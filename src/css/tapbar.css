@@ -1,0 +1,146 @@
+.tapbar {
+  position: fixed;
+  border-top: 1px solid #ACACAC;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.57rem;
+  background: #F9F9F9;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tapbar li:first-child {
+  width: 12%;
+}
+
+.tapbar li {
+  width: 22%;
+  padding-top: 0.15rem;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tapbar li button {
+  border: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: inherit;
+}
+
+.tapbar li button i {
+  display: block;
+  margin: 0 auto;
+}
+
+.tapbar li button .back {
+  background-image: url("../img/sprite.png");
+  background-position: -6.57143rem 0rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button .home {
+  background-image: url("../img/sprite.png");
+  background-position: -2.38095rem -2.38095rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button .category {
+  background-image: url("../img/sprite.png");
+  background-position: -4.7619rem -1.80952rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button .cart {
+  background-image: url("../img/sprite.png");
+  background-position: -4.7619rem 0rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button .my {
+  background-image: url("../img/sprite.png");
+  background-position: -1.80952rem -4.7619rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button .txt {
+  display: block;
+  width: 100%;
+  font-size: 0.71rem;
+  color: #848689;
+}
+
+.tapbar li button.active .home {
+  background-image: url("../img/sprite.png");
+  background-position: 0rem -6.57143rem;
+  width: 1.28571rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button.active .category {
+  background-image: url("../img/sprite.png");
+  background-position: -6.57143rem -1.80952rem;
+  width: 1.5rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button.active .cart {
+  background-image: url("../img/sprite.png");
+  background-position: 0rem -4.7619rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button.active .my {
+  background-image: url("../img/sprite.png");
+  background-position: -3.61905rem -4.7619rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 8.14286rem 8.14286rem;
+}
+
+.tapbar li button.active .txt {
+  color: #FB4747;
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+<head>
+    <meta charset="UTF-8">
+    <title>购买成功</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/my_cart_success.css">
+    <link rel="stylesheet" type="text/css" href="css/my_goods_info.css">
+
+</head>
+<body>
+<div ng-app="appBuySuccess" ng-controller="appBuySuccessCt">
+     <div class="head">购买成功<div class="headEdit">完成</div></div>
+     <div class="LINE"></div>
+     <div class="cartEmpty">
+        <div class="cartEmptyImgCover">
+            <img class="cartEmptyImg" src="img/cart/buy_success.png">
+            <div class="cartEmptySay">恭喜您，购买成功！</div>
+            <button class="cartEmptyButton">再逛逛</button>
+         </div>
+     </div>
+
+     <img class="colorLine" src="img/cart/buy_color.png">
+      <div class="bigCover" style="margin:0 auto;">
+         <div class="smallCover" style="padding:1rem 0 0 0;">
+
+
+            <div class="ems" style="margin:0 0 1rem 0;">
+                <div class="emsInfo">下单日期： {{goodsinfo.data.createDate | date:"yyyy/MM/dd HH:mm"}}</div>
+                 <div class="emsInfo">订单编号： {{goodsinfo.data.orderNo}}</div>
+            </div>
+
+            <div class="ems" style="margin:0 0 1.9rem 0;">
+                <div class="emsInfo">收货地址： {{goodsinfo.data.detailAddress}}</div>
+                 <div class="emsInfo">收货人名： {{goodsinfo.data.name}}</div>
+            </div>
+
+            <div class="infoLine"></div>
+            <div class="goodsTitle">
+                <div class="goodsName">商品</div>
+                <div class="goodsBuyInfo">购买信息</div>
+                <div class="goodsPayAll">小计</div>
+            </div>
+            <div class="infoLine"></div>
+
+            <div class="goodsAll" ng-repeat="item in goodsinfo.data.orders">
+                <img class="goodsImg" ng-src="{{item.previewUrl}}">
+                <div class="goodsInfoCover">
+                    <div class="goodsAllName">{{item.title}}</div>
+                    <div class="goodsAllPrice">售价：{{item.price}}元x{{item.number}}</div>
+                </div>
+                <div class="goodsPayCover">
+                   ￥{{item.price * item.number}}
+                </div>
+            </div>
+
+            <div class="infoLine"></div>
+
+            <div class="infoLast">
+                <div class="infoLastOne">订单总额：{{goodsinfo.data.allMoney}}元</div>
+                <div class="infoLastOne">运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{goodsinfo.data.transportMoney}}元</div>
+                <div class="infoLastOne">实付总额：{{goodsinfo.data.payMoney}}元</div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+
+
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/my_cart_success.js"></script>
+</html>

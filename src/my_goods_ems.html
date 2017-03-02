@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <title>物流信息</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/my_goods_ems.css">
+
+</head>
+<body>
+<div ng-app="appEms" ng-controller="appEmsCt">
+     <div class="head"><img class="headBack" ontouchstart="history.go(-1)" src="img/back2.png">查看物流</div>
+     <div class="LINE"></div>
+     <div class="headInfo">
+         <img class="headImg" ng-src="{{ems.data.previewUrl}}" src="img/head.jpg">
+         <div class="headInfoRight">
+             <div class="headInfoRightStatus"> <div style="float:left;">物流状态：</div><div class="statusRed">{{ems.data.statusName}}</div></div>
+             <div class="headInfoP">承运来源：{{ems.data.typeName}}</div>
+             <div class="headInfoP">物流单号：{{ems.data.number}}</div>
+         </div>
+     </div>
+
+     <div class="emsContent" ng-repeat="(index,x) in ems.data.list">
+         <div class="emsTime" ng-style="index==0?redColor:null">
+             <div class="emsTimeHour">{{x.time}}</div>
+             <!-- <div class="emsTimeHour">09:23</div> -->
+         </div>
+         <img class="emsImg" ng-src="{{index==0?'img/my/my_ems_ac.png':'img/my/my_ems.png'}}"></img>
+         <div class="emsContent" ng-style="{{index==0?redColor:null}}">{{x.title}}</div>
+         <div class="LINE"></div>
+     </div>
+
+
+
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/my_goods_ems.js"></script>
+</html>

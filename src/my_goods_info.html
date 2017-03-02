@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/my_goods_info.css">
+
+</head>
+<body>
+<div ng-app="appInfo" ng-controller="appInfoCt">
+     <div class="head"><img class="headBack" ontouchstart="history.go(-1)"  src="img/back2.png">订单详情</div>
+
+     <div class="bigCover">
+         <div class="smallCover">
+            <div class="infoTitle">RECEIPT</div>
+            <div class="infoLine" style="margin:0 0 .2rem 0;"></div>
+            <div class="infoLine"></div>
+            <div class="infoScheduleCover">
+                <div class="infoScheduleItem">
+                    <div class="infoScheduleItemTitle" ng-style="colorObject.one?threeColor:oneColor">下单</div>
+                    <div class="infoScheduleItemCir" ng-style="colorObject.one?threeColor:twoColor"></div>
+                </div>
+                <div class="infoScheduleItem">
+                    <div class="infoScheduleItemTitle" ng-style="colorObject.two?threeColor:oneColor">付款</div>
+                    <div class="infoScheduleItemCir" ng-style="colorObject.two?threeColor:twoColor"></div>
+                </div>
+                <div class="infoScheduleItem">
+                    <div class="infoScheduleItemTitle" ng-style="colorObject.three?threeColor:oneColor">发货</div>
+                    <div class="infoScheduleItemCir" ng-style="colorObject.three?threeColor:twoColor"></div>
+                </div>
+                <div class="infoScheduleItem">
+                    <div class="infoScheduleItemTitle" ng-style="colorObject.four?threeColor:oneColor">完成</div>
+                    <div class="infoScheduleItemCir" ng-style="colorObject.four?threeColor:twoColor"></div>
+                </div>
+            </div>
+            <div class="lineForThis"></div>
+
+            <div ng-show="goodsinfo.data.mailNumber?true:false" class="ems" style="margin:2.2rem 0 0 0;">
+                <div class="emsInfo">物流信息： {{goodsinfo.data.mailType}}</div>
+                 <div class="emsInfo">物流单号： {{goodsinfo.data.mailNumber}}</div>
+            </div>
+
+            <div class="ems" style="margin:1rem 0;">
+                <div class="emsInfo">下单日期： {{goodsinfo.data.createDate | date:"yyyy/MM/dd HH:mm"}}</div>
+                 <div class="emsInfo">订单编号： {{goodsinfo.data.orderNo}}</div>
+            </div>
+
+            <div class="ems" style="margin:0 0 1.9rem 0;">
+                <div class="emsInfo">收货地址： {{goodsinfo.data.detailAddress}}</div>
+                 <div class="emsInfo">收货人名： {{goodsinfo.data.name}}</div>
+            </div>
+
+            <div class="infoLine"></div>
+            <div class="goodsTitle">
+                <div class="goodsName">商品</div>
+                <div class="goodsBuyInfo">购买信息</div>
+                <div class="goodsPayAll">小计</div>
+            </div>
+            <div class="infoLine"></div>
+
+            <div class="goodsAll" ng-repeat="item in goodsinfo.data.orders">
+                <img class="goodsImg" ng-src="{{item.previewUrl}}">
+                <div class="goodsInfoCover">
+                    <div class="goodsAllName">{{item.title}}</div>
+                    <div class="goodsAllPrice">售价：{{item.price}}元x{{item.number}}</div>
+                </div>
+                <div class="goodsPayCover">
+                    ￥{{item.price * item.number}}
+                </div>
+            </div>
+
+            <div class="infoLine"></div>
+
+            <div class="infoLast">
+                <div class="infoLastOne">订单总额：{{goodsinfo.data.allMoney}}元</div>
+                <div class="infoLastOne">运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{goodsinfo.data.transportMoney}}元</div>
+                <div class="infoLastOne">实付总额：{{goodsinfo.data.payMoney}}元</div>
+            </div>
+
+
+         </div>
+     </div>
+
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/my_goods_info.js"></script>
+</html>

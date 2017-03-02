@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <title>联联商城</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/tapbar.css">
+    <link rel="stylesheet" type="text/css" href="css/my.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+
+</head>
+<body>
+<div ng-app="app" ng-controller="appct" ng-cloak>
+    <ul class="tapbar">
+        <li>
+            <button type="button" tap="back()" name="button">
+                <i class="back"></i>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./index.html',token)">
+                <i class="home"></i>
+                <span class="txt">首页</span>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./category.html',token)">
+                <i class="category"></i>
+                <span class="txt">分类</span>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./my_cart.html')">
+                <i class="cart"></i>
+                <span class="txt">购物车</span>
+            </button>
+        </li>
+        <li>
+            <button class="active" type="button" name="button">
+                <i class="my"></i>
+                <span class="txt">我的商城</span>
+            </button>
+        </li>
+    </ul>
+
+
+ <div class="loading" ng-show="loading"></div>
+        <div class="head" ng-swipe-right="testRight()">我的商城</div>
+        <div class="headCover">
+            <img class="headImg" ng-src="{{myinfo.data.headIconUrl}}">
+            <div class="headName">{{myinfo.data.nickName}}</div>
+
+            <img src="img/my/my_u.png" class="headUImg">
+            <div class="headUNumber">{{myinfo.data.ucoin}}U币</div>
+        </div>
+
+        <div class="addressCover">
+        	<img src="img/my/my_address.png" class="addressImg">
+        	<div class="addressName">地址管理</div>
+        	<img src="img/my/my_right.png" class="addressRight">
+        </div>
+
+        <div class="lineCover"></div>
+
+        <div class="goodsCover">
+        	<div class="goodsCoverOne" ng-repeat="item in goodsClass" ng-click="changeGid(item.id)">
+        		<img ng-src="{{item.id==gid?item.imgac:item.img}}" class="goodsCoverOneImg">
+        		<div class="goodsCoverOneName">{{item.name}}</div>
+        	</div>
+        </div>
+
+        <div class="itemCover" ng-repeat="x in mylist.data.data">
+        	<div class="itemTop"  ng-click="goGoodsInfo(x.orderNo)">
+        		<div class="itemTopLeft">
+        			<div class="itemTopLeftTitle">{{x.title}}</div>
+                    <!-- 1已下单，2待发货，3待收货，4完成 -->
+
+                    <div ng-if="x.status==1" class="itemTopLeftInfo">共{{x.number}}件商品 | 已下单</div>
+                    <div ng-if="x.status==2" class="itemTopLeftInfo">共{{x.number}}件商品 | 待发货</div>
+                    <div ng-if="x.status==3" class="itemTopLeftInfo">共{{x.number}}件商品 | 待收货</div>
+        			<div ng-if="x.status==4" class="itemTopLeftInfo">共{{x.number}}件商品 | 完成</div>
+        		</div>
+        		<img class="itemTopRight" ng-src="{{x.previewUrl}}">
+        	</div>
+
+        	<div class="lineCover"></div>
+
+        	<div class="itemBottom">
+        		<div class="itemBottomName">实付款: &nbsp;￥{{x.price}}</div>
+        		<button class="itemBottomButton" ng-show="x.status==4 || x.status==3">再次购买</button>
+                <button class="itemBottomButton buttonTwo" ng-show="x.status==1">立即支付</button>
+        		<button ng-click="goGoodsEms(x.id)" class="itemBottomButton buttonOne" ng-show="x.status==3">物流</button>
+
+        	</div>
+        </div>
+
+        <div class="loadMore" ng-click="loadMoreFunction()">
+            {{loadText}}
+        </div>
+
+        <!-- 返回顶部 -->
+        <img ng-click="pageScroll()" id="goTop" src="img/my/my_top.png">
+
+</div>
+</body>
+<script type="text/javascript" src="js/angular-touch.js"></script>
+<script src="js/my.js"></script>
+</html>

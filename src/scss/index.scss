@@ -1,0 +1,186 @@
+@import "./helper/_sprite.scss";
+@import "./helper/_mixin.scss";
+
+body{
+    background: #EBEBEB;
+}
+.banner_contain{
+    height: 19rem;
+}
+.banner{
+    height: 19rem;
+}
+.marquee{
+    height: 2.86rem;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    .l{
+        width: 5.71rem;
+        height: 1.43rem;
+        border-right: 1px solid #BFBFBF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.57rem;
+        .img_con{
+            height: 1rem;
+            width: 4rem;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .r{
+        flex-grow: 1;
+        color: #2B333B;
+        marquee{
+            height: 1.43rem;
+            line-height: 1.43rem;
+            display: block;
+            width: 100%;
+        }
+    }
+    border-bottom: 1px solid #BFBFBF;
+}
+
+.category_contain{
+    height: 5.71rem;
+}
+.category{
+    display: flex;
+    align-items: center;
+    height: 5.71rem;
+    background: #fff;
+    li{
+        width: 33.33%;
+        a{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        p{
+            font-size: 0.93rem;
+            color: #848689;
+            margin-top: 0.5rem;
+        }
+        .icon_chg{
+            display: block;
+            @include sprite3($icon-chg);
+        }
+        .icon_dftc{
+            display: block;
+            @include sprite3($icon-dftc);
+        }
+        .icon_yp{
+            display: block;
+            @include sprite3($icon-yp);
+        }
+    }
+}
+.statement{
+    font-size: 0.93rem;
+    text-align: center;
+    color: #BFBFBF;
+    height: 2.86rem;
+    line-height: 2.86rem;
+    padding-bottom: 6rem;
+}
+.product{
+    margin-top: 0.71rem;
+    background-color: #fff;
+    .pro_tit{
+        font-size: 1rem;
+        height: 2.86rem;
+        line-height: 2.86rem;
+        padding-left: 0.71rem;
+        color: #2B333B;
+        font-weight: normal;
+        border-bottom: 1px solid #BFBFBF;
+    }
+    .pro_list{
+        @include clearfix();
+        li{
+            float: left;
+            width: 50%;
+            padding: 0.71rem 0;
+            height: 13.4rem;
+            &:nth-child(odd){
+                border-right: 1px solid #BFBFBF;
+            }
+            border-bottom: 1px solid #BFBFBF;
+            &:last-child{
+                border-bottom: 0;
+            }
+            &:nth-last-child(2):not(:nth-child(even)){
+                border-bottom: 0;
+            }
+            text-align: center;
+            .pro_view{
+                width: 100%;
+                padding-left: 0.71rem;
+                padding-right: 0.71rem;
+                height: 7.54rem;
+                overflow: hidden;
+                img{
+                    max-width: 100%;
+                    display: block;
+                    height: auto;
+                    border: 0;
+                }
+            }
+            .pro_name{
+                font-size: 0.93rem;
+                color: #001500;
+                padding: 0 1rem;
+                margin-top: 0.5rem;
+                height: 1.29rem;
+                line-height: 1.29rem;
+                @include otw();
+            }
+            .pro_price{
+                font-size: 1rem;
+                color: #FB4747;
+                padding: 0 1rem;
+                height: 1.43rem;
+                line-height: 1.43rem;
+                @include otw();
+            }
+            .pro_discount{
+                font-size: 0.93rem;
+                color: #BFBFBF;
+                padding: 0 1rem;
+                height: 1.29rem;
+                line-height: 1.29rem;
+                @include otw();
+            }
+        }
+    }
+    .more_pro{
+        border-top: 1px solid #BFBFBF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button{
+            background-color: #fff;
+            border: 0;
+            width: 100%;
+            height: 2.86rem;
+            span{
+                font-size: 1rem;
+                line-height: 1rem;
+                color: #BFBFBF;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .icon{
+                display: inline-block;
+                vertical-align: middle;
+                @include sprite3($icon-index-more);
+            }
+        }
+    }
+}

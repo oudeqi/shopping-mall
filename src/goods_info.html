@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/goods_info.css">
+
+</head>
+<body>
+<div ng-app="goodsInfo" ng-controller="goodsInfoCt">
+       <div class="sliderCover">
+           <div ng-swipe-left="swipeLeft()" ng-swipe-right="swipeRight()" ng-class="leftClass" class="sliderItem" style="background-image:url('img/test/1.jpg')"></div>
+           <div ng-swipe-left="swipeLeft()" ng-swipe-right="swipeRight()" ng-class="centerClass" class="sliderItem" style="background-image:url('img/test/2.jpg')"></div>
+           <div ng-swipe-left="swipeLeft()" ng-swipe-right="swipeRight()" ng-class="rightClass" class="sliderItem" style="background-image:url('img/test/3.jpg')"></div>
+
+       </div>
+
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/angular-touch.js"></script>
+<script src="js/goods_info.js"></script>
+</html>

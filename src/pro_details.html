@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="pro_details">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/pro_details.css"/>
+        <script type="text/javascript" src="./js/angular.min.js"></script>
+    </head>
+    <body ng-controller="pro_details" ng-cloak>
+        <header>
+            <div class="inner">
+                <div class="l">
+                    <button type="button" name="button" tap="back()">
+                        <i class="back"></i>
+                    </button>
+                </div>
+                <div class="m">
+                    <h2>商品详情</h2>
+                </div>
+                <div class="r"></div>
+            </div>
+        </header>
+        <div class="banner_contain">
+            <app-banner banner-arr="banner"></app-banner>
+        </div>
+        <div ng-show="ok">
+            <div class="base_info">
+                <h2 class="tit">{{title}}</h2>
+                <div class="price">
+                    <span>{{price | currency:""}}</span>
+                    <span>元</span>
+                    <span>{{deduction}}</span>
+                </div>
+                <div class="tip">
+                    <span>原价</span>
+                    <del>{{originalPrice | currency:""}}</del>
+                    <span>元</span>
+                    <span>邮费：包邮</span>
+                </div>
+            </div>
+            <div class="pro_details">
+                <p class="tit">图文详情</p>
+                <div class="content" ng-bind-html="content"></div>
+            </div>
+            <div class="fixed_btn_group" ng-show="cart.remainNumber>0">
+                <div class="go_index">
+                    <button type="button" name="button" tap="linkTo('./index.html',token,item.id)">
+                        <i class="icon-home"></i>
+                        <span>首页</span>
+                    </button>
+                </div>
+                <div class="cart">
+                    <button type="button" name="button" tap="linkTo('./my_cart.html')">
+                        <i class="icon-cart"></i>
+                        <span class="txt">购物车</span>
+                        <span ng-show="cartAll.length" class="badge">{{cartAll.length}}</span>
+                    </button>
+                </div>
+                <div class="add_cart">
+                    <button type="button" name="button" tap="addCart()">
+                        加入购物车
+                    </button>
+                </div>
+                <div class="buy_now">
+                    <button type="button" name="button" tap="buy()">
+                        立即购买
+                    </button>
+                </div>
+            </div>
+            <div class="invalid" ng-show="!cart.remainNumber">
+                宝贝失效
+            </div>
+        </div>
+        <buy-now buy-model="cart" buy-click="buyClick" next="next()"></buy-now>
+        <!-- <div class="popup_content">
+            <div class="popup_buy">
+                <div class="shade"></div>
+                <div class="content">
+                    <button class="close" type="button" name="button"></button>
+                    <div class="con">
+                        <div class="t">
+                            <div class="l">
+                                <img ng-src="{{cart.img}}" alt="">
+                            </div>
+                            <div class="r">
+                                <h3 class="tit">{{cart.name}}</h3>
+                                <span class="price">{{cart.money | currency:""}}</span>
+                            </div>
+                        </div>
+                        <div class="b">
+                            <div class="l">购买数量：</div>
+                            <div class="r">
+                                <button ng-disabled="cart.quantity==0" class="minus" type="button" ng-click="minus()" name="button">-</button>
+                                <span>{{cart.quantity}}</span>
+                                <button ng-disabled="cart.quantity==cart.remainNumber" class="plus" type="button" ng-click="plus()" name="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <button type="button" name="button">下一步</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+    </body>
+
+    <script type="text/javascript" src="./js/angular-touch.js"></script>
+    <script type="text/javascript" src="./js/photoSlider.js"></script>
+    <script type="text/javascript" src="./js/pro_details.js"></script>
+</html>

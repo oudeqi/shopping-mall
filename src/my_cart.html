@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1"> -->
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/my_cart.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+</head>
+<body>
+<div ng-app="appCart" ng-controller="appCartCt" ng-cloak>
+    <div class="loading" ng-show="loading"></div>
+
+     <div class="head"><img tap="back()" class="headBack" src="img/back2.png">购物车 <div class="headEdit" ng-show="!editAllDel" ng-click="goEditFunction()">编辑</div><div ng-click="goEditFunction()" ng-show="editAllDel" class="headEdit">完成</div></div>
+     <div class="LINE"></div>
+     <div class="cartEmpty" ng-show="false">
+        <div class="cartEmptyImgCover">
+            <img class="cartEmptyImg" src="img/cart/buy_empty.png">
+            <div class="cartEmptySay">购物车什么都没有</div>
+            <button class="cartEmptyButton">去逛逛</button>
+         </div>
+     </div>
+
+     <div class="cartFull" ng-show="true">
+        <div class="cartFullSmall" style="padding:0 0 5rem 0;">
+            <div ng-repeat="(index,x) in buyCar">
+                <div class="cartFullItem">
+                    <div class="cartFullCheckCover" ng-if="!x.isLose">
+                        <input class="fullCheck" type="checkbox" value="1" name="checkbox" ng-model="x.yesBuy" id="{{'k'+index}}">
+                        <label ng-click="isBuyFuntion(x)" ng-style="checkImgAc" ng-show="x.isBuy" class="fullCheckLabel" for="{{'k'+index}}"></label>
+                         <label ng-click="isBuyFuntion(x)" ng-style="checkImg" ng-show="!x.isBuy" class="fullCheckLabel" for="{{'k'+index}}"></label>
+                    </div>
+                    <div class="cartFullCheckCover" ng-if="x.isLose">
+                        <input class="fullCheck" type="checkbox" name="checkbox" ng-model="checkboxModel.value1" id="{{x}}">
+                        <label class="fullCheckLabel_lose" ng-style="testImg" for="{{x}}"></label>
+                    </div>
+
+
+                    <img class="cartFullImg" ng-src="{{x.img}}">
+                    <div class="cartFullRight">
+                        <div class="cartFullRightName">{{x.name}}</div>
+                        <div class="cartFullRightControl">
+                            <div class="cartFullRightControlMoney">{{x.money}}</div>
+
+                                <div class="cartFullRightControlSome" ng-if="!x.isLose" ng-show="!editAllDel">
+                                    <div class="numLess" ng-click="numSubtractFunction(x)">-</div>
+                                    <input readonly="readonly" type="num" ng-model="x.quantity" value="1" class="num"/>
+                                    <div class="numMore" ng-click="numAddFunction(x)">+</div>
+                                </div>
+
+                                 <img src="img/cart/item_del.png" ng-if="x.isLose" ng-click="delItemOne(x,index)" class="cartFullRightControlDelImg">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="LINE"></div>
+            </div>
+
+            <!-- <div>
+                <div class="cartFullItem">
+                    <div class="cartFullCheckCover">
+                        <input class="fullCheck" type="checkbox" name="checkbox" ng-model="checkboxModel.value1" id="{{x}}">
+                        <label class="fullCheckLabel_lose" ng-style="testImg" for="{{x}}"></label>
+                    </div>
+
+                    <img class="cartFullImg" src="img/head.jpg">
+                    <div class="cartFullRight">
+                        <div class="cartFullRightName">百草味 饱饱果年货</div>
+                        <div class="cartFullRightControl">
+                            <div class="cartFullRightControlMoney">30.00元</div>
+                            <img src="img/cart/item_del.png" class="cartFullRightControlDelImg">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="LINE"></div>
+            </div> -->
+
+        </div>
+
+        <!-- 结算底部button -->
+        <div class="bottomCover">
+
+                   <div class="cartFullCheckCover" style="float:left;">
+                        <input class="fullCheck" type="checkbox" name="checkbox" ng-model="testTrue" id="kissyes">
+                        <label style="transform:translate(0rem,1.07rem); margin:0 0 0 1rem" class="fullCheckLabel" ng-style="checkImg" for="kissyes" ng-show="!allCheck" ng-click="allCheckFunction()"></label>
+                        <label style="transform:translate(0rem,1.07rem); margin:0 0 0 1rem" class="fullCheckLabel" ng-style="checkImgAc" for="kissyes" ng-show="allCheck" ng-click="allCheckFunction()"></label>
+                    </div>
+                    <div class="bottomCoverAllChecked">全选</div>
+
+                    <button ng-show="!editAllDel" class="bottomButton">结算({{totalQuantity}})</button>
+                    <button ng-show="editAllDel" class="bottomButton" ng-click="delItemAll()">删除</button>
+
+                    <div class="bottomMoney" ng-show="!editAllDel">
+                        合计：<i class="bottomMoneyText">￥{{totalPrice}}</i>
+                    </div>
+
+        </div>
+
+     </div>
+
+
+
+</div>
+</body>
+
+<script src="js/my_cart.js"></script>
+</html>

@@ -1,0 +1,7 @@
+@function px2rem( $px ){
+	@return $px*320/$designWidth/20 + rem;
+}
+
+@function px2rem14( $px ){
+	@return $px/14px * 1rem;
+}
