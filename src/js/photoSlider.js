@@ -8,7 +8,8 @@
  * */
 function photoSlider(options) {
 	this.wrap = options.wrap;
-	this.wrapWidth = this.wrap.offsetWidth;
+	this.wrapWidth = window.innerWidth;
+	// this.wrapWidth = this.wrap.offsetWidth;
 	this.wrapInner = this.wrap.getElementsByTagName('ul')[0];
 	this.lists = this.wrap.getElementsByTagName('li');
 	this.listLength = this.lists.length;
@@ -52,8 +53,10 @@ photoSlider.prototype.createSprite = function(){
 	}
 }
 photoSlider.prototype.init = function() {
-	this.ratio = this.wrap.offsetHeight / this.wrap.offsetWidth;
-	this.wrapWidth = this.wrap.offsetWidth;
+	this.ratio = this.wrap.offsetHeight / window.innerWidth;
+	this.wrapWidth = window.innerWidth;
+	// this.ratio = this.wrap.offsetHeight / this.wrap.offsetWidth;
+	// this.wrapWidth = this.wrap.offsetWidth;
 	this.wrapHeight = this.wrap.offsetHeight;
 	this.wrapInner.style.width = this.wrapWidth + 'px';
 	this.index = 0;
@@ -91,8 +94,10 @@ photoSlider.prototype.init = function() {
 	};
 };
 photoSlider.prototype.resizeInit = function(){
-	this.ratio = this.wrap.offsetHeight / this.wrap.offsetWidth;
-	this.wrapWidth = this.wrap.offsetWidth;
+	this.ratio = this.wrap.offsetHeight / window.innerWidth;
+	this.wrapWidth = window.innerWidth;
+	// this.ratio = this.wrap.offsetHeight / this.wrap.offsetWidth;
+	// this.wrapWidth = this.wrap.offsetWidth;
 	this.wrapHeight = this.wrap.offsetHeight;
 	this.wrapInner.style.width = this.wrapWidth + 'px';
 	for (var i = 0; i < this.listLength; i++) {

@@ -1,4 +1,4 @@
-var app=angular.module("goodsInfo",['ngTouch']);
+var app=angular.module("goodsInfo",[]);
 app.controller("goodsInfoCt",function($scope){
 
 		$scope.centerNum=8;

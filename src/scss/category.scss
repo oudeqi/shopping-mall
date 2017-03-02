@@ -6,20 +6,28 @@ body{
 }
 header{
     background-color: #fff;
-    height: 4.64rem;
+    height: 3.4rem;
+    line-height: 3.4rem;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     font-size: 1.29rem;
     text-align: center;
-    line-height: 5.6rem;
     z-index: 1000;
     color: #2B333B;
     border-bottom: 1px solid #BFBFBF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+        text-align: center;
+        font-size: 1.29rem;
+        color: #2B333B;
+    }
 }
 .tab-head{
-    margin-top: 4.64rem;
+    margin-top: 3.4rem;
     height: 2.86rem;
     display: flex;
     padding: 0 1rem;

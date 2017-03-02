@@ -12,165 +12,167 @@
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="index">
-        <ul class="tapbar">
-            <li>
-                <button type="button" tap="back()" name="button">
-                    <i class="back"></i>
-                </button>
-            </li>
-            <li>
-                <button class="active" type="button" name="button">
-                    <i class="home"></i>
-                    <span class="txt">首页</span>
-                </button>
-            </li>
-            <li>
-                <button type="button" name="button" tap="linkTo('./category.html',token)">
-                    <i class="category"></i>
-                    <span class="txt">分类</span>
-                </button>
-            </li>
-            <li>
-                <button type="button" name="button" tap="linkTo('./my_cart.html')">
-                    <i class="cart"></i>
-                    <span class="txt">购物车</span>
-                </button>
-            </li>
-            <li>
-                <button type="button" name="button" tap="linkTo('./my.html')">
-                    <i class="my"></i>
-                    <span class="txt">我的商城</span>
-                </button>
-            </li>
-        </ul>
-        <div class="banner_contain">
-            <app-banner banner-arr="banner"></app-banner>
-        </div>
-        <div ng-show="banner" class="marquee">
-            <div class="l">
-                <div class="img_con">
-                    <img src="./img/sczb.png" alt="">
+        <div class="page_container" ng-show="banner">
+            <ul class="tapbar">
+                <li>
+                    <button type="button" tap="back()" name="button">
+                        <i class="back"></i>
+                    </button>
+                </li>
+                <li>
+                    <button class="active" type="button" name="button">
+                        <i class="home"></i>
+                        <span class="txt">首页</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" name="button" tap="linkTo('./category.html',token)">
+                        <i class="category"></i>
+                        <span class="txt">分类</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" name="button" tap="linkTo('./my_cart.html')">
+                        <i class="cart"></i>
+                        <span class="txt">购物车</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" name="button" tap="linkTo('./my.html')">
+                        <i class="my"></i>
+                        <span class="txt">我的商城</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="banner_contain">
+                <app-banner banner-arr="banner" token="{{token}}"></app-banner>
+            </div>
+            <div class="marquee">
+                <div class="l">
+                    <div class="img_con">
+                        <img src="./img/sczb.png" alt="">
+                    </div>
+                </div>
+                <div class="r">
+                    <marquee behavior="scroll" onTouchStart="this.stop()" onTouchEnd="this.start()" scrollamount="2" width="280" scrolldelay="100" direction="up">
+                        <p ng-repeat="item in marquee" ng-click="linkTo('/pro_details.html',token,item.id)">
+                            {{item.title}}
+                        </p>
+                    </marquee>
                 </div>
             </div>
-            <div class="r">
-                <marquee behavior="scroll" onTouchStart="this.stop()" onTouchEnd="this.start()" scrollamount="2" width="280" scrolldelay="100" direction="up">
-                    <p ng-repeat="item in marquee">
-                        {{item.title}}
-                    </p>
-                </marquee>
+            <div class="category_contain">
+                <ul class="category">
+                    <li>
+                        <a href="#dftc">
+                            <i class="icon_dftc"></i>
+                            <p>联联地方特产</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#chg">
+                            <i class="icon_chg"></i>
+                            <p>联联吃货馆</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#llyp">
+                            <i class="icon_yp"></i>
+                            <p>联联优品</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="category_contain">
-            <ul ele-fixed-top ng-show="banner" class="category">
-                <li>
-                    <a href="#dftc">
-                        <i class="icon_dftc"></i>
-                        <p>联联地方特产</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#chg">
-                        <i class="icon_chg"></i>
-                        <p>联联吃货馆</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#llyp">
-                        <i class="icon_yp"></i>
-                        <p>联联优品</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
 
-        <!-- 新品推荐 -->
-        <div ng-show="banner" class="product">
-            <h2 class="pro_tit">新品推荐</h2>
-            <ul class="pro_list">
-                <li ng-repeat="item in newProduct" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || newProductShow">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-            </ul>
-            <div class="more_pro" ng-hide="newProductShow">
-                <button type="button" name="button" ng-click="newProductShow = true">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
+            <!-- 新品推荐 -->
+            <div class="product">
+                <h2 class="pro_tit">新品推荐</h2>
+                <ul class="pro_list">
+                    <li ng-repeat="item in newProduct" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || newProductShow">
+                        <div class="pro_view">
+                            <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
+                        </div>
+                        <p class="pro_name" ng-bind="item.title"></p>
+                        <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
+                        <p class="pro_discount" ng-bind="item.deduction"></p>
+                    </li>
+                </ul>
+                <div class="more_pro" ng-hide="newProductShow">
+                    <button type="button" name="button" ng-click="newProductShow = true">
+                        <span>更多</span>
+                        <i class="icon"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- 联联地方特产 -->
-        <a name="dftc"></a>
-        <div ng-show="banner" class="product">
-            <h2 class="pro_tit">联联地方特产</h2>
-            <ul class="pro_list">
-                <li ng-repeat="item in lltc" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || lltcShow">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-            </ul>
-            <div class="more_pro" ng-hide="lltcShow">
-                <button type="button" name="button" ng-click="lltcShow = true">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
+            <!-- 联联地方特产 -->
+            <a name="dftc"></a>
+            <div class="product">
+                <h2 class="pro_tit">联联地方特产</h2>
+                <ul class="pro_list">
+                    <li ng-repeat="item in lltc" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || lltcShow">
+                        <div class="pro_view">
+                            <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
+                        </div>
+                        <p class="pro_name" ng-bind="item.title"></p>
+                        <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
+                        <p class="pro_discount" ng-bind="item.deduction"></p>
+                    </li>
+                </ul>
+                <div class="more_pro" ng-hide="lltcShow">
+                    <button type="button" name="button" ng-click="lltcShow = true">
+                        <span>更多</span>
+                        <i class="icon"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- 联联吃货馆 -->
-        <a name="chg"></a>
-        <div ng-show="banner" class="product">
-            <h2 class="pro_tit">联联吃货馆</h2>
-            <ul class="pro_list">
-                <li ng-repeat="item in llchg" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llchgShow">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-            </ul>
-            <div class="more_pro" ng-hide="llchgShow">
-                <button type="button" name="button" ng-click="llchgShow = true">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
+            <!-- 联联吃货馆 -->
+            <a name="chg"></a>
+            <div class="product">
+                <h2 class="pro_tit">联联吃货馆</h2>
+                <ul class="pro_list">
+                    <li ng-repeat="item in llchg" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llchgShow">
+                        <div class="pro_view">
+                            <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
+                        </div>
+                        <p class="pro_name" ng-bind="item.title"></p>
+                        <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
+                        <p class="pro_discount" ng-bind="item.deduction"></p>
+                    </li>
+                </ul>
+                <div class="more_pro" ng-hide="llchgShow">
+                    <button type="button" name="button" ng-click="llchgShow = true">
+                        <span>更多</span>
+                        <i class="icon"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- 联联优品 -->
-        <a name="llyp"></a>
-        <div ng-show="banner" class="product">
-            <h2 class="pro_tit">联联优品</h2>
-            <ul class="pro_list">
-                <li ng-repeat="item in llyp" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llypShow">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-            </ul>
-            <div class="more_pro" ng-hide="llypShow">
-                <button type="button" name="button" ng-click="llypShow = true">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
+            <!-- 联联优品 -->
+            <a name="llyp"></a>
+            <div class="product">
+                <h2 class="pro_tit">联联优品</h2>
+                <ul class="pro_list">
+                    <li ng-repeat="item in llyp" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llypShow">
+                        <div class="pro_view">
+                            <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
+                        </div>
+                        <p class="pro_name" ng-bind="item.title"></p>
+                        <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
+                        <p class="pro_discount" ng-bind="item.deduction"></p>
+                    </li>
+                </ul>
+                <div class="more_pro" ng-hide="llypShow">
+                    <button type="button" name="button" ng-click="llypShow = true">
+                        <span>更多</span>
+                        <i class="icon"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div ng-show="banner" class="statement">
-            所有奖品和活动均与苹果公司无关
+            <div ng-if="iphone" class="statement">
+                所有奖品和活动均与苹果公司无关
+            </div>
         </div>
     </body>
 

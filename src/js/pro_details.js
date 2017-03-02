@@ -1,4 +1,4 @@
-var app = angular.module("pro_details",["ngTouch"]);
+var app = angular.module("pro_details",[]);
 app.constant("contstant",{
     HOST:"http://192.168.10.254:8080"
 });
@@ -76,19 +76,34 @@ app.factory("cart",["$http","$q","contstant","$rootScope",
                     defer.reject("error");
                 });
                 return defer.promise;
+            },
+            order: function(obj){
+                var defer = $q.defer();
+                $http.post(contstant.HOST+"/v1/aut/goods/order", obj,{
+                    headers: {
+                        'Authorization': $rootScope.token,
+                    }
+                }).success(function(data){
+                    defer.resolve(data);
+                }).error(function(data){
+                    defer.reject("error");
+                });
+                return defer.promise;
             }
         };
     }
 ]);
 app.factory('device',['$window',function($window){
     return {
-        screenW : parseInt($window.innerWidth)
+        screenW : function(){
+            return parseInt($window.innerWidth);
+        }
     };
 }]);
 
 app.directive("appBanner",["device",function(device){
-    var w = parseInt(device.screenW * 1.5),
-        h = parseInt(device.screenW * 266 / 375 * 1.5);
+    var w = parseInt(device.screenW() * 1.5),
+        h = parseInt(device.screenW() * 266 / 375 * 1.5);
     return {
         restrict: 'E',
         replace: true,
@@ -124,7 +139,7 @@ app.directive("appBanner",["device",function(device){
 }]);
 
 app.directive("buyNow",["device","$document",function(device,$document){
-    var w = parseInt(device.screenW / 3);
+    var w = parseInt(device.screenW() / 3);
     return {
         restrict: 'E',
         replace: true,
@@ -225,8 +240,8 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
     function($scope,pageDate,device,$sce,cart){
 
         //设备相关
-        $scope.proViewW = parseInt(device.screenW / 2 * 1.5);
-        $scope.proViewH = parseInt(device.screenW * 105 / 166 / 2 * 1.5);
+        $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
+        $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
         cart.get().then(function(data){
             console.log("获取购物车",data);
@@ -255,21 +270,15 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
                 content = data.data.content.substring(start,end);
             $scope.content = $sce.trustAsHtml(content);
             //立即购买
+            $scope.cart.id = data.data.id;
             $scope.cart.name = data.data.title;
             $scope.cart.img = data.data.previewUrl;
             $scope.cart.money = data.data.price;
             $scope.cart.remainNumber = data.data.remainNumber;
             //购物车
             $scope.cartObj = {
-                createDate:null,
                 goodsId:data.data.id,
-                id:data.data.id,
-                number:1,
-                previewUrl:data.data.previewUrl,
-                price:data.data.price,
-                status:data.data.status,
-                title:data.data.title,
-                uid:data.data.id,
+                number:1
             };
         }).catch(function(data){
             console.log(data);
@@ -291,24 +300,11 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
         $scope.linkTo = function(uri,token,id){
             location.href = uri+"?token="+token+"&id="+id;
         };
-        $scope.back = function() {
+        $scope.pageBack = function() {
             history.go(-1);
         };
 
-        // 添加购物车
-        $scope.cartObj = {
-            createDate:null,
-            goodsId:null,
-            id:null,
-            number:null,
-            previewUrl:null,
-            price:null,
-            status:null,
-            title:null,
-            uid:null
-        };
         $scope.addCart = function(){
-            $scope.cartObj.createDate = new Date().getTime();
             cart.add($scope.cartObj).then(function(data){
                 console.log("添加购物车",data);
                 $scope.cartAll.push($scope.cartObj);
@@ -318,10 +314,31 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
             });
         };
 
+        // 下单
+        $scope.nextClicked = false;
         $scope.next = function(){
             console.log($scope.cart);
+            if($scope.nextClicked){
+                return;
+            }
+            $scope.nextClicked = true;
+            cart.order([{
+                goodsId:$scope.cart.id,
+                number:$scope.cart.quantity
+            }]).then(function(data){
+                console.log(data);
+                if(data.data && typeof data.data === 'object'){
+                    //下单成功
+                    if(typeof h5 == "object"){
+                        h5.mallPay(JSON.stringify(data));
+                    }
+                }else{
+                    //下单失败
+                    $scope.nextClicked = false;
+                }
+            }).catch(function(data){
+                $scope.nextClicked = false;
+            });
         };
-
-
     }
 ]);

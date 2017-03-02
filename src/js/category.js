@@ -119,24 +119,27 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
 
 app.factory('device',['$window',function($window){
     return {
-        screenW : parseInt($window.innerWidth)
+        screenW : function(){
+            return parseInt($window.innerWidth);
+        }
     };
 }]);
 
 app.directive("appBanner",["device",function(device){
-    var w = parseInt(device.screenW * 1.5),
-        h = parseInt(device.screenW * 163 / 375 * 1.5);
+    var w = parseInt(device.screenW() * 1.5),
+        h = parseInt(device.screenW() * 163 / 375 * 1.5);
     return {
         restrict: 'E',
         replace: true,
         scope:{
-            banner:'=bannerArr'
+            banner:'=bannerArr',
+            token:'@'
         },
         template:function(element, attrs){
             var tpl = '<div class="banner">';
                 tpl +=      '<ul class="pic-view">';
                 tpl +=          '<li ng-repeat="item in banner track by $index">';
-                tpl +=              '<a href="javascript:void(0);">';
+                tpl +=              '<a href="javascript:void(0);" ng-click="linkTo(item.id)">';
                 tpl +=                  '<img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_'+h+',w_'+w+'" />';
                 tpl +=              '</a>';
                 tpl +=          '</li>';
@@ -156,6 +159,11 @@ app.directive("appBanner",["device",function(device){
                     });
                 }
             });
+            scope.linkTo = function(id){
+                if(scope.token && id){
+                    location.href = "/pro_details.html?token="+scope.token+"&id="+id;
+                }
+            };
         }
     };
 }]);
@@ -187,8 +195,8 @@ app.controller("category",["$scope","pageDate","device",
     function($scope,pageDate,device){
 
         //设备相关
-        $scope.proViewW = parseInt(device.screenW / 2 * 1.5);
-        $scope.proViewH = parseInt(device.screenW * 105 / 166 / 2 * 1.5);
+        $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
+        $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
         function getBanner(array){
             var res = [];
             for (var i = 0; i < array.length; i++) {
@@ -298,6 +306,12 @@ app.controller("category",["$scope","pageDate","device",
             }).catch(function(data){
                 console.log(data);
             });
+        };
+
+        $scope.back = function(){
+            if(typeof h5 == "object"){
+                h5.mallBack();
+            }
         };
 
         $scope.linkTo = function(uri,token,id){

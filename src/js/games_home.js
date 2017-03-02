@@ -1,4 +1,4 @@
-var app=angular.module("games",['ngTouch']);
+var app=angular.module("games",[]);
 app.controller("gamesCt",function($scope,$location){
 	$scope.banner=[{
 		previewUrl:"img/games/bg2.png",
@@ -90,4 +90,3 @@ app.factory('device',['$window',function($window){
         screenW : parseInt($window.innerWidth)
     };
 }]);
-

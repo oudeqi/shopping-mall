@@ -2,11 +2,15 @@ body {
   background: #EBEBEB;
 }
 
+.page_container {
+  padding-bottom: 4.5rem;
+}
+
 .banner_contain {
   height: 19rem;
 }
 
-.banner {
+.banner_contain .banner {
   height: 19rem;
 }
 
@@ -149,7 +153,6 @@ body {
   color: #BFBFBF;
   height: 2.86rem;
   line-height: 2.86rem;
-  padding-bottom: 6rem;
 }
 
 .product {

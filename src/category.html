@@ -12,7 +12,9 @@
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="category" ng-cloak>
-        <header>商城</header>
+        <header>
+            <h1>商城</h1>
+        </header>
         <ul class="tapbar">
             <li>
                 <button type="button" tap="back()" name="button">
@@ -63,7 +65,7 @@
         <!-- 特产 -->
         <div class="tab-cont" ng-show="lltc.banner && type == 1">
             <div class="banner_contain">
-                <app-banner banner-arr="lltc.banner"></app-banner>
+                <app-banner banner-arr="lltc.banner" token="{{token}}"></app-banner>
             </div>
             <ul class="pro_list">
                 <li ng-repeat="item in lltc.list" tap="linkTo('./pro_details.html',token,item.id)">
@@ -87,7 +89,7 @@
         <!-- 吃货 -->
         <div class="tab-cont" ng-show="chg.banner && type == 2">
             <div class="banner_contain">
-                <app-banner banner-arr="chg.banner"></app-banner>
+                <app-banner banner-arr="chg.banner" token="{{token}}"></app-banner>
             </div>
             <ul class="pro_list">
                 <li ng-repeat="item in chg.list" tap="linkTo('./pro_details.html',token,item.id)">
@@ -111,7 +113,7 @@
         <!-- 优品 -->
         <div class="tab-cont" ng-show="yp.banner && type == 3">
             <div class="banner_contain">
-                <app-banner banner-arr="yp.banner"></app-banner>
+                <app-banner banner-arr="yp.banner" token="{{token}}"></app-banner>
             </div>
             <ul class="pro_list">
                 <li ng-repeat="item in yp.list" tap="linkTo('./pro_details.html',token,item.id)">
@@ -122,7 +124,6 @@
                     <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
                     <p class="pro_discount" ng-bind="item.deduction"></p>
                 </li>
-
             </ul>
             <div class="more_pro" ng-hide="yp.rowCount == 0">
                 <button type="button" name="button" ng-click="ypNext()">

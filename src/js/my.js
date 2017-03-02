@@ -1,4 +1,4 @@
-var app=angular.module("app",['ngTouch']);
+var app=angular.module("app",[]);
 app.directive('tap',function(){
     return function(scope, elem, attrs){
         var start,end,t,moved = false;

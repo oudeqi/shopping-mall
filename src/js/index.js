@@ -35,8 +35,20 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
 ]);
 
 app.factory('device',['$window',function($window){
+    var userAgent = $window.navigator.userAgent.toLowerCase();
+    function find(needle){
+        return userAgent.indexOf(needle) !== -1;
+    }
     return {
-        screenW : parseInt($window.innerWidth)
+        screenW : function(){
+            return parseInt($window.innerWidth);
+        },
+        iphone : function(){
+            return find('iphone');
+        },
+        android : function(){
+            return find('android');
+        }
     };
 }]);
 app.directive('tap',function(){
@@ -63,51 +75,22 @@ app.directive('tap',function(){
         });
     };
 });
-app.directive("eleFixedTop",["$document","$interval",
-    function($document,$interval){
-        return function(scope, element, attrs){
-            // var offsetTop = element[0].offsetTop;
-            // function fix(){
-            //     var scrollTop = $document.find("body")[0].scrollTop;
-            //     if(parseInt(scrollTop - offsetTop) > 8){
-            //         element.css({
-            //             "position": "fixed",
-            //             "top": "0",
-            //             "width": "100%"
-            //         });
-            //     }else{
-            //         element.css({
-            //             "position": "static",
-            //             "top": "0",
-            //             "width": "100%"
-            //         });
-            //     }
-            // }
-            // $interval(function(x){
-            //     fix();
-            // },30);
-            // $document.bind("touchend scroll",function(){
-            //     fix();
-            // });
-        };
-    }
-]);
 
 app.directive("appBanner",["device",function(device){
-    var w = parseInt(device.screenW * 1.5),
-        h = parseInt(device.screenW * 266 / 375 * 1.5);
+    var w = parseInt(device.screenW() * 1.5),
+        h = parseInt(device.screenW() * 266 / 375 * 1.5);
     return {
         restrict: 'E',
         replace: true,
         scope:{
             banner:'=bannerArr',
-            tap:'&tap'
+            token:'@'
         },
         template:function(element, attrs){
             var tpl = '<div class="banner">';
                 tpl +=      '<ul class="pic-view">';
                 tpl +=          '<li ng-repeat="item in banner track by $index">';
-                tpl +=              '<a href="javascript:void(0);">';
+                tpl +=              '<a href="javascript:void(0);" ng-click="linkTo(item.id)">';
                 tpl +=                  '<img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_'+h+',w_'+w+'" />';
                 tpl +=              '</a>';
                 tpl +=          '</li>';
@@ -127,6 +110,11 @@ app.directive("appBanner",["device",function(device){
                     });
                 }
             });
+            scope.linkTo = function(id){
+                if(scope.token && id){
+                    location.href = "/pro_details.html?token="+scope.token+"&id="+id;
+                }
+            };
         }
     };
 }]);
@@ -134,9 +122,11 @@ app.directive("appBanner",["device",function(device){
 app.controller("index",["$scope","pageDate","device",
     function($scope,pageDate,device){
 
+        $scope.iphone = device.iphone();
+
         //设备相关
-        $scope.proViewW = parseInt(device.screenW / 2 * 1.5);
-        $scope.proViewH = parseInt(device.screenW * 105 / 166 / 2 * 1.5);
+        $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
+        $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
         pageDate.getData().then(function(data){
             console.log("获取首页数据：",data);
@@ -159,7 +149,7 @@ app.controller("index",["$scope","pageDate","device",
 
         $scope.back = function(){
             if(typeof h5 == "object"){
-                h5.back();
+                h5.mallBack();
             }
         };
 
