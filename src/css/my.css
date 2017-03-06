@@ -15,7 +15,8 @@ body {
 
 .lineCover {
 	width: 100%;
-	height: 0.05rem;
+	height: 1px;
+	/*height: 0.05rem;*/
 	color: #bfbfbf;
 	background-color: #bfbfbf;
 }
@@ -120,7 +121,8 @@ body {
 	width: 24.86rem;
 	height: 8.86rem;
 	background-color: white;
-	margin: 1rem;
+	margin: 1rem auto;
+
 }
 .itemCover .itemTop {
 	margin: 0.9rem 1.3rem 0.6rem 1.3rem;
@@ -130,13 +132,22 @@ body {
 }
 .itemCover .itemTop .itemTopLeft {
 	float: left;
+	width: 70%;
 }
 .itemCover .itemTop .itemTopLeft .itemTopLeftTitle {
+	height: 3rem;
 	font-size: 1.14rem;
 	color: #2b333b;
-	margin: 0.9rem 0 1.2rem 0;
+	margin: 0.9rem 0 0rem 0;
+	text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .itemCover .itemTop .itemTopLeft .itemTopLeftInfo {
+
 	font-size: 1rem;
 	color: #bfbfbf;
 }
@@ -158,9 +169,11 @@ body {
 .itemCover .itemBottom .itemBottomButton {
 	width: 5.71rem;
 	height: 1.86rem;
-	border-radius: 0.29rem;
+	border-radius: 0;
+	border:none;
+	/*border-radius: 0.29rem;*/
 	color: #fb4747;
-	border-color: #fb4747;
+	/*border-color: #fb4747;*/
 	font-size: 1rem;
 	float: right;
 	margin: 0.6rem 1rem 0 0;

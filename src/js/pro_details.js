@@ -1,6 +1,7 @@
 var app = angular.module("pro_details",[]);
 app.constant("contstant",{
     HOST:"http://192.168.10.254:8080"
+    // HOST:"https://api.uoolle.com"
 });
 
 //http://192.168.10.96:3000/pro_details.html?id=102&token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
@@ -103,7 +104,9 @@ app.factory('device',['$window',function($window){
 
 app.directive("appBanner",["device",function(device){
     var w = parseInt(device.screenW() * 1.5),
-        h = parseInt(device.screenW() * 266 / 375 * 1.5);
+        h = parseInt(device.screenW() * 351 / 624 * 1.5);
+        // h = parseInt(device.screenW() * 266 / 375 * 1.5);
+        // h = parseInt(device.screenW() * 350 / 800 * 1.5);
     return {
         restrict: 'E',
         replace: true,
@@ -217,17 +220,25 @@ app.directive('tap',function(){
         elem.bind('touchstart',function(e){
             start = e.timeStamp;
             moved = false;
-            elem.css("opacity","0.7");
+            elem.css({
+                "opacity":"0.7"
+            });
         });
         elem.bind('touchmove',function(e){
-            // e.preventDefault();
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
             moved = true;
         });
         elem.bind('touchend',function(e){
-            elem.css("opacity","1");
+            elem.css({
+                "opacity":"1"
+            });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>30 && t<500){
+            if(!moved && t>10 && t<500){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }
@@ -265,9 +276,15 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
             $scope.price = data.data.price;
             $scope.deduction = data.data.deduction;
             $scope.originalPrice = data.data.originalPrice;
-            var start = data.data.content.indexOf('<body>')+6,
-                end = data.data.content.indexOf('</body>'),
+            var start,end,content;
+            if(data.data.content.indexOf('<body>') !== -1){
+                start = data.data.content.indexOf('<body>')+6;
+                end = data.data.content.indexOf('</body>');
                 content = data.data.content.substring(start,end);
+            }else{
+                content = data.data.content;
+            }
+            // console.log(content);
             $scope.content = $sce.trustAsHtml(content);
             //立即购买
             $scope.cart.id = data.data.id;
@@ -299,6 +316,7 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
         };
         $scope.linkTo = function(uri,token,id){
             location.href = uri+"?token="+token+"&id="+id;
+            localStorage.isTopCar=2; //不是顶部导航
         };
         $scope.pageBack = function() {
             history.go(-1);
@@ -342,3 +360,11 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
         };
     }
 ]);
+
+function mallPaySucc(id){
+    location.href = "./my_cart_success.html?id="+id;
+    // var ctrlElement = document.querySelector('[ng-controller="pro_details"]');
+    // var $scope = angular.element(ctrlElement).scope();
+    // $scope.getRewardList();//改变了模型，想同步到控制器中，则需要调用$apply()
+    // $scope.$apply();
+}

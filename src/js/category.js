@@ -1,6 +1,7 @@
 var app = angular.module("category",[]);
 app.constant("contstant",{
     HOST:"http://192.168.10.254:8080"
+    // HOST:"https://api.uoolle.com"
 });
 //http://192.168.10.96:3000/category.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
 app.config(['$locationProvider',
@@ -160,6 +161,7 @@ app.directive("appBanner",["device",function(device){
                 }
             });
             scope.linkTo = function(id){
+                localStorage.isTopCar=1;
                 if(scope.token && id){
                     location.href = "/pro_details.html?token="+scope.token+"&id="+id;
                 }
@@ -173,17 +175,25 @@ app.directive('tap',function(){
         elem.bind('touchstart',function(e){
             start = e.timeStamp;
             moved = false;
-            elem.css("opacity","0.7");
+            elem.css({
+                "opacity":"0.7"
+            });
         });
         elem.bind('touchmove',function(e){
-            // e.preventDefault();
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
             moved = true;
         });
         elem.bind('touchend',function(e){
-            elem.css("opacity","1");
+            elem.css({
+                "opacity":"1"
+            });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>30 && t<500){
+            if(!moved && t>10 && t<500){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }

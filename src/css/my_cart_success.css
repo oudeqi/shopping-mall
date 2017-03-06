@@ -1,5 +1,6 @@
 .headEdit {
-	position: fixed;
+	position: absolute;
+	/*position: fixed;*/
 	top: .1rem;
 	right: 1rem;
 	font-size: 1rem;
@@ -33,9 +34,11 @@
 .cartEmptyButton {
 	width: 5.71rem;
 	height: 2.14rem;
-	border-radius: 0.29rem;
+	border-radius: 0;
+	border:none;
+	/*border-radius: 0.29rem;*/
 	background-color: #ffffff;
-	border-color: #d7d7d7;
+	/*border-color: #d7d7d7;*/
 	color: #2b333b;
 	font-size: 1.14rem;
 }

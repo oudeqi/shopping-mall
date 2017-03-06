@@ -5,17 +5,25 @@ app.directive('tap',function(){
         elem.bind('touchstart',function(e){
             start = e.timeStamp;
             moved = false;
-            elem.css("opacity","0.7");
+            elem.css({
+                "opacity":"0.7"
+            });
         });
         elem.bind('touchmove',function(e){
-            // e.preventDefault();
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
             moved = true;
         });
         elem.bind('touchend',function(e){
-            elem.css("opacity","1");
+            elem.css({
+                "opacity":"1"
+            });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>60 && t<300){
+            if(!moved && t>10 && t<500){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }
@@ -25,6 +33,7 @@ app.directive('tap',function(){
 });
 app.controller("appct",function($scope,$http){
 	var k=1;
+	$scope.loadMoreShow=true;
 	$scope.loading=false;
 	$scope.loadText="点击加载更多";
 	$scope.testRight=function(){
@@ -57,6 +66,7 @@ app.controller("appct",function($scope,$http){
 
 	$scope.changeGid=function(index){
 		$scope.gid=index;
+		$scope.loadMoreShow=true;
 
 		$scope.getList(index-1,0);
 		$scope.kid=index-1;
@@ -97,10 +107,18 @@ app.controller("appct",function($scope,$http){
 					$scope.mylist.data.data.push(val)
 					console.log(val,'前面是val')
 				})
+				console.log(data.data.data.length)
+				if(data.data.data.length==0){
+					$scope.loadMoreShow=false;
+				}
 			}else{
 				$scope.mylist=data;
+
 			}
 			$scope.loadText="点击加载更多";
+
+
+
 			console.log(data)
 			$scope.loading=false;
 		})
@@ -131,9 +149,55 @@ app.controller("appct",function($scope,$http){
 
     // add more
     $scope.linkTo = function(uri,token,id){
+    	localStorage.isTopCar=1;
+        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+    };
+    $scope.linkTox = function(uri,token,id){
+    	localStorage.isTopCar=2;
         location.href = uri+"?token="+APP_TOKEN+"&id="+id;
     };
 
+    /*立即支付*/
+
+    $scope.payNow=function(orderNo,number){
+    	var obj={
+            "orderNo":orderNo
+        }
+    	console.log(obj)
+    	 $http.post(APP_HOST+"/v1/aut/goods/order/continue", obj,{
+                    headers: {
+                        'Authorization': APP_TOKEN,
+                    }
+                }).success(function(data){
+                	console.log(data)
+                	if(data.errMessage){
+		            	}else{
+		            		if(typeof h5=="object"){
+		                		h5.mallPay(JSON.stringify(data));
+		            			}
+		            		
+		            	}
+                }).error(function(data){
+
+                });
+    }
+
+    /*去地址管理*/
+    $scope.goAddress=function(){
+    	console.log("去地址管理")
+    	if(typeof h5=="object"){
+    		h5.openAddrManage();
+    	}
+
+    }
+    /*商场返回*/
+
+    $scope.back=function(){
+    	console.log("返回")
+    	if(typeof h5=="object"){
+    		h5.mallBack();
+    	}
+    }
 
 })
 // alert(window.innerWidth)

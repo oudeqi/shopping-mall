@@ -8,12 +8,15 @@ body{
     padding-bottom: 4.5rem;
 }
 .banner_contain{
-    height: 19rem;
+    height: 15rem;
+    // height: 19rem;
     .banner{
-        height: 19rem;
+        height: 15rem;
+        // height: 19rem;
     }
 }
 .marquee{
+    overflow: hidden;
     height: 2.86rem;
     display: flex;
     align-items: center;
@@ -129,7 +132,6 @@ body{
                 overflow: hidden;
                 img{
                     max-width: 100%;
-                    display: block;
                     height: auto;
                     border: 0;
                 }

@@ -5,17 +5,25 @@ app.directive('tap',function(){
         elem.bind('touchstart',function(e){
             start = e.timeStamp;
             moved = false;
-            elem.css("opacity","0.7");
+            elem.css({
+                "opacity":"0.7"
+            });
         });
         elem.bind('touchmove',function(e){
-            // e.preventDefault();
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
             moved = true;
         });
         elem.bind('touchend',function(e){
-            elem.css("opacity","1");
+            elem.css({
+                "opacity":"1"
+            });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>60 && t<300){
+            if(!moved && t>10 && t<500){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }
@@ -167,24 +175,30 @@ app.controller("appCartCt",function($scope,$http){
 		/*全局删除按钮*/
 		var str='';
 		var strTrue=true;
+        // window.strTrue=true;
 		$scope.delItemAll=function(){
+            console.log("打印删除后");
+            console.log($scope.buyCar);
 			$scope.loading=true;
-			angular.forEach($scope.buyCar,function(val,index){
-				if(val.isBuy==true || val.isLose==true){
-					if(strTrue==true){
-					str=str+val.id;
-					$scope.buyCar.splice(index,1);
-					$scope.delItemAll();
-					}else{
-						str=','+str+val.id;
-						$scope.buyCar.splice(index,1);
-						$scope.delItemAll();
-					}
+            for (var i = 0; i < $scope.buyCar.length; i++) {
+                if($scope.buyCar[i].isBuy || $scope.buyCar[i].isLose){
+    					if(strTrue){
+                            console.log("2+++++2");
+        					str=str+$scope.buyCar[i].id;
+        					$scope.buyCar.splice(i,1);
+                            strTrue=false;
+        					$scope.delItemAll();
+    					}else{
+                            console.log("1+++++1");
+    						str=str+','+$scope.buyCar[i].id;
+    						$scope.buyCar.splice(i,1);
+    						$scope.delItemAll();
+    					}
 
-				}
+    				}
+            }
 
-			})
-			console.log(str)
+
 			$http.delete(APP_HOST+'/v1/aut/goods/shopping/cart?ids='+str,{
 					headers: {
 		                        'Authorization': APP_TOKEN,
@@ -219,6 +233,43 @@ app.controller("appCartCt",function($scope,$http){
 				}
 			});
 		}
+
+		/*购物车结算*/
+		  $scope.payNow=function(){
+		  	console.log($scope.buyCar);
+		  	var carArr=[];
+		  	angular.forEach($scope.buyCar,function(val,index){
+					if(val.isBuy==true){
+						var kis={
+							goodsId:val.goodsId,
+							number:val.quantity,
+						}
+						carArr.push(kis);
+					}
+				})
+
+	  		$http.post(APP_HOST+"/v1/aut/goods/order", carArr,{
+                headers: {
+                    'Authorization': APP_TOKEN,
+                }
+            }).success(function(data){
+            	console.log(data)
+            	if(data.errMessage){
+            	}else{
+            		if(typeof h5=="object"){
+                		h5.mallPay(JSON.stringify(data));
+            			}
+            		
+            	}
+
+            	
+            }).error(function(data){
+
+            });
+
+
+		    }
+
 
 // eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg
 
@@ -277,6 +328,25 @@ app.controller("appCartCt",function($scope,$http){
 		$scope.back = function() {
             history.go(-1);
         };
+
+        $scope.linkTo = function(uri,token,id){
+        	location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+		};
+
+		$scope.isTopBack=true;
+		$scope.noTopBackStyle={
+			"bottom":"0",
+		}
+		if(localStorage.isTopCar){
+			if(localStorage.isTopCar==2){
+				$scope.isTopBack=true;
+			}else{
+				$scope.isTopBack=false;
+			}
+		}
+		/*是否顶级菜单进入*/
+		// localStorage.getIsTop;
+
 
 
 

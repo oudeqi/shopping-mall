@@ -1,4 +1,36 @@
 var app=angular.module("appBuySuccess",[]);
+app.directive('tap',function(){
+    return function(scope, elem, attrs){
+        var start,end,t,moved = false;
+        elem.bind('touchstart',function(e){
+            start = e.timeStamp;
+            moved = false;
+            elem.css({
+                "opacity":"0.7"
+            });
+        });
+        elem.bind('touchmove',function(e){
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
+            moved = true;
+        });
+        elem.bind('touchend',function(e){
+            elem.css({
+                "opacity":"1"
+            });
+            end = e.timeStamp;
+            t = end - start;
+            if(!moved && t>10 && t<500){
+                if(attrs.tap){
+                    scope.$apply(attrs.tap);
+                }
+            }
+        });
+    };
+});
 app.controller("appBuySuccessCt",function($scope,$http){
 	var homesrc=location.href;
 	var orderId=homesrc.split("=");
@@ -16,6 +48,10 @@ app.controller("appBuySuccessCt",function($scope,$http){
 		})
 	}
 	$scope.getInfo();
+
+	$scope.linkTo = function(uri,token,id){
+        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+    };
 
 
 })

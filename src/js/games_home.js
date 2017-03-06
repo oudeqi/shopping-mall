@@ -1,5 +1,12 @@
 var app=angular.module("games",[]);
 app.controller("gamesCt",function($scope,$location){
+
+	$scope.back = function(){
+		if(typeof h5 == "object"){
+			h5.mallBack();
+		}
+	};
+
 	$scope.banner=[{
 		previewUrl:"img/games/bg2.png",
 		go:'http://www.jywgame.com/media.php/TuiRegister/login/pid/73/gid/10',

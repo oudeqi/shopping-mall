@@ -8,13 +8,14 @@
         <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/pro_details.css"/>
+        <script type="text/javascript" src="./js/adapt.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
-    <body ng-controller="pro_details" ng-cloak>
+    <body ng-controller="pro_details">
         <header>
             <div class="inner">
                 <div class="l">
-                    <button type="button" name="button" tap="pageBack()">
+                    <button type="button" name="button" ng-click="pageBack()">
                         <i class="back"></i>
                     </button>
                 </div>
@@ -27,7 +28,7 @@
         <div class="banner_contain">
             <app-banner banner-arr="banner"></app-banner>
         </div>
-        <div ng-show="ok">
+        <div ng-cloak ng-show="ok">
             <div class="base_info">
                 <h2 class="tit">{{title}}</h2>
                 <div class="price">
@@ -106,13 +107,8 @@
                 </div>
             </div>
         </div> -->
-
-
-
-
     </body>
 
-    <script type="text/javascript" src="./js/angular-touch.js"></script>
     <script type="text/javascript" src="./js/photoSlider.js"></script>
     <script type="text/javascript" src="./js/pro_details.js"></script>
 </html>

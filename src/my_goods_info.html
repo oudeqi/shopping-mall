@@ -4,13 +4,16 @@
 <meta name="viewport" content="user-scalable=no" />
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
     <title>订单详情</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/my_goods_info.css">
+    <script type="text/javascript" src="js/adapt.js"></script>
 </head>
 <body>
 <div ng-app="appInfo" ng-controller="appInfoCt">
-     <div class="head"><img class="headBack" ontouchstart="history.go(-1)"  src="img/back2.png">订单详情</div>
+     <div class="head"><div class="headBackCover" ontouchstart="history.go(-1)"><img class="headBack"  src="img/back2.png"></div>订单详情</div>
 
      <div class="bigCover">
          <div class="smallCover">
@@ -75,7 +78,9 @@
 
             <div class="infoLast">
                 <div class="infoLastOne">订单总额：{{goodsinfo.data.allMoney}}元</div>
-                <div class="infoLastOne">运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{goodsinfo.data.transportMoney}}元</div>
+                <div class="infoLastOne">运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{goodsinfo.data.transportMoney}}元</div>
+
+                <!-- <div class="infoLastOne">运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{goodsinfo.data.transportMoney}}元</div> -->
                 <div class="infoLastOne">实付总额：{{goodsinfo.data.payMoney}}元</div>
             </div>
 

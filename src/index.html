@@ -9,44 +9,45 @@
         <link rel="stylesheet" type="text/css" href="./css/tapbar.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+        <script type="text/javascript" src="./js/adapt.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="index">
+        <ul class="tapbar">
+            <li>
+                <button type="button" tap="back()" name="button">
+                    <i class="back"></i>
+                </button>
+            </li>
+            <li>
+                <button class="active" type="button" name="button">
+                    <i class="home"></i>
+                    <span class="txt">首页</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" name="button" tap="linkTo('./category.html',token)">
+                    <i class="category"></i>
+                    <span class="txt">分类</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" name="button" tap="linkTo('./my_cart.html')">
+                    <i class="cart"></i>
+                    <span class="txt">购物车</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" name="button" tap="linkTo('./my.html')">
+                    <i class="my"></i>
+                    <span class="txt">我的商城</span>
+                </button>
+            </li>
+        </ul>
+        <div class="banner_contain">
+            <app-banner banner-arr="banner" token="{{token}}"></app-banner>
+        </div>
         <div class="page_container" ng-show="banner">
-            <ul class="tapbar">
-                <li>
-                    <button type="button" tap="back()" name="button">
-                        <i class="back"></i>
-                    </button>
-                </li>
-                <li>
-                    <button class="active" type="button" name="button">
-                        <i class="home"></i>
-                        <span class="txt">首页</span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" name="button" tap="linkTo('./category.html',token)">
-                        <i class="category"></i>
-                        <span class="txt">分类</span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" name="button" tap="linkTo('./my_cart.html')">
-                        <i class="cart"></i>
-                        <span class="txt">购物车</span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" name="button" tap="linkTo('./my.html')">
-                        <i class="my"></i>
-                        <span class="txt">我的商城</span>
-                    </button>
-                </li>
-            </ul>
-            <div class="banner_contain">
-                <app-banner banner-arr="banner" token="{{token}}"></app-banner>
-            </div>
             <div class="marquee">
                 <div class="l">
                     <div class="img_con">
@@ -83,7 +84,6 @@
                     </li>
                 </ul>
             </div>
-
             <!-- 新品推荐 -->
             <div class="product">
                 <h2 class="pro_tit">新品推荐</h2>

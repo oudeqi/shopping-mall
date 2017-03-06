@@ -7,14 +7,15 @@ body {
 }
 
 .banner_contain {
-  height: 19rem;
+  height: 15rem;
 }
 
 .banner_contain .banner {
-  height: 19rem;
+  height: 15rem;
 }
 
 .marquee {
+  overflow: hidden;
   height: 2.86rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -211,7 +212,6 @@ body {
 
 .product .pro_list li .pro_view img {
   max-width: 100%;
-  display: block;
   height: auto;
   border: 0;
 }

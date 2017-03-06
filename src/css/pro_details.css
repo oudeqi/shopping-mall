@@ -73,12 +73,12 @@ header .inner .m h2 {
 }
 
 .banner_contain {
-  height: 18.57rem;
+  height: 15rem;
   margin-top: 3.4rem;
 }
 
-.banner {
-  height: 18.57rem;
+.banner_contain .banner {
+  height: 15rem;
 }
 
 .base_info {
@@ -153,7 +153,7 @@ header .inner .m h2 {
 }
 
 .pro_details .content img {
-  max-width: 100%;
+  max-width: 100% !important;
   height: auto;
 }
 

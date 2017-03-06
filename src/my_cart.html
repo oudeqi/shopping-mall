@@ -4,9 +4,13 @@
 <meta name="viewport" content="user-scalable=no" />
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
     <title>购物车</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/tapbar.css">
     <link rel="stylesheet" type="text/css" href="css/my_cart.css">
+    <script type="text/javascript" src="js/adapt.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
 
 </head>
@@ -14,18 +18,18 @@
 <div ng-app="appCart" ng-controller="appCartCt" ng-cloak>
     <div class="loading" ng-show="loading"></div>
 
-     <div class="head"><img tap="back()" class="headBack" src="img/back2.png">购物车 <div class="headEdit" ng-show="!editAllDel" ng-click="goEditFunction()">编辑</div><div ng-click="goEditFunction()" ng-show="editAllDel" class="headEdit">完成</div></div>
+     <div class="head"><div ng-show="!!isTopBack" tap="back()" class="headBackCover"><img class="headBack" src="img/back2.png"></div>购物车 <div class="headEdit" ng-show="!editAllDel" ng-click="goEditFunction()">编辑</div><div ng-click="goEditFunction()" ng-show="editAllDel" class="headEdit">完成</div></div>
      <div class="LINE"></div>
-     <div class="cartEmpty" ng-show="false">
+     <div class="cartEmpty" ng-hide="!!buyCar.length">
         <div class="cartEmptyImgCover">
             <img class="cartEmptyImg" src="img/cart/buy_empty.png">
             <div class="cartEmptySay">购物车什么都没有</div>
-            <button class="cartEmptyButton">去逛逛</button>
+            <button tap="linkTo('./index.html',token)" class="cartEmptyButton">去逛逛</button>
          </div>
      </div>
 
      <div class="cartFull" ng-show="true">
-        <div class="cartFullSmall" style="padding:0 0 5rem 0;">
+        <div class="cartFullSmall">
             <div ng-repeat="(index,x) in buyCar">
                 <div class="cartFullItem">
                     <div class="cartFullCheckCover" ng-if="!x.isLose">
@@ -60,6 +64,9 @@
                 <div class="LINE"></div>
             </div>
 
+
+           
+
             <!-- <div>
                 <div class="cartFullItem">
                     <div class="cartFullCheckCover">
@@ -83,7 +90,7 @@
         </div>
 
         <!-- 结算底部button -->
-        <div class="bottomCover">
+        <div class="bottomCover" ng-style="isTopBack?noTopBackStyle:''">
 
                    <div class="cartFullCheckCover" style="float:left;">
                         <input class="fullCheck" type="checkbox" name="checkbox" ng-model="testTrue" id="kissyes">
@@ -92,7 +99,7 @@
                     </div>
                     <div class="bottomCoverAllChecked">全选</div>
 
-                    <button ng-show="!editAllDel" class="bottomButton">结算({{totalQuantity}})</button>
+                    <button ng-disabled="!buyCar.length" ng-show="!editAllDel" class="bottomButton" ng-click="payNow()">结算({{totalQuantity}})</button>
                     <button ng-show="editAllDel" class="bottomButton" ng-click="delItemAll()">删除</button>
 
                     <div class="bottomMoney" ng-show="!editAllDel">
@@ -103,6 +110,38 @@
 
      </div>
 
+
+     <ul class="tapbar" ng-show="!isTopBack">
+        <li>
+            <button type="button" tap="back()" name="button">
+                <i class="back"></i>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./index.html',token)">
+                <i class="home"></i>
+                <span class="txt">首页</span>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./category.html',token)">
+                <i class="category"></i>
+                <span class="txt">分类</span>
+            </button>
+        </li>
+        <li>
+            <button class="active" type="button" name="button">
+                <i class="cart"></i>
+                <span class="txt">购物车</span>
+            </button>
+        </li>
+        <li>
+            <button type="button" name="button" tap="linkTo('./my.html',token)">
+                <i class="my"></i>
+                <span class="txt">我的商城</span>
+            </button>
+        </li>
+    </ul>
 
 
 </div>

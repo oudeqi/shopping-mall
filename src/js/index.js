@@ -1,6 +1,7 @@
 var app = angular.module("index",[]);
 app.constant("contstant",{
     HOST:"http://192.168.10.254:8080"
+    // HOST:"https://api.uoolle.com"
 });
 //http://192.168.10.96:3000/index.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg
 app.config(['$locationProvider',
@@ -57,17 +58,25 @@ app.directive('tap',function(){
         elem.bind('touchstart',function(e){
             start = e.timeStamp;
             moved = false;
-            elem.css("opacity","0.7");
+            elem.css({
+                "opacity":"0.7"
+            });
         });
         elem.bind('touchmove',function(e){
-            // e.preventDefault();
+            end = e.timeStamp;
+            t = end - start;
+            if(t>300){
+                e.preventDefault();
+            }
             moved = true;
         });
         elem.bind('touchend',function(e){
-            elem.css("opacity","1");
+            elem.css({
+                "opacity":"1"
+            });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>30 && t<500){
+            if(!moved && t>10 && t<500){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }
@@ -78,7 +87,8 @@ app.directive('tap',function(){
 
 app.directive("appBanner",["device",function(device){
     var w = parseInt(device.screenW() * 1.5),
-        h = parseInt(device.screenW() * 266 / 375 * 1.5);
+        h = parseInt(device.screenW() * 351 / 624 * 1.5);
+        // h = parseInt(device.screenW() * 266 / 375 * 1.5);
     return {
         restrict: 'E',
         replace: true,
@@ -154,6 +164,7 @@ app.controller("index",["$scope","pageDate","device",
         };
 
         $scope.linkTo = function(uri,token,id){
+            localStorage.isTopCar=1;
             location.href = uri+"?token="+token+"&id="+id;
         };
 

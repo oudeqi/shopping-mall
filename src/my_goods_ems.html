@@ -4,14 +4,16 @@
 <meta name="viewport" content="user-scalable=no" />
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
     <title>物流信息</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/my_goods_ems.css">
-
+    <script type="text/javascript" src="js/adapt.js"></script>
 </head>
 <body>
 <div ng-app="appEms" ng-controller="appEmsCt">
-     <div class="head"><img class="headBack" ontouchstart="history.go(-1)" src="img/back2.png">查看物流</div>
+     <div class="head"><div ontouchstart="history.go(-1)" class="headBackCover"><img class="headBack" src="img/back2.png"></div>查看物流</div>
      <div class="LINE"></div>
      <div class="headInfo">
          <img class="headImg" ng-src="{{ems.data.previewUrl}}" src="img/head.jpg">

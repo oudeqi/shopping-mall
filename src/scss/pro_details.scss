@@ -45,11 +45,15 @@ header{
     }
 }
 .banner_contain{
-    height: 18.57rem;
+    height: 15rem;
+    // height: 11.71rem;
+    // height: 18.57rem;
     margin-top: 3.4rem;
-}
-.banner{
-    height: 18.57rem;
+    .banner{
+        height: 15rem;
+        // height: 18.57rem;
+        // height: 11.71rem;
+    }
 }
 .base_info{
     background: #fff;
@@ -108,7 +112,7 @@ header{
         font-size: 1rem;
         color: #2B333B;
         img{
-            max-width: 100%;
+            max-width: 100% !important;
             height: auto;
         }
     }
