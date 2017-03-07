@@ -376,7 +376,7 @@ header .inner .m h2 {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 1001;
 }
 
 .popup_buy .shade {

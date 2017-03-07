@@ -30,17 +30,17 @@
         </div>
         <div ng-cloak ng-show="ok">
             <div class="base_info">
-                <h2 class="tit">{{title}}</h2>
+                <h2 class="tit" ng-bind="title"></h2>
                 <div class="price">
-                    <span>{{price | currency:""}}</span>
-                    <span>元</span>
-                    <span>{{deduction}}</span>
+                    <span ng-bind="price | currency:''"></span>
+                    <span ng-bind="'元'"></span>
+                    <span ng-bind="deduction"></span>
                 </div>
                 <div class="tip">
                     <span>原价</span>
-                    <del>{{originalPrice | currency:""}}</del>
-                    <span>元</span>
-                    <span>邮费：包邮</span>
+                    <del ng-bind="originalPrice | currency:''"></del>
+                    <span ng-bind="'元'">元</span>
+                    <span ng-bind="'邮费：包邮'"></span>
                 </div>
             </div>
             <div class="pro_details">
