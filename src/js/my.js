@@ -144,29 +144,17 @@ app.controller("appct",function($scope,$http){
 	$scope.loadMoreFunction=function(){
 		k=k+1;
 		$scope.getList($scope.kid,k,2);
+
 	}
 
     // add more
     $scope.linkTo = function(uri,token,id){
-        console.log(token);
     	localStorage.isTopCar=1;
-        if(token){
-            uri = uri+"?token="+APP_TOKEN;
-        }
-        if(id){
-            uri = uri+"&id="+id;
-        }
-        location.href = uri;
+        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
     };
     $scope.linkTox = function(uri,token,id){
     	localStorage.isTopCar=2;
-        if(token){
-            uri = uri+"?token="+APP_TOKEN;
-        }
-        if(id){
-            uri = uri+"&id="+id;
-        }
-        location.href = uri;
+        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
     };
 
     /*立即支付*/
@@ -187,7 +175,7 @@ app.controller("appct",function($scope,$http){
 		            		if(typeof h5=="object"){
 		                		h5.mallPay(JSON.stringify(data));
 		            			}
-
+		            		
 		            	}
                 }).error(function(data){
 

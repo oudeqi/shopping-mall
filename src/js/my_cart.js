@@ -253,16 +253,26 @@ app.controller("appCartCt",function($scope,$http){
                     'Authorization': APP_TOKEN,
                 }
             }).success(function(data){
+            	console.log("#######################")
             	console.log(data)
+            	console.log("#######################")
+
+            	console.log(data.data.orderNo)
+            	localStorage.payAllx=JSON.stringify(data.data);
+            	localStorage.payOrderNo=data.data.orderNo;
+            	localStorage.payMoney=data.data.money;
+            	/*全部*/
+            	// localStorage.setOnePay.money=data.data.money;
             	if(data.errMessage){
             	}else{
-            		if(typeof h5=="object"){
-                		h5.mallPay(JSON.stringify(data));
-            			}
-
+            		window.location.href="pay.html"
+            		// if(typeof h5=="object"){
+              //   		h5.mallPay(JSON.stringify(data));
+            		// 	}
+            		
             	}
 
-
+            	
             }).error(function(data){
 
             });
@@ -329,11 +339,8 @@ app.controller("appCartCt",function($scope,$http){
             history.go(-1);
         };
 
-        $scope.linkTo = function(uri,token){
-            if(token){
-                uri = uri+"?token="+APP_TOKEN;
-            }
-            location.href = uri;
+        $scope.linkTo = function(uri,token,id){
+        	location.href = uri+"?token="+APP_TOKEN+"&id="+id;
 		};
 
 		$scope.isTopBack=true;

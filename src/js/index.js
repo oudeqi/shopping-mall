@@ -52,7 +52,6 @@ app.factory('device',['$window',function($window){
         }
     };
 }]);
-
 app.directive('tap',function(){
     return function(scope, elem, attrs){
         var start,end,t,moved = false;
@@ -147,6 +146,7 @@ app.controller("index",["$scope","pageDate","device",
                 $scope.llchg = data.data.food;
                 $scope.lltc = data.data.special;
                 $scope.llyp = data.data.good;
+
                 $scope.newProductShow = false;
                 $scope.llchgShow = false;
                 $scope.lltcShow = false;
@@ -164,13 +164,7 @@ app.controller("index",["$scope","pageDate","device",
 
         $scope.linkTo = function(uri,token,id){
             localStorage.isTopCar=1;
-            if(token){
-                uri = uri+"?token="+token;
-            }
-            if(id){
-                uri = uri+"&id="+id;
-            }
-            location.href = uri;
+            location.href = uri+"?token="+token+"&id="+id;
         };
 
     }

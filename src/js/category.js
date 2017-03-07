@@ -1,101 +1,77 @@
-var app = angular.module("category",["ngRoute"]);
+var app = angular.module("category",[]);
 app.constant("contstant",{
     // HOST:"http://192.168.10.254:8080"
     HOST:"https://api.uoolle.com"
 });
 //http://192.168.10.96:3000/category.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
-/*
-resolve: {
-    delay: function($q, $timeout) {
-        var delay = $q.defer();
-        $timeout(delay.resolve, 1000);
-        return delay.promise;
-    }
-}
- */
-app.config(['$routeProvider',
-    function($routeProvider) {
-        $routeProvider.when('/dftc', {
-            templateUrl: 'list.html',
-            controller: 'getDftcList'
-        })
-        .when('/chg', {
-            templateUrl: 'list.html',
-            controller: 'getChgList'
-        }).when('/llyp', {
-            templateUrl: 'list.html',
-            controller: 'getLlypList'
-        })
-        .otherwise({
-            redirectTo: '/dftc'
-        });
+app.config(['$locationProvider',
+    function($locationProvider) {
+        $locationProvider.html5Mode({enabled: true, requireBase: false});
     }
 ]);
 
-app.run(['$rootScope', '$location',"$window","device",
-    function($rootScope, $location,$window,device) {
-
-        $rootScope.token = localStorage.token;
-        $rootScope.proViewW = parseInt(device.screenW() / 2 * 1.5);
-        $rootScope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
-        $rootScope.linkTo = function(uri,token,id){
-            localStorage.isTopCar=1;
-            if(token){
-                uri = uri+"?token="+token;
-            }
-            if(id){
-                uri = uri+"&id="+id;
-            }
-            location.href = uri;
-        };
-        $rootScope.getBanner = function(array){
-            var res = [];
-            for (var i = 0; i < array.length; i++) {
-                if(array[i].top == '1'){
-                    res.push(array[i]);
-                }
-            }
-            return res;
-        };
-        $rootScope.getList = function(array){
-            var res = [];
-            for (var i = 0; i < array.length; i++) {
-                if(array[i].top == '0'){
-                    res.push(array[i]);
-                }
-            }
-            return res;
-        };
-        console.log($rootScope.token);
-        $rootScope.$on('$routeChangeSuccess',function(event, current, previous){
-           console.log(current.$$route.originalPath);
-          $rootScope.currentPath = current.$$route.originalPath;
-       });
+app.run(['$rootScope', '$location',"$window",
+    function($rootScope, $location,$window) {
+        $rootScope.token = $location.search().token;
+        localStorage.token=$rootScope.token;
     }
 ]);
 
 app.service("pageDate",["$http","$rootScope","$q","contstant",
     function($http,$rootScope,$q,contstant){
 
-        // 吃货馆
-        var chg = {
-            pageSize: 20,
-            type:2
+        // 优品
+        var yp = {
+            pageIndex: 1,
+            pageSize: 20
         };
-        this.chg = {
-            next: function(pageIndex){
+        this.yp = {
+            next: function(){
                 var defer = $q.defer();
                 $http.get(contstant.HOST+"/v1/aut/goods/list", {
                     headers: {
                         'Authorization': $rootScope.token,
                     },
                     params:{
-                        type: chg.type,
-                        pageIndex:pageIndex,
+                        type: 3,
+                        pageIndex:yp.pageIndex,
+                        pageSize:yp.pageSize
+                    }
+                }).success(function(data){
+                    if(data.data && typeof data.data === 'object'){
+                        yp.pageIndex++;
+                        defer.resolve(data);
+                    }else{
+                        defer.reject(data);
+                    }
+
+                }).error(function(data){
+                    defer.reject("error");
+                });
+                return defer.promise;
+            }
+        };
+
+        // 吃货馆
+        var chg = {
+            pageIndex: 1,
+            pageSize: 20
+        };
+        this.chg = {
+            next: function(){
+                var defer = $q.defer();
+                $http.get(contstant.HOST+"/v1/aut/goods/list", {
+                    headers: {
+                        'Authorization': $rootScope.token,
+                    },
+                    params:{
+                        type: 2,
+                        pageIndex:chg.pageIndex,
                         pageSize:chg.pageSize
                     }
                 }).success(function(data){
                     if(data.data && typeof data.data === 'object'){
+                        chg.pageIndex++;
                         defer.resolve(data);
                     }else{
                         defer.reject(data);
@@ -109,55 +85,25 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
         };
 
         // 特产
-        var dftc = {
-            pageSize: 20,
-            type: 1
+        var lltc = {
+            pageIndex: 1,
+            pageSize: 20
         };
-        this.dftc = {
-            next: function(pageIndex){
+        this.lltc = {
+            next: function(){
                 var defer = $q.defer();
                 $http.get(contstant.HOST+"/v1/aut/goods/list", {
                     headers: {
                         'Authorization': $rootScope.token,
                     },
                     params:{
-                        type: dftc.type,
-                        pageIndex:pageIndex,
-                        pageSize:dftc.pageSize
+                        type: 1,
+                        pageIndex:lltc.pageIndex,
+                        pageSize:lltc.pageSize
                     }
                 }).success(function(data){
                     if(data.data && typeof data.data === 'object'){
-                        defer.resolve(data);
-                    }else{
-                        defer.reject(data);
-                    }
-
-                }).error(function(data){
-                    defer.reject("error");
-                });
-                return defer.promise;
-            }
-        };
-
-        // 优品
-        var yp = {
-            pageSize: 20,
-            type: 3
-        };
-        this.yp = {
-            next: function(pageIndex){
-                var defer = $q.defer();
-                $http.get(contstant.HOST+"/v1/aut/goods/list", {
-                    headers: {
-                        'Authorization': $rootScope.token,
-                    },
-                    params:{
-                        type: yp.type,
-                        pageIndex:pageIndex,
-                        pageSize:yp.pageSize
-                    }
-                }).success(function(data){
-                    if(data.data && typeof data.data === 'object'){
+                        lltc.pageIndex++;
                         defer.resolve(data);
                     }else{
                         defer.reject(data);
@@ -223,7 +169,6 @@ app.directive("appBanner",["device",function(device){
         }
     };
 }]);
-
 app.directive('tap',function(){
     return function(scope, elem, attrs){
         var start,end,t,moved = false;
@@ -256,123 +201,131 @@ app.directive('tap',function(){
         });
     };
 });
+app.controller("category",["$scope","pageDate","device",
+    function($scope,pageDate,device){
 
-app.controller("nav",["$scope",function($scope){
-    $scope.back = function(){
-        if(typeof h5 == "object"){
-            h5.mallBack();
+        //设备相关
+        $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
+        $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
+        function getBanner(array){
+            var res = [];
+            for (var i = 0; i < array.length; i++) {
+                if(array[i].top == '1'){
+                    res.push(array[i]);
+                }
+            }
+            return res;
         }
-    };
-    $scope.linkTo = function(uri,token,id){
-        if(token){
-            uri = uri+"?token="+token;
+        function getList(array){
+            var res = [];
+            for (var i = 0; i < array.length; i++) {
+                if(array[i].top == '0'){
+                    res.push(array[i]);
+                }
+            }
+            return res;
         }
-        if(id){
-            uri = uri+"&id="+id;
-        }
-        location.href = uri;
-    };
-}]);
 
-app.controller("getDftcList",["$scope","pageDate","device","$rootScope",
-    function($scope,pageDate,device,$rootScope){
+        $scope.type = 1;//列表类型 1特产 2吃货 3优品
 
-        $scope.pageIndex = 1;
-        $scope.list = [];
-        $scope.banner = [];
-        $scope.rowCount = 0;
-        pageDate.dftc.next($scope.pageIndex).then(function(data){
+        $scope.lltc = {
+            list:[],
+            banner:[],
+            rowCount:0
+        };
+        //获取地方特产
+        pageDate.lltc.next().then(function(data){
             console.log("获取地方特产：",data);
-            $scope.pageIndex ++;
-            $scope.banner = $rootScope.getBanner(data.data.data);
-            $scope.list = $rootScope.getList(data.data.data);
-            $scope.rowCount = $scope.list.length;
+            $scope.lltc.banner = getBanner(data.data.data);
+            $scope.lltc.list = getList(data.data.data);
+            $scope.lltc.rowCount = $scope.lltc.list.length;
         }).catch(function(data){
             console.log(data);
         });
 
-        $scope.next = function(){
-            pageDate.dftc.next($scope.pageIndex).then(function(data){
+        $scope.lltcNext = function(){
+            console.log($scope.lltc);
+            pageDate.lltc.next().then(function(data){
                 console.log("获取地方特产：",data);
-                $scope.pageIndex ++;
                 var array = data.data.data;
                 for (var i = 0; i < array.length; i++) {
-                    $scope.list.push(array[i]);
+                    $scope.lltc.list.push(array[i]);
                 }
-                $scope.rowCount = data.data.data.length;
-                console.log($scope.list,$scope.banner,$scope.rowCount);
+                $scope.lltc.rowCount = data.data.data.length;
+                console.log($scope.lltc);
             }).catch(function(data){
                 console.log(data);
             });
         };
-    }
-]);
 
-app.controller("getChgList",["$scope","pageDate","device","$rootScope",
-    function($scope,pageDate,device,$rootScope){
 
-        $scope.pageIndex = 1;
-        $scope.list = [];
-        $scope.banner = [];
-        $scope.rowCount = 0;
-        pageDate.chg.next($scope.pageIndex).then(function(data){
-            console.log("获取吃货馆：",data);
-            $scope.pageIndex ++;
-            $scope.banner = $rootScope.getBanner(data.data.data);
-            $scope.list = $rootScope.getList(data.data.data);
-            $scope.rowCount = $scope.list.length;
+        $scope.chg = {
+            list:[],
+            banner:[],
+            rowCount:0
+        };
+        //获取吃货管
+        pageDate.chg.next().then(function(data){
+            console.log("获取吃货管：",data);
+            $scope.chg.banner = getBanner(data.data.data);
+            $scope.chg.list = getList(data.data.data);
+            $scope.chg.rowCount = $scope.chg.list.length;
         }).catch(function(data){
             console.log(data);
         });
-
-        $scope.next = function(){
-            pageDate.chg.next($scope.pageIndex).then(function(data){
-                console.log("获取吃货馆：",data);
-                $scope.pageIndex ++;
+        $scope.chgNext = function(){
+            console.log($scope.chg);
+            pageDate.chg.next().then(function(data){
+                console.log("获取地方特产：",data);
                 var array = data.data.data;
                 for (var i = 0; i < array.length; i++) {
-                    $scope.list.push(array[i]);
+                    $scope.chg.list.push(array[i]);
                 }
-                $scope.rowCount = data.data.data.length;
-                console.log($scope.list,$scope.banner,$scope.rowCount);
+                $scope.chg.rowCount = data.data.data.length;
+                console.log($scope.chg);
             }).catch(function(data){
                 console.log(data);
             });
         };
-    }
-]);
 
-app.controller("getLlypList",["$scope","pageDate","device","$rootScope",
-    function($scope,pageDate,device,$rootScope){
 
-        $scope.pageIndex = 1;
-        $scope.list = [];
-        $scope.banner = [];
-        $scope.rowCount = 0;
-        pageDate.yp.next($scope.pageIndex).then(function(data){
-            console.log("获取联联优品：",data);
-            $scope.pageIndex ++;
-            $scope.banner = $rootScope.getBanner(data.data.data);
-            $scope.list = $rootScope.getList(data.data.data);
-            $scope.rowCount = $scope.list.length;
+        $scope.yp = {
+            list:[],
+            banner:[],
+            rowCount:0
+        };
+        //获取优品
+        pageDate.yp.next().then(function(data){
+            console.log("获取优品：",data);
+            $scope.yp.banner = getBanner(data.data.data);
+            $scope.yp.list = getList(data.data.data);
+            $scope.yp.rowCount = $scope.yp.list.length;
         }).catch(function(data){
             console.log(data);
         });
-
-        $scope.next = function(){
-            pageDate.yp.next($scope.pageIndex).then(function(data){
-                console.log("获取联联优品：",data);
-                $scope.pageIndex ++;
+        $scope.ypNext = function(){
+            console.log($scope.yp);
+            pageDate.yp.next().then(function(data){
+                console.log("获取地方特产：",data);
                 var array = data.data.data;
                 for (var i = 0; i < array.length; i++) {
-                    $scope.list.push(array[i]);
+                    $scope.yp.list.push(array[i]);
                 }
-                $scope.rowCount = data.data.data.length;
-                console.log($scope.list,$scope.banner,$scope.rowCount);
+                $scope.yp.rowCount = data.data.data.length;
+                console.log($scope.yp);
             }).catch(function(data){
                 console.log(data);
             });
         };
 
+        $scope.back = function(){
+            if(typeof h5 == "object"){
+                h5.mallBack();
+            }
+        };
+
+        $scope.linkTo = function(uri,token,id){
+            location.href = uri+"?token="+token+"&id="+id;
+        };
     }
 ]);

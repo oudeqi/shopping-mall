@@ -149,9 +149,6 @@ app.directive("buyNow",["device","$document",function(device,$document){
             click:'=buyClick',
             next:'&'
         },
-        controller:["$scope",function($scope){
-            $scope.click = false;
-        }],
         template:function(element, attrs){
             var tpl = '';
                 tpl += '<div class="popup_content">';

@@ -80,42 +80,42 @@
 
 .tapbar li button .back {
   background-image: url("../img/sprite.png");
-  background-position: -112px 0px;
+  background-position: -92px 0px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button .home {
   background-image: url("../img/sprite.png");
-  background-position: -40px -40px;
+  background-position: -33.33333px -33.33333px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button .category {
   background-image: url("../img/sprite.png");
-  background-position: -80px -32px;
+  background-position: -66.66667px -25.33333px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button .cart {
   background-image: url("../img/sprite.png");
-  background-position: -80px 0px;
+  background-position: -66.66667px 0px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button .my {
   background-image: url("../img/sprite.png");
-  background-position: -32px -80px;
+  background-position: -25.33333px -66.66667px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button .txt {
@@ -128,34 +128,34 @@
 
 .tapbar li button.active .home {
   background-image: url("../img/sprite.png");
-  background-position: 0px -112px;
+  background-position: 0px -92px;
   width: 18px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button.active .category {
   background-image: url("../img/sprite.png");
-  background-position: -112px -32px;
+  background-position: -92px -25.33333px;
   width: 21px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button.active .cart {
   background-image: url("../img/sprite.png");
-  background-position: 0px -80px;
+  background-position: 0px -66.66667px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button.active .my {
   background-image: url("../img/sprite.png");
-  background-position: -64px -80px;
+  background-position: -50.66667px -66.66667px;
   width: 22px;
   height: 22px;
-  background-size: 134px 134px;
+  background-size: 114px 114px;
 }
 
 .tapbar li button.active .txt {
