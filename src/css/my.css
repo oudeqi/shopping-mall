@@ -16,6 +16,7 @@ body {
 .lineCover {
 	width: 100%;
 	height: 1px;
+	transform: scale(1,0.25);
 	/*height: 0.05rem;*/
 	color: #bfbfbf;
 	background-color: #bfbfbf;

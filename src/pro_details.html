@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/pro_details.css"/>
-        <script type="text/javascript" src="./js/adapt.js"></script>
+        <script type="text/javascript" src="./js/hotcss.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="pro_details">
@@ -77,36 +77,6 @@
             </div>
         </div>
         <buy-now buy-model="cart" buy-click="buyClick" next="next()"></buy-now>
-        <!-- <div class="popup_content">
-            <div class="popup_buy">
-                <div class="shade"></div>
-                <div class="content">
-                    <button class="close" type="button" name="button"></button>
-                    <div class="con">
-                        <div class="t">
-                            <div class="l">
-                                <img ng-src="{{cart.img}}" alt="">
-                            </div>
-                            <div class="r">
-                                <h3 class="tit">{{cart.name}}</h3>
-                                <span class="price">{{cart.money | currency:""}}</span>
-                            </div>
-                        </div>
-                        <div class="b">
-                            <div class="l">购买数量：</div>
-                            <div class="r">
-                                <button ng-disabled="cart.quantity==0" class="minus" type="button" ng-click="minus()" name="button">-</button>
-                                <span>{{cart.quantity}}</span>
-                                <button ng-disabled="cart.quantity==cart.remainNumber" class="plus" type="button" ng-click="plus()" name="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="btn">
-                        <button type="button" name="button">下一步</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </body>
 
     <script type="text/javascript" src="./js/photoSlider.js"></script>

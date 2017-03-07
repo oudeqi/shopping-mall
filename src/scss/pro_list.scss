@@ -1,0 +1,62 @@
+@import "./helper/_sprite.scss";
+@import "./helper/_mixin.scss";
+@import "./helper/px2rem.scss";
+.pro_list{
+    @include clearfix();
+    background-color: #fff;
+    li{
+        float: left;
+        width: 50%;
+        padding: px2rem(10) 0;
+        height: px2rem(188);
+        &:nth-child(odd){
+            border-right: 1px solid #BFBFBF;
+        }
+        border-bottom: 1px solid #BFBFBF;
+        &:last-child{
+            border-bottom: 0;
+        }
+        &:nth-last-child(2):not(:nth-child(even)){
+            border-bottom: 0;
+        }
+        text-align: center;
+        .pro_view{
+            width: 100%;
+            padding-left: px2rem(10);
+            padding-right: px2rem(10);
+            height: px2rem(105);
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: auto;
+                border: 0;
+                display: block;
+            }
+        }
+        .pro_name{
+            font-size: px2rem(14);
+            color: #001500;
+            padding: 0 px2rem(14);
+            margin-top: px2rem(7);
+            height: px2rem(18);
+            line-height: px2rem(18);
+            @include otw();
+        }
+        .pro_price{
+            font-size: px2rem(14);
+            color: #FB4747;
+            padding: 0 px2rem(14);
+            height: px2rem(20);
+            line-height: px2rem(20);
+            @include otw();
+        }
+        .pro_discount{
+            font-size: px2rem(13);
+            color: #BFBFBF;
+            padding: 0 px2rem(14);
+            height: px2rem(16);
+            line-height: px2rem(16);
+            @include otw();
+        }
+    }
+}
