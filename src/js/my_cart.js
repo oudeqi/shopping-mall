@@ -340,7 +340,13 @@ app.controller("appCartCt",function($scope,$http){
         };
 
         $scope.linkTo = function(uri,token,id){
-        	location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+        	 if(token){
+                uri = uri+"?token="+APP_TOKEN;
+            }
+            if(id){
+                uri = uri+"&id="+id;
+            }
+            location.href = uri;
 		};
 
 		$scope.isTopBack=true;

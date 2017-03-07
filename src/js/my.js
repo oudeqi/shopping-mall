@@ -150,11 +150,17 @@ app.controller("appct",function($scope,$http){
     // add more
     $scope.linkTo = function(uri,token,id){
     	localStorage.isTopCar=1;
-        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+    	if(token){
+                uri = uri+"?token="+APP_TOKEN;
+            }
+            if(id){
+                uri = uri+"&id="+id;
+            }
+            location.href = uri;
     };
     $scope.linkTox = function(uri,token,id){
     	localStorage.isTopCar=2;
-        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+        location.href = uri;
     };
 
     /*立即支付*/
@@ -172,9 +178,13 @@ app.controller("appct",function($scope,$http){
                 	console.log(data)
                 	if(data.errMessage){
 		            	}else{
-		            		if(typeof h5=="object"){
-		                		h5.mallPay(JSON.stringify(data));
-		            			}
+		            		localStorage.payAllx=JSON.stringify(data.data);
+		                    localStorage.payOrderNo=data.data.orderNo;
+		                    localStorage.payMoney=data.data.money;
+		                    window.location.href="/pay.html"
+		            		// if(typeof h5=="object"){
+		              //   		h5.mallPay(JSON.stringify(data));
+		            		// 	}
 		            		
 		            	}
                 }).error(function(data){

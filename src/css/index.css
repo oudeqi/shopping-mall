@@ -130,25 +130,25 @@ body {
   background-position: 0rem 0rem;
   width: 1.28rem;
   height: 1.28rem;
-  background-size: 4.864rem 4.864rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .category_contain .category li .icon_chg {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: 0rem -1.42222rem;
+  background-position: 0rem -1.70667rem;
   width: 1.28rem;
   height: 1.28rem;
-  background-size: 4.864rem 4.864rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .category_contain .category li .icon_yp {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: -1.42222rem 0rem;
+  background-position: -1.70667rem 0rem;
   width: 1.28rem;
   height: 1.28rem;
-  background-size: 4.864rem 4.864rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .statement {
