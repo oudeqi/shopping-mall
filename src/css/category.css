@@ -237,8 +237,8 @@ header h1 {
   display: inline-block;
   vertical-align: middle;
   background-image: url("../img/sprite.png");
-  background-position: -6.57143rem -5.28571rem;
+  background-position: -4rem -8rem;
   width: 0.85714rem;
   height: 0.85714rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }

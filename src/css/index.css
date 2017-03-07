@@ -124,10 +124,10 @@ body {
 .category li .icon_chg {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: 0rem -2.38095rem;
+  background-position: 0rem -2.85714rem;
   width: 2.14286rem;
   height: 2.14286rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .category li .icon_dftc {
@@ -136,16 +136,16 @@ body {
   background-position: 0rem 0rem;
   width: 2.14286rem;
   height: 2.14286rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .category li .icon_yp {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: -2.38095rem 0rem;
+  background-position: -2.85714rem 0rem;
   width: 2.14286rem;
   height: 2.14286rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .statement {
@@ -285,8 +285,8 @@ body {
   display: inline-block;
   vertical-align: middle;
   background-image: url("../img/sprite.png");
-  background-position: -6.57143rem -5.28571rem;
+  background-position: -4rem -8rem;
   width: 0.85714rem;
   height: 0.85714rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }

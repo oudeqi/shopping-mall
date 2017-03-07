@@ -53,10 +53,10 @@ header .inner .l button, header .inner .r button {
 header .inner .l button i, header .inner .r button i {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: -1.52381rem -6.57143rem;
+  background-position: -2rem -8rem;
   width: 1.28571rem;
   height: 1.28571rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 header .inner .m {
@@ -235,10 +235,10 @@ header .inner .m h2 {
 .fixed_btn_group .go_index button .icon-home {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: -2.38095rem -2.38095rem;
+  background-position: -2.85714rem -2.85714rem;
   width: 1.57143rem;
   height: 1.57143rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .fixed_btn_group .go_index button span {
@@ -293,10 +293,10 @@ header .inner .m h2 {
 .fixed_btn_group .cart button .icon-cart {
   display: block;
   background-image: url("../img/sprite.png");
-  background-position: -4.7619rem 0rem;
+  background-position: -5.71429rem 0rem;
   width: 1.57143rem;
   height: 1.57143rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .fixed_btn_group .cart button .txt {
@@ -409,10 +409,10 @@ header .inner .m h2 {
   border: 0;
   background-color: inherit;
   background-image: url("../img/sprite.png");
-  background-position: -6.57143rem -3.61905rem;
+  background-position: -8rem -4.57143rem;
   width: 1.42857rem;
   height: 1.42857rem;
-  background-size: 8.14286rem 8.14286rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .popup_buy .content .con {
