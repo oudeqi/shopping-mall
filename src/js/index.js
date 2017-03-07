@@ -1,7 +1,7 @@
 var app = angular.module("index",[]);
 app.constant("contstant",{
-    HOST:"http://192.168.10.254:8080"
-    // HOST:"https://api.uoolle.com"
+    // HOST:"http://192.168.10.254:8080"
+    HOST:"https://api.uoolle.com"
 });
 //http://192.168.10.96:3000/index.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg
 app.config(['$locationProvider',
@@ -52,6 +52,7 @@ app.factory('device',['$window',function($window){
         }
     };
 }]);
+
 app.directive('tap',function(){
     return function(scope, elem, attrs){
         var start,end,t,moved = false;
@@ -76,7 +77,7 @@ app.directive('tap',function(){
             });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>10 && t<500){
+            if(!moved && t>10 && t<300){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }
@@ -86,9 +87,8 @@ app.directive('tap',function(){
 });
 
 app.directive("appBanner",["device",function(device){
-    var w = parseInt(device.screenW() * 1.5),
-        h = parseInt(device.screenW() * 351 / 624 * 1.5);
-        // h = parseInt(device.screenW() * 266 / 375 * 1.5);
+    var w = parseInt(device.screenW()),
+        h = parseInt(device.screenW() * 450 / 800);
     return {
         restrict: 'E',
         replace: true,
@@ -115,7 +115,7 @@ app.directive("appBanner",["device",function(device){
                         wrap: element[0],
                         loop: true,
                         autoPlay:true,
-                        autoTime:4000,
+                        autoTime:8000,
                         pagination:true
                     });
                 }
@@ -147,7 +147,6 @@ app.controller("index",["$scope","pageDate","device",
                 $scope.llchg = data.data.food;
                 $scope.lltc = data.data.special;
                 $scope.llyp = data.data.good;
-
                 $scope.newProductShow = false;
                 $scope.llchgShow = false;
                 $scope.lltcShow = false;
@@ -165,7 +164,13 @@ app.controller("index",["$scope","pageDate","device",
 
         $scope.linkTo = function(uri,token,id){
             localStorage.isTopCar=1;
-            location.href = uri+"?token="+token+"&id="+id;
+            if(token){
+                uri = uri+"?token="+token;
+            }
+            if(id){
+                uri = uri+"&id="+id;
+            }
+            location.href = uri;
         };
 
     }

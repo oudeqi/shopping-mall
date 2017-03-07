@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/pro_details.css"/>
-        <script type="text/javascript" src="./js/adapt.js"></script>
+        <script type="text/javascript" src="./js/hotcss.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="pro_details">
@@ -30,17 +30,17 @@
         </div>
         <div ng-cloak ng-show="ok">
             <div class="base_info">
-                <h2 class="tit">{{title}}</h2>
+                <h2 class="tit" ng-bind="title"></h2>
                 <div class="price">
-                    <span>{{price | currency:""}}</span>
-                    <span>元</span>
-                    <span>{{deduction}}</span>
+                    <span ng-bind="price | currency:''"></span>
+                    <span ng-bind="'元'"></span>
+                    <span ng-bind="deduction"></span>
                 </div>
                 <div class="tip">
                     <span>原价</span>
-                    <del>{{originalPrice | currency:""}}</del>
-                    <span>元</span>
-                    <span>邮费：包邮</span>
+                    <del ng-bind="originalPrice | currency:''"></del>
+                    <span ng-bind="'元'">元</span>
+                    <span ng-bind="'邮费：包邮'"></span>
                 </div>
             </div>
             <div class="pro_details">
@@ -77,36 +77,6 @@
             </div>
         </div>
         <buy-now buy-model="cart" buy-click="buyClick" next="next()"></buy-now>
-        <!-- <div class="popup_content">
-            <div class="popup_buy">
-                <div class="shade"></div>
-                <div class="content">
-                    <button class="close" type="button" name="button"></button>
-                    <div class="con">
-                        <div class="t">
-                            <div class="l">
-                                <img ng-src="{{cart.img}}" alt="">
-                            </div>
-                            <div class="r">
-                                <h3 class="tit">{{cart.name}}</h3>
-                                <span class="price">{{cart.money | currency:""}}</span>
-                            </div>
-                        </div>
-                        <div class="b">
-                            <div class="l">购买数量：</div>
-                            <div class="r">
-                                <button ng-disabled="cart.quantity==0" class="minus" type="button" ng-click="minus()" name="button">-</button>
-                                <span>{{cart.quantity}}</span>
-                                <button ng-disabled="cart.quantity==cart.remainNumber" class="plus" type="button" ng-click="plus()" name="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="btn">
-                        <button type="button" name="button">下一步</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </body>
 
     <script type="text/javascript" src="./js/photoSlider.js"></script>

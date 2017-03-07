@@ -259,10 +259,10 @@ app.controller("appCartCt",function($scope,$http){
             		if(typeof h5=="object"){
                 		h5.mallPay(JSON.stringify(data));
             			}
-            		
+
             	}
 
-            	
+
             }).error(function(data){
 
             });
@@ -329,8 +329,11 @@ app.controller("appCartCt",function($scope,$http){
             history.go(-1);
         };
 
-        $scope.linkTo = function(uri,token,id){
-        	location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+        $scope.linkTo = function(uri,token){
+            if(token){
+                uri = uri+"?token="+APP_TOKEN;
+            }
+            location.href = uri;
 		};
 
 		$scope.isTopBack=true;

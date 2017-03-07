@@ -1,7 +1,7 @@
 var app = angular.module("pro_details",[]);
 app.constant("contstant",{
-    HOST:"http://192.168.10.254:8080"
-    // HOST:"https://api.uoolle.com"
+    // HOST:"http://192.168.10.254:8080"
+    HOST:"https://api.uoolle.com"
 });
 
 //http://192.168.10.96:3000/pro_details.html?id=102&token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
@@ -103,10 +103,8 @@ app.factory('device',['$window',function($window){
 }]);
 
 app.directive("appBanner",["device",function(device){
-    var w = parseInt(device.screenW() * 1.5),
-        h = parseInt(device.screenW() * 351 / 624 * 1.5);
-        // h = parseInt(device.screenW() * 266 / 375 * 1.5);
-        // h = parseInt(device.screenW() * 350 / 800 * 1.5);
+    var w = parseInt(device.screenW()),
+        h = parseInt(device.screenW() * 450 / 800);
     return {
         restrict: 'E',
         replace: true,
@@ -132,7 +130,7 @@ app.directive("appBanner",["device",function(device){
                         wrap: element[0],
                         loop: true,
                         autoPlay:true,
-                        autoTime:4000,
+                        autoTime:8000,
                         pagination:true
                     });
                 }
@@ -151,6 +149,9 @@ app.directive("buyNow",["device","$document",function(device,$document){
             click:'=buyClick',
             next:'&'
         },
+        controller:["$scope",function($scope){
+            $scope.click = false;
+        }],
         template:function(element, attrs){
             var tpl = '';
                 tpl += '<div class="popup_content">';
@@ -164,15 +165,15 @@ app.directive("buyNow",["device","$document",function(device,$document){
                 tpl += '                        <img ng-src="{{cart.img}}?x-oss-process=image/resize,m_fill,h_'+w+',w_'+w+'" alt="">';
                 tpl += '                    </div>';
                 tpl += '                    <div class="r">';
-                tpl += '                        <h3 class="tit">{{cart.name}}</h3>';
-                tpl += '                        <span class="price">{{cart.money | currency:""}}</span>';
+                tpl += '                        <h3 class="tit" ng-bind="cart.name"></h3>';
+                tpl += '                        <span class="price" ng-bind="cart.money | currency:\'￥\'"></span>';
                 tpl += '                    </div>';
                 tpl += '                </div>';
                 tpl += '                <div class="b">';
                 tpl += '                    <div class="l">购买数量：</div>';
                 tpl += '                    <div class="r">';
                 tpl += '                        <button ng-disabled="cart.quantity==1" class="minus" type="button" tap="minus()" name="button">-</button>';
-                tpl += '                        <span>{{cart.quantity}}</span>';
+                tpl += '                        <span ng-bind="cart.quantity"></span>';
                 tpl += '                        <button ng-disabled="cart.quantity==cart.remainNumber" class="plus" type="button" tap="plus()" name="button">+</button>';
                 tpl += '                    </div>';
                 tpl += '                </div>';
@@ -238,7 +239,7 @@ app.directive('tap',function(){
             });
             end = e.timeStamp;
             t = end - start;
-            if(!moved && t>10 && t<500){
+            if(!moved && t>10 && t<300){
                 if(attrs.tap){
                     scope.$apply(attrs.tap);
                 }

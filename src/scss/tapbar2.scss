@@ -1,23 +1,35 @@
 @import "./helper/_sprite.scss";
 @import "./helper/_mixin.scss";
-@import "./helper/px2rem.scss";
+
 .tapbar{
     position: fixed;
-    border-top: 1px solid #ACACAC;
+    // border-top: 1px solid #ACACAC;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: px2rem(50);
-    background-color: #F9F9F9;
+    height: 3.57rem;
+    background-color: #F9F9F9 !important;
+    opacity: 1 !important;
     display: flex;
     z-index: 1000;
-    min-width: px2rem(375);
+    min-width: 320px;
+    &:after{
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1px;
+        background-color: #ACACAC;
+        width: 100%;
+        transform: scale(1,0.5);
+    }
     li:first-child{
         width: 12%;
     }
     li{
         width: 22%;
-        padding-top: px2rem(2);
+        padding-top: 0.15rem;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -35,39 +47,39 @@
                 margin: 0 auto;
             }
             .back{
-                @include sprite3($icon-back);
+                @include sprite4($icon-back);
             }
             .home{
-                @include sprite3($icon-home);
+                @include sprite4($icon-home);
             }
             .category{
-                @include sprite3($icon-category);
+                @include sprite4($icon-category);
             }
             .cart{
-                @include sprite3($icon-cart);
+                @include sprite4($icon-cart);
             }
             .my{
-                @include sprite3($icon-my);
+                @include sprite4($icon-my);
             }
             .txt{
                 display: block;
                 width: 100%;
-                font-size: px2rem(10);
+                font-size: 0.71rem;
                 color: #848689;
-                margin-top: px2rem(2);
+                margin-top: 0.1rem;
             }
             &.active{
                 .home{
-                    @include sprite3($icon-home-active);
+                    @include sprite4($icon-home-active);
                 }
                 .category{
-                    @include sprite3($icon-category-active);
+                    @include sprite4($icon-category-active);
                 }
                 .cart{
-                    @include sprite3($icon-cart-active);
+                    @include sprite4($icon-cart-active);
                 }
                 .my{
-                    @include sprite3($icon-my-active);
+                    @include sprite4($icon-my-active);
                 }
                 .txt{
                     color: #FB4747;

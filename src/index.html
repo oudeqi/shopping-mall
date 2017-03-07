@@ -7,9 +7,11 @@
         <title></title>
         <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
         <link rel="stylesheet" type="text/css" href="./css/tapbar.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/pro_more.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/pro_list.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/index.css"/>
-        <script type="text/javascript" src="./js/adapt.js"></script>
+        <script type="text/javascript" src="./js/hotcss.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
     </head>
     <body ng-controller="index">
@@ -26,7 +28,7 @@
                 </button>
             </li>
             <li>
-                <button type="button" name="button" tap="linkTo('./category.html',token)">
+                <button type="button" name="button" tap="linkTo('./category.html')">
                     <i class="category"></i>
                     <span class="txt">分类</span>
                 </button>
@@ -56,9 +58,7 @@
                 </div>
                 <div class="r">
                     <marquee behavior="scroll" onTouchStart="this.stop()" onTouchEnd="this.start()" scrollamount="2" width="280" scrolldelay="100" direction="up">
-                        <p ng-repeat="item in marquee" ng-click="linkTo('/pro_details.html',token,item.id)">
-                            {{item.title}}
-                        </p>
+                        <p ng-repeat="item in marquee" ng-bind="item.title" ng-click="linkTo('/pro_details.html',token,item.id)"></p>
                     </marquee>
                 </div>
             </div>

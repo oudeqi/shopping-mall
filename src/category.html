@@ -7,16 +7,19 @@
         <title></title>
         <link rel="stylesheet" type="text/css" href="./css/base_o.css"/>
         <link rel="stylesheet" type="text/css" href="./css/tapbar.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/pro_more.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/pro_list.css"/>
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/category.css"/>
-        <script type="text/javascript" src="./js/adapt.js"></script>
+        <script type="text/javascript" src="./js/hotcss.js"></script>
         <script type="text/javascript" src="./js/angular.min.js"></script>
+        <script type="text/javascript" src="./js/angular-router.min.js"></script>
     </head>
-    <body ng-controller="category" ng-cloak>
+    <body ng-cloak>
         <header>
             <h1>商城</h1>
         </header>
-        <ul class="tapbar">
+        <ul class="tapbar" ng-controller="nav">
             <li>
                 <button type="button" tap="back()" name="button">
                     <i class="back"></i>
@@ -47,94 +50,46 @@
                 </button>
             </li>
         </ul>
-
         <ul class="tab-head">
-            <li class="tab_item" ng-class="{'active':type == 1}">
-                <button ng-click="type = 1" type="button" name="button">联联地方特产</button>
+            <li class="tab_item" ng-class="{'active':currentPath == '/dftc'}">
+                <a href="#dftc" ng-click="type = 1" type="button" name="button">联联地方特产</a>
                 <span></span>
             </li>
-            <li class="tab_item" ng-class="{'active':type == 2}">
-                <button ng-click="type = 2" type="button" name="button">联联吃货馆</button>
+            <li class="tab_item" ng-class="{'active':currentPath == '/chg'}">
+                <a href="#chg" ng-click="type = 2" type="button" name="button">联联吃货馆</a>
                 <span></span>
             </li>
-            <li class="tab_item" ng-class="{'active':type == 3}">
-                <button ng-click="type = 3" type="button" name="button">联联优品</button>
+            <li class="tab_item" ng-class="{'active':currentPath == '/llyp'}">
+                <a href="#llyp" ng-click="type = 3" type="button" name="button">联联优品</a>
                 <span></span>
             </li>
         </ul>
+        <ng-view></ng-view>
+        <script type="text/ng-template" id="list.html">
+            <div class="tab-cont" ng-show="banner">
+                <div class="banner_contain">
+                    <app-banner banner-arr="banner" token="{{token}}"></app-banner>
+                </div>
+                <ul class="pro_list">
+                    <li ng-repeat="item in list" tap="linkTo('./pro_details.html',token,item.id)">
+                        <div class="pro_view">
+                            <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
+                        </div>
+                        <p class="pro_name" ng-bind="item.title"></p>
+                        <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
+                        <p class="pro_discount" ng-bind="item.deduction"></p>
+                    </li>
 
-        <!-- 特产 -->
-        <div class="tab-cont" ng-show="lltc.banner && type == 1">
-            <div class="banner_contain">
-                <app-banner banner-arr="lltc.banner" token="{{token}}"></app-banner>
+                </ul>
+                <div class="more_pro" ng-hide="rowCount == 0">
+                    <button type="button" name="button" ng-click="next()">
+                        <span>更多</span>
+                        <i class="icon"></i>
+                    </button>
+                </div>
             </div>
-            <ul class="pro_list">
-                <li ng-repeat="item in lltc.list" tap="linkTo('./pro_details.html',token,item.id)">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-
-            </ul>
-            <div class="more_pro" ng-hide="lltc.rowCount == 0">
-                <button type="button" name="button" ng-click="lltcNext()">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- 吃货 -->
-        <div class="tab-cont" ng-show="chg.banner && type == 2">
-            <div class="banner_contain">
-                <app-banner banner-arr="chg.banner" token="{{token}}"></app-banner>
-            </div>
-            <ul class="pro_list">
-                <li ng-repeat="item in chg.list" tap="linkTo('./pro_details.html',token,item.id)">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-
-            </ul>
-            <div class="more_pro" ng-hide="chg.rowCount == 0">
-                <button type="button" name="button" ng-click="chgNext()">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- 优品 -->
-        <div class="tab-cont" ng-show="yp.banner && type == 3">
-            <div class="banner_contain">
-                <app-banner banner-arr="yp.banner" token="{{token}}"></app-banner>
-            </div>
-            <ul class="pro_list">
-                <li ng-repeat="item in yp.list" tap="linkTo('./pro_details.html',token,item.id)">
-                    <div class="pro_view">
-                        <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
-                    </div>
-                    <p class="pro_name" ng-bind="item.title"></p>
-                    <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
-                    <p class="pro_discount" ng-bind="item.deduction"></p>
-                </li>
-            </ul>
-            <div class="more_pro" ng-hide="yp.rowCount == 0">
-                <button type="button" name="button" ng-click="ypNext()">
-                    <span>更多</span>
-                    <i class="icon"></i>
-                </button>
-            </div>
-        </div>
+        </script>
     </body>
-
     <script type="text/javascript" src="./js/photoSlider.js"></script>
     <script type="text/javascript" src="./js/category.js"></script>
 </html>

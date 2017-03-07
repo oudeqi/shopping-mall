@@ -1,0 +1,29 @@
+@import "./helper/_sprite.scss";
+@import "./helper/_mixin.scss";
+@import "./helper/px2rem.scss";
+.more_pro{
+    border-top: 1px solid #BFBFBF;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    button{
+        background-color: #fff;
+        border: 0;
+        width: 100%;
+        height: px2rem(40);
+        span{
+            font-size: px2rem(14);
+            line-height: px2rem(30);
+            color: #BFBFBF;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .icon{
+            display: inline-block;
+            vertical-align: middle;
+            line-height: px2rem(14);
+            @include sprite3($icon-index-more);
+        }
+    }
+}

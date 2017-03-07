@@ -1,7 +1,15 @@
+$designWidth : 375;
+
+// hotcss 页面缩放
 @function px2rem( $px ){
 	@return $px*320/$designWidth/20 + rem;
 }
+// hotcss 页面缩放
+@function px2rem2( $px ){
+	@return $px*320/($designWidth + px) /20 * 1rem;
+}
 
+// adapt 页面无缩放
 @function px2rem14( $px ){
 	@return $px/14px * 1rem;
 }
