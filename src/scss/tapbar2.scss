@@ -36,12 +36,27 @@
         align-items: center;
         button{
             border: 0;
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             background-color: inherit;
+            position: relative;
+            .badge{
+                position: absolute;
+                top: -0.4rem;
+                right: -0.5rem;
+                min-width: 1.26rem;
+                height: 1.26rem;
+                border-radius: 1.26rem;
+                background-color: #F43530;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.86rem;
+                border:1px solid #fff;
+            }
             i{
                 display: block;
                 margin: 0 auto;

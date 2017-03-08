@@ -31,7 +31,38 @@ app.directive('tap',function(){
         });
     };
 });
-app.controller("appCartCt",function($scope,$http){
+app.factory("cart",["$http","$q","$rootScope",
+    function($http,$q,$rootScope){
+        return {
+            get: function(){
+                var defer = $q.defer();
+                $http.get(APP_HOST+"/v1/aut/goods/shopping/cart", {
+                    headers: {
+                        'Authorization':localStorage.token,
+                    }
+                }).success(function(data){
+                    if(data.data && typeof data.data === 'object'){
+                        defer.resolve(data);
+                    }else{
+                        defer.reject(data);
+                    }
+                }).error(function(data){
+                    defer.reject("error");
+                });
+                return defer.promise;
+            }
+        };
+    }
+]);
+app.controller("appCartCt",function($scope,$http,cart){
+
+        cart.get().then(function(data){
+            console.log("获取购物车",data);
+            $scope.cartAll = data.data;
+        }).catch(function(data){
+            console.log(data);
+        });
+
 		$scope.loading=false;
 		$scope.testTrue=true;
 		$scope.totalPrice=0; //总价格

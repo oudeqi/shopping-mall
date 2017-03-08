@@ -1,7 +1,8 @@
 var app = angular.module("category",["ngRoute"]);
 app.constant("contstant",{
     // HOST:"http://192.168.10.254:8080"
-    HOST:"https://api.uoolle.com"
+    // HOST:"https://api.uoolle.com"
+    HOST:"https://api.2tai.com"
 });
 //http://192.168.10.96:3000/category.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
 /*
@@ -180,6 +181,30 @@ app.factory('device',['$window',function($window){
     };
 }]);
 
+app.factory("cart",["$http","$q","contstant","$rootScope",
+    function($http,$q,contstant,$rootScope){
+        return {
+            get: function(){
+                var defer = $q.defer();
+                $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
+                    headers: {
+                        'Authorization': $rootScope.token,
+                    }
+                }).success(function(data){
+                    if(data.data && typeof data.data === 'object'){
+                        defer.resolve(data);
+                    }else{
+                        defer.reject(data);
+                    }
+                }).error(function(data){
+                    defer.reject("error");
+                });
+                return defer.promise;
+            }
+        };
+    }
+]);
+
 app.directive("appBanner",["device",function(device){
     var w = parseInt(device.screenW()),
         h = parseInt(device.screenW() * 350 / 800);
@@ -257,7 +282,15 @@ app.directive('tap',function(){
     };
 });
 
-app.controller("nav",["$scope",function($scope){
+app.controller("nav",["$scope","cart",function($scope,cart){
+
+    cart.get().then(function(data){
+        console.log("获取购物车",data);
+        $scope.cartAll = data.data;
+    }).catch(function(data){
+        console.log(data);
+    });
+
     $scope.back = function(){
         if(typeof h5 == "object"){
             h5.mallBack();
@@ -274,8 +307,8 @@ app.controller("nav",["$scope",function($scope){
     };
 }]);
 
-app.controller("getDftcList",["$scope","pageDate","device","$rootScope",
-    function($scope,pageDate,device,$rootScope){
+app.controller("getDftcList",["$scope","pageDate","device","$rootScope","cart",
+    function($scope,pageDate,device,$rootScope,cart){
 
         $scope.pageIndex = 1;
         $scope.list = [];

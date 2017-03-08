@@ -1,7 +1,8 @@
 var app = angular.module("pro_details",[]);
 app.constant("contstant",{
     // HOST:"http://192.168.10.254:8080"
-    HOST:"https://api.uoolle.com"
+    // HOST:"https://api.uoolle.com"
+    HOST:"https://api.2tai.com"
 });
 
 //http://192.168.10.96:3000/pro_details.html?id=102&token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
@@ -150,11 +151,11 @@ app.directive("buyNow",["device","$document",function(device,$document){
             next:'&'
         },
         controller:["$scope",function($scope){
-            $scope.click = false;
+
         }],
         template:function(element, attrs){
             var tpl = '';
-                tpl += '<div class="popup_content">';
+                tpl += '<div class="popup_content" style="display:none;">';
                 tpl += '    <div class="popup_buy" ng-show="click">';
                 tpl += '        <div class="shade"></div>';
                 tpl += '        <div class="content">';
@@ -189,6 +190,9 @@ app.directive("buyNow",["device","$document",function(device,$document){
         link:function(scope, element, attrs){
             scope.$watch("click",function(nv,ov){
                 if(nv){
+                    element.css({
+                        "display":"block"
+                    });
                     $document.bind("touchstart",function(e){
                         if(e.target.className != "close" && e.target.className != "minus" && e.target.className != "plus" && e.target.className != "next"){
                             e.preventDefault();
@@ -262,6 +266,9 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
             console.log(data);
         });
 
+        $scope.ok = false;
+        $scope.cart = {};
+        $scope.cart.remainNumber = true;
         pageDate.getDetails().then(function(data){
             console.log("获取详情：",data);
             $scope.ok = true;

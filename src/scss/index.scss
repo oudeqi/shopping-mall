@@ -27,6 +27,7 @@ body{
         width: px2rem(80);
         height: px2rem(20);
         border-right: px2rem(1) solid #BFBFBF;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -41,6 +41,7 @@
                 <button type="button" name="button" tap="linkTo('./my_cart.html')">
                     <i class="cart"></i>
                     <span class="txt">购物车</span>
+                    <span ng-show="cartAll.length" class="badge" ng-bind="cartAll.length"></span>
                 </button>
             </li>
             <li>

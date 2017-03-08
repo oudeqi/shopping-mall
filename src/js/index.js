@@ -1,7 +1,8 @@
 var app = angular.module("index",[]);
 app.constant("contstant",{
     // HOST:"http://192.168.10.254:8080"
-    HOST:"https://api.uoolle.com"
+    // HOST:"https://api.uoolle.com"
+    HOST:"https://api.2tai.com"
 });
 //http://192.168.10.96:3000/index.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg
 app.config(['$locationProvider',
@@ -31,6 +32,30 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
                 defer.reject("error");
             });
             return defer.promise;
+        };
+    }
+]);
+
+app.factory("cart",["$http","$q","contstant","$rootScope",
+    function($http,$q,contstant,$rootScope){
+        return {
+            get: function(){
+                var defer = $q.defer();
+                $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
+                    headers: {
+                        'Authorization': $rootScope.token,
+                    }
+                }).success(function(data){
+                    if(data.data && typeof data.data === 'object'){
+                        defer.resolve(data);
+                    }else{
+                        defer.reject(data);
+                    }
+                }).error(function(data){
+                    defer.reject("error");
+                });
+                return defer.promise;
+            }
         };
     }
 ]);
@@ -129,14 +154,21 @@ app.directive("appBanner",["device",function(device){
     };
 }]);
 
-app.controller("index",["$scope","pageDate","device",
-    function($scope,pageDate,device){
+app.controller("index",["$scope","pageDate","device","cart",
+    function($scope,pageDate,device,cart){
 
         $scope.iphone = device.iphone();
 
         //设备相关
         $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
         $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
+
+        cart.get().then(function(data){
+            console.log("获取购物车",data);
+            $scope.cartAll = data.data;
+        }).catch(function(data){
+            console.log(data);
+        });
 
         pageDate.getData().then(function(data){
             console.log("获取首页数据：",data);

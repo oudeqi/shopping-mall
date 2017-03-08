@@ -35,6 +35,9 @@ body {
   width: 3.41333rem;
   height: 0.85333rem;
   border-right: 0.04267rem solid #BFBFBF;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

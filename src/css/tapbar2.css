@@ -52,7 +52,6 @@
 
 .tapbar li button {
   border: 0;
-  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -71,6 +70,32 @@
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: inherit;
+  position: relative;
+}
+
+.tapbar li button .badge {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.5rem;
+  min-width: 1.26rem;
+  height: 1.26rem;
+  border-radius: 1.26rem;
+  background-color: #F43530;
+  color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.86rem;
+  border: 1px solid #fff;
 }
 
 .tapbar li button i {

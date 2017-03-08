@@ -24,12 +24,28 @@
         align-items: center;
         button{
             border: 0;
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             background-color: inherit;
+            position: relative;
+            .badge{
+                position: absolute;
+                top: px2rem(-4);
+                right: px2rem(-4);
+                min-width: px2rem(18);
+                height: px2rem(18);
+                border-radius: px2rem(18);
+                background-color: #F43530;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: px2rem(12);
+                padding: 0 px2rem(3);
+                border:1px solid #fff;
+            }
             i{
                 display: block;
                 margin: 0 auto;

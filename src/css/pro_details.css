@@ -320,6 +320,7 @@ header .inner .m h2 {
           align-items: center;
   font-size: 0.512rem;
   padding: 0 0.128rem;
+  border: 1px solid #fff;
 }
 
 .fixed_btn_group .add_cart {
