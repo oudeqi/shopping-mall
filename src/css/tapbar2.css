@@ -80,42 +80,42 @@
 
 .tapbar li button .back {
   background-image: url("../img/sprite.png");
-  background-position: -112px 0px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -8rem 0rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button .home {
   background-image: url("../img/sprite.png");
-  background-position: -40px -40px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -2.85714rem -2.85714rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button .category {
   background-image: url("../img/sprite.png");
-  background-position: -80px -32px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -5.71429rem -2.28571rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button .cart {
   background-image: url("../img/sprite.png");
-  background-position: -80px 0px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -5.71429rem 0rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button .my {
   background-image: url("../img/sprite.png");
-  background-position: -32px -80px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -2.28571rem -5.71429rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button .txt {
@@ -128,34 +128,34 @@
 
 .tapbar li button.active .home {
   background-image: url("../img/sprite.png");
-  background-position: 0px -112px;
-  width: 18px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: 0rem -8rem;
+  width: 1.28571rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button.active .category {
   background-image: url("../img/sprite.png");
-  background-position: -112px -32px;
-  width: 21px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -8rem -2.28571rem;
+  width: 1.5rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button.active .cart {
   background-image: url("../img/sprite.png");
-  background-position: 0px -80px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: 0rem -5.71429rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button.active .my {
   background-image: url("../img/sprite.png");
-  background-position: -64px -80px;
-  width: 22px;
-  height: 22px;
-  background-size: 134px 134px;
+  background-position: -4.57143rem -5.71429rem;
+  width: 1.57143rem;
+  height: 1.57143rem;
+  background-size: 9.57143rem 9.57143rem;
 }
 
 .tapbar li button.active .txt {

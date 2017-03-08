@@ -53,7 +53,10 @@ header .inner .l button, header .inner .r button {
 header .inner .l button i, header .inner .r button i {
   display: block;
   background-image: url("../img/sprite.png");
-
+  background-position: -1.19467rem -4.77867rem;
+  width: 0.768rem;
+  height: 0.768rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 header .inner .m {
@@ -239,7 +242,10 @@ header .inner .m h2 {
 .fixed_btn_group .go_index button .icon-home {
   display: block;
   background-image: url("../img/sprite.png");
-
+  background-position: -1.70667rem -1.70667rem;
+  width: 0.93867rem;
+  height: 0.93867rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .fixed_btn_group .go_index button span {
@@ -278,7 +284,10 @@ header .inner .m h2 {
   display: block;
   margin: 0 auto;
   background-image: url("../img/sprite.png");
-
+  background-position: -3.41333rem 0rem;
+  width: 0.93867rem;
+  height: 0.93867rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .fixed_btn_group .cart button .txt {
@@ -391,7 +400,10 @@ header .inner .m h2 {
   border: 0;
   background-color: inherit;
   background-image: url("../img/sprite.png");
-
+  background-position: -4.77867rem -2.73067rem;
+  width: 0.85333rem;
+  height: 0.85333rem;
+  background-size: 5.71733rem 5.71733rem;
 }
 
 .popup_buy .content .con {

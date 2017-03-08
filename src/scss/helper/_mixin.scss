@@ -46,11 +46,12 @@
     height: px2rem2(nth($sprite, 6)/3);
     background-size: px2rem2(nth($sprite, 7)/3) px2rem2(nth($sprite, 8)/3);
 }
+
 //rem作为单位的3倍雪碧图，无缩放
 @mixin sprite4($sprite) {
     background-image: url(nth($sprite, 9));
-    background-position: nth($sprite, 3)/3 nth($sprite, 4)/3;
-    width: nth($sprite, 5)/3;
-    height: nth($sprite, 6)/3;
-    background-size: nth($sprite, 7)/3 nth($sprite, 8)/3;
+    background-position: px2rem14(nth($sprite, 3)/3) px2rem14(nth($sprite, 4)/3);
+    width: px2rem14(nth($sprite, 5)/3);
+    height: px2rem14(nth($sprite, 6)/3);
+    background-size: px2rem14(nth($sprite, 7)/3) px2rem14(nth($sprite, 8)/3);
 }

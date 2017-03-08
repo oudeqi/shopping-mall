@@ -76,92 +76,37 @@ body {
   font-size: 0.59733rem;
 }
 
-
-.product .pro_list:after {
-  content: "";
-  display: block;
-  height: 0;
-  font-size: 0;
-  overflow: hidden;
-  line-height: 0;
-  clear: both;
+.category_contain {
+  height: 3.41333rem;
 }
 
-.product .pro_list li {
-  float: left;
-  width: 50%;
-  padding: 0.71rem 0;
-  height: 13.4rem;
-  border-bottom: 1px solid #BFBFBF;
-  text-align: center;
-}
-
-.product .pro_list li:nth-child(odd) {
-  border-right: 1px solid #BFBFBF;
-}
-
-.product .pro_list li:last-child {
-  border-bottom: 0;
-}
-
-.product .pro_list li:nth-last-child(2):not(:nth-child(even)) {
-  border-bottom: 0;
-}
-
-.product .pro_list li .pro_view {
-  width: 100%;
-  padding-left: 0.71rem;
-  padding-right: 0.71rem;
-  height: 7.54rem;
-  overflow: hidden;
-}
-
-.product .pro_list li .pro_view img {
-  max-width: 100%;
-  height: auto;
-  border: 0;
-}
-
-.product .pro_list li .pro_name {
-  font-size: 0.93rem;
-  color: #001500;
-  padding: 0 1rem;
-  margin-top: 0.5rem;
-  height: 1.29rem;
-  line-height: 1.29rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.product .pro_list li .pro_price {
-  font-size: 1rem;
-  color: #FB4747;
-  padding: 0 1rem;
-  height: 1.43rem;
-  line-height: 1.43rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.product .pro_list li .pro_discount {
-  font-size: 0.93rem;
-  color: #BFBFBF;
-  padding: 0 1rem;
-  height: 1.29rem;
-  line-height: 1.29rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.product .more_pro {
-  border-top: 1px solid #BFBFBF;
+.category_contain .category {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  background: #fff;
+}
+
+.category_contain .category li {
+  width: 33.33%;
+}
+
+.category_contain .category li a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
@@ -170,29 +115,61 @@ body {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  text-decoration: none;
 }
 
-.product .more_pro button {
-  background-color: #fff;
-  border: 0;
-  width: 100%;
-  height: 2.86rem;
+.category_contain .category li p {
+  font-size: 0.55467rem;
+  color: #848689;
+  margin-top: 0.29867rem;
 }
 
-.product .more_pro button span {
-  font-size: 1rem;
-  line-height: 1rem;
-  color: #BFBFBF;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.product .more_pro button .icon {
-  display: inline-block;
-  vertical-align: middle;
+.category_contain .category li .icon_dftc {
+  display: block;
   background-image: url("../img/sprite.png");
-  background-position: -4rem -8rem;
-  width: 0.85714rem;
-  height: 0.85714rem;
-  background-size: 9.57143rem 9.57143rem;
+  background-position: 0rem 0rem;
+  width: 1.28rem;
+  height: 1.28rem;
+  background-size: 5.71733rem 5.71733rem;
+}
+
+.category_contain .category li .icon_chg {
+  display: block;
+  background-image: url("../img/sprite.png");
+  background-position: 0rem -1.70667rem;
+  width: 1.28rem;
+  height: 1.28rem;
+  background-size: 5.71733rem 5.71733rem;
+}
+
+.category_contain .category li .icon_yp {
+  display: block;
+  background-image: url("../img/sprite.png");
+  background-position: -1.70667rem 0rem;
+  width: 1.28rem;
+  height: 1.28rem;
+  background-size: 5.71733rem 5.71733rem;
+}
+
+.statement {
+  font-size: 0.59733rem;
+  text-align: center;
+  color: #BFBFBF;
+  height: 1.70667rem;
+  line-height: 1.70667rem;
+}
+
+.product {
+  margin-top: 0.42667rem;
+  background-color: #fff;
+}
+
+.product .pro_tit {
+  font-size: 0.59733rem;
+  height: 1.70667rem;
+  line-height: 1.70667rem;
+  padding-left: 0.42667rem;
+  color: #2B333B;
+  font-weight: normal;
+  border-bottom: 1px solid #BFBFBF;
 }
