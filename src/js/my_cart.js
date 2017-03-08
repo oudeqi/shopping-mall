@@ -257,14 +257,15 @@ app.controller("appCartCt",function($scope,$http){
             	console.log(data)
             	console.log("#######################")
 
-            	console.log(data.data.orderNo)
-            	localStorage.payAllx=JSON.stringify(data.data);
-            	localStorage.payOrderNo=data.data.orderNo;
-            	localStorage.payMoney=data.data.money;
+            	
             	/*全部*/
             	// localStorage.setOnePay.money=data.data.money;
             	if(data.errMessage){
             	}else{
+            		console.log(data.data.orderNo)
+	            	localStorage.payAllx=JSON.stringify(data.data);
+	            	localStorage.payOrderNo=data.data.orderNo;
+	            	localStorage.payMoney=data.data.money;
             		window.location.href="pay.html"
             		// if(typeof h5=="object"){
               //   		h5.mallPay(JSON.stringify(data));
@@ -348,6 +349,9 @@ app.controller("appCartCt",function($scope,$http){
             }
             location.href = uri;
 		};
+		$scope.linkTox=function(url){
+			window.location.href=url+"?token="+APP_TOKEN;
+		}
 
 		$scope.isTopBack=true;
 		$scope.noTopBackStyle={

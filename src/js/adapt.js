@@ -8,6 +8,10 @@
                 docEl.style.fontSize = (docEl.clientWidth * 14 / 375) + 'px';
             }
         };
+        // else if(docEl.clientWidth==320){
+        //         docEl.style.fontSize = 11+'px';
+        //     }
+     // alert(docEl.clientWidth);
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(window,document);

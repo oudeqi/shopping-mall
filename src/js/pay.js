@@ -20,6 +20,20 @@ function goAddress(addressid){
     $scope.$apply();
 }
 
+function showWeixin(){
+	var appElement = document.querySelector('[ng-controller="apppayct"]');
+    var $scope = angular.element(appElement).scope();
+    $scope.payWayArr[1].viewShow=true;
+    $scope.$apply();
+}
+function hideWeixin(){
+	var appElement = document.querySelector('[ng-controller="apppayct"]');
+    var $scope = angular.element(appElement).scope();
+    $scope.payWayArr[1].viewShow=false;
+    $scope.$apply();
+}
+
+
 var app=angular.module("apppay",[]);
 app.directive('tap',function(){
     return function(scope, elem, attrs){
@@ -68,16 +82,16 @@ app.controller("apppayct",function($scope,$http){
 	}	
 
 	$scope.payWayArr=[{
-		title:"微信支付",
-		icon:"img/pay/wxIcon.png",
-		ck:true,
-		val:2,
-		viewShow:false,
-	},{
 		title:"支付宝",
 		icon:"img/pay/alipayIcon.png",
-		ck:false,
+		ck:true,
 		val:3,
+		viewShow:false,
+	},{
+		title:"微信支付",
+		icon:"img/pay/wxIcon.png",
+		ck:false,
+		val:2,
 		viewShow:false,
 	},{
 		title:"零钱",
@@ -99,16 +113,41 @@ app.controller("apppayct",function($scope,$http){
 	}	
 
 	$scope.orderNoAll=JSON.parse(localStorage.payAllx);
+	  var u = navigator.userAgent;
 
 	if($scope.orderNoAll.weixin==1){
-		$scope.payWayArr[0].viewShow=true;
-	}
-	if($scope.orderNoAll.alipay==1){
 		$scope.payWayArr[1].viewShow=true;
+			if(typeof h5=="object"){
+			 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+				if(isAndroid){
+					var k=h5.isWXAppInstalled();
+					if(k==1 || k=='1'){
+						$scope.payWayArr[1].viewShow=true;
+					}else{
+						$scope.payWayArr[1].viewShow=false;
+						// $scope.yesPayId=3;
+					}
+				}
+				
+	 		}
+	}
+
+
+	if($scope.orderNoAll.alipay==1){
+		$scope.payWayArr[0].viewShow=true;
 	}
 	if($scope.orderNoAll.overplusMoneyUsable==1){
 		$scope.payWayArr[2].viewShow=true;
 	}
+	/*ios 判断微信*/
+	 var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	 if(isiOS){
+	 		if(typeof h5=="object"){
+				h5.wechatInstalled();
+			}
+	 }
+
+
 	$scope.postGetOrderNo=$scope.orderNoAll.orderNo;
 
 	$scope.switchFunction=function(){
@@ -127,9 +166,11 @@ app.controller("apppayct",function($scope,$http){
 				console.log($scope.isSwitchx)
 	}
 
-	$scope.yesPayId=2; //付款方式  1余额，2 微信，3，支付宝
+	$scope.yesPayId=3; //付款方式  1余额，2 微信，3，支付宝
 
 	$scope.yesPayMoney=33; //总共实际付款金额
+
+	$scope.myAddressId=0; //地址id
 
 	$scope.payWayFunction=function(item){
 		item.ck=true;
@@ -171,9 +212,10 @@ app.controller("apppayct",function($scope,$http){
 
 	$scope.goPayMore=function(){
 		$http.post(APP_HOST+'/v1/aut/goods/payment',{
-				"addressId":"507",
+				"addressId":$scope.myAddressId,
 			    "orderNo":localStorage.payOrderNo,
 			    "payType":$scope.yesPayId,
+			    "payUcoin":$scope.isSwitchx?1:0,
 
 		},{
 			headers: {
@@ -197,9 +239,10 @@ app.controller("apppayct",function($scope,$http){
 
 	$scope.goPayMorex=function(payOrderNo){
 		$http.post(APP_HOST+'/v1/aut/goods/payment',{
-				"addressId":"507",
+				"addressId":$scope.myAddressId,
 			    "orderNo":payOrderNo,
 			    "payType":1,
+			    "payUcoin":$scope.isSwitchx?1:0,
 
 		},{
 			headers: {
@@ -278,3 +321,11 @@ app.controller("apppayct",function($scope,$http){
 
 
 })
+
+// window.onload=function(){
+// 	var appElement = document.querySelector('[ng-controller="apppayct"]');
+//     var $scope = angular.element(appElement).scope();
+//     $scope.isWeixinFunction();
+//     // $scope.getRewardList();//改变了模型，想同步到控制器中，则需要调用$apply()
+//     $scope.$apply();
+// }

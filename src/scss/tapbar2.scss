@@ -48,8 +48,10 @@
             }
             .back{
                 @include sprite4($icon-back);
+                transform:scale(0.97);
             }
             .home{
+                
                 @include sprite4($icon-home);
             }
             .category{
