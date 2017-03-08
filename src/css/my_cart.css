@@ -170,6 +170,7 @@
 	text-align: center;
 	border:1px solid #bfbfbf;
 	font-size: 1rem;
+	border-radius: 0;
 }
 .numMore {
 	width: 1.43rem;
