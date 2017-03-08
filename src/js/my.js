@@ -175,28 +175,22 @@ app.controller("appct",function($scope,$http,cart){
 	$scope.loadMoreFunction=function(){
 		k=k+1;
 		$scope.getList($scope.kid,k,2);
+
 	}
 
     // add more
     $scope.linkTo = function(uri,token,id){
-        console.log(token);
     	localStorage.isTopCar=1;
-        if(token){
-            uri = uri+"?token="+APP_TOKEN;
-        }
-        if(id){
-            uri = uri+"&id="+id;
-        }
-        location.href = uri;
+    	if(token){
+                uri = uri+"?token="+APP_TOKEN;
+            }
+            if(id){
+                uri = uri+"&id="+id;
+            }
+            location.href = uri;
     };
     $scope.linkTox = function(uri,token,id){
     	localStorage.isTopCar=2;
-        if(token){
-            uri = uri+"?token="+APP_TOKEN;
-        }
-        if(id){
-            uri = uri+"&id="+id;
-        }
         location.href = uri;
     };
 
@@ -215,10 +209,14 @@ app.controller("appct",function($scope,$http,cart){
                 	console.log(data)
                 	if(data.errMessage){
 		            	}else{
-		            		if(typeof h5=="object"){
-		                		h5.mallPay(JSON.stringify(data));
-		            			}
-
+		            		localStorage.payAllx=JSON.stringify(data.data);
+		                    localStorage.payOrderNo=data.data.orderNo;
+		                    localStorage.payMoney=data.data.money;
+		                    window.location.href="/pay.html"
+		            		// if(typeof h5=="object"){
+		              //   		h5.mallPay(JSON.stringify(data));
+		            		// 	}
+		            		
 		            	}
                 }).error(function(data){
 

@@ -323,8 +323,15 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
             $scope.buyClick = true;
         };
         $scope.linkTo = function(uri,token,id){
-            location.href = uri+"?token="+token+"&id="+id;
+            // location.href = uri+"?token="+token+"&id="+id;
             localStorage.isTopCar=2; //不是顶部导航
+            if(token){
+                uri = uri+"?token="+token;
+            }
+            if(id){
+                uri = uri+"&id="+id;
+            }
+            location.href = uri;
         };
         $scope.pageBack = function() {
             history.go(-1);
@@ -354,10 +361,14 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
             }]).then(function(data){
                 console.log(data);
                 if(data.data && typeof data.data === 'object'){
+                    localStorage.payAllx=JSON.stringify(data.data);
+                    localStorage.payOrderNo=data.data.orderNo;
+                    localStorage.payMoney=data.data.money;
+                    window.location.href="/pay.html"
                     //下单成功
-                    if(typeof h5 == "object"){
-                        h5.mallPay(JSON.stringify(data));
-                    }
+                    // if(typeof h5 == "object"){
+                    //     h5.mallPay(JSON.stringify(data));
+                    // }
                 }else{
                     //下单失败
                     $scope.nextClicked = false;

@@ -1,4 +1,4 @@
-*{margin:0;padding:0;background-size:cover}
+*{margin:0;padding:0;background-size:cover;}
 html{font-size:14px;font-family:"Microsoft YaHei",微软雅黑}
 /*320 */
 /*html{font-size:11.91px;font-family:"Microsoft YaHei",微软雅黑} */
@@ -6,6 +6,7 @@ html{font-size:14px;font-family:"Microsoft YaHei",微软雅黑}
 body {
 	background-color: #EBEBEB;
 }
+
 /*@media screen and (min-width: 359px) {
   html {
     font-size: 12px;
@@ -49,17 +50,7 @@ body {
   }
 }*/
 
-a,
-button,
-input,
-textarea,
-select {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-  appearance: none;
-  font-size: 100%;
-  outline: 0;
-}
+
 .head {
 	width: 100%;
 	height: 3.15rem;
@@ -73,6 +64,20 @@ select {
 	height: 1px;
 	background-color: #bfbfbf;
 	transform: scale(0,0.25);
+}
+.LINE_ONE {
+	width: 100%;
+	height: .4px;
+	opacity: .5;
+	background-color: #bfbfbf;
+	/*transform: scale(0,0.45);*/
+}
+.LINE_TWO {
+	width: 80%;
+	margin: 0 auto;
+	height: .4px;
+	opacity: .5;
+	background-color: #bfbfbf;
 }
 
 .headBackCover {

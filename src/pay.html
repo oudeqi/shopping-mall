@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
+    <title>用户结算</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/pay.css">
+    <script type="text/javascript" src="js/adapt.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+
+</head>
+<body>
+<div ng-app="apppay" ng-controller="apppayct" ng-cloak>
+ <div class="head"><div class="headBackCover" ontouchstart="history.go(-1)"><img class="headBack"  src="img/back2.png"></div>用户结算</div>
+<div class="colorFul"></div>
+
+<div class="addressCover" ng-click="getMyAddress()">
+    <div class="addressName">{{myAddress.name}} {{myAddress.phone}}</div>
+    <div class="addressContent">{{myAddress.provinceName}} {{myAddress.cityName}} {{myAddress.townName}}</div>
+    <div ng-show="!myAddress" class="addressContentx">添加收货地址</div>
+    <div ng-show="myAddress" class="addressRight"></div>
+</div>
+
+<div class="payWay">
+    <div class="payWayOne" ng-repeat="(index,x) in payWayArr" ng-show="x.viewShow">
+        <img class="payWayOneImg" ng-src="{{x.icon}}">
+        <div class="payWayOneTitle">{{x.title}} <div class="otherWords" ng-show="x.val==1">{{orderNoAll.moneyExplain}}</div></div>
+        <div class="payWayOneCheck">
+            <input class="fullCheck" type="radio" ng-value="x.val" name="radio" ng-change="payWayChange(x.val)" ng-model="x.ck" id="{{'k'+index}}">
+            <label ng-click="payWayFunction(x)" ng-style="checkImgAc" ng-show="x.ck" class="fullCheckLabel" for="{{'k'+index}}"></label>
+             <label ng-click="payWayFunction(x)" ng-style="checkImg" ng-show="!x.ck" class="fullCheckLabel" for="{{'k'+index}}"></label>
+        </div>
+        <div class="LINE_ONE"></div>
+    </div>
+</div>
+<div class="uPayAll">
+    <div style="float: left; margin: 0 0 0 1rem; width: 80%;">使用U币抵扣，账户剩余{{orderNoAll.overplusUcoin}}U</div>
+    <div ng-show="orderNoAll.overplusUcoinUsable==1" ng-click="switchFunction()" ng-style="isSwitchx?sYes:sNo" class="uPayAllSwitch">
+        <div class="uPayAllSwitchCir" ng-class="isSwitch"></div>
+    </div>
+</div>
+ <div class="LINE_ONE"></div>
+
+ <div class="payGoodsCover" ng-repeat="kk in orderNoAll.goodsList" ng-style="isSwitchx?'':listHeight">
+     <div class="payGoods">
+         <img class="payGoodsImg" ng-src="{{kk.previewUrl}}"></img>
+         <div class="payGoodsContent">
+             <div class="payGoodsContentTitle">{{kk.title}}</div>
+             <div class="goodsNumber">x{{kk.number}}</div>
+             <div class="goodsPrice">{{isSwitchx?kk.ucoinPrice:kk.price}}元 <s ng-show="isSwitchx">￥{{kk.price}}</s></div>
+         </div>
+     </div>
+   <div class="LINE_ONE" style="height: 1px; width: 90%; margin: 0 auto;"></div>
+   <div class="payUTitle" ng-show="isSwitchx">
+       {{kk.ucoinExplain}}
+   </div>
+ </div>
+
+ <div class="LastEms">
+     <div style="float: left; margin: 0 0 0 1rem;">快递配送</div> <div class="ems">包邮</div>
+ </div>
+
+<div class="lastPay">
+    <div class="lastTitle">合计：{{isSwitchx?orderNoAll.ucoinMoney:orderNoAll.money}}</div>
+    <div class="lastButton" ng-click="goPay()">去付款</div>
+</div>
+
+
+
+</div>
+</body>
+<script src="js/pay.js"></script>
+</html>
