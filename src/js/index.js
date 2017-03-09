@@ -163,12 +163,6 @@ app.controller("index",["$scope","pageDate","device","cart",
         $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
         $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
-        cart.get().then(function(data){
-            console.log("获取购物车",data);
-            $scope.cartAll = data.data;
-        }).catch(function(data){
-            console.log(data);
-        });
 
         pageDate.getData().then(function(data){
             console.log("获取首页数据：",data);
@@ -184,6 +178,13 @@ app.controller("index",["$scope","pageDate","device","cart",
                 $scope.lltcShow = false;
                 $scope.llypShow = false;
             }
+        }).catch(function(data){
+            console.log(data);
+        });
+
+        cart.get().then(function(data){
+            console.log("获取购物车",data);
+            $scope.cartAll = data.data;
         }).catch(function(data){
             console.log(data);
         });
