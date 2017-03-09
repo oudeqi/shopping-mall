@@ -20,23 +20,19 @@
   border: 0;
   width: 100%;
   height: 1.70667rem;
+  color: #BFBFBF;
 }
 
 .more_pro button span {
   font-size: 0.59733rem;
   line-height: 1.28rem;
-  color: #BFBFBF;
   display: inline-block;
   vertical-align: middle;
 }
 
 .more_pro button .icon {
+  font-size: 0.29867rem;
+  line-height: 1.5;
   display: inline-block;
   vertical-align: middle;
-  line-height: 0.59733rem;
-  background-image: url("../img/sprite.png");
-  background-position: -2.38933rem -4.77867rem;
-  width: 0.512rem;
-  height: 0.512rem;
-  background-size: 5.71733rem 5.71733rem;
 }

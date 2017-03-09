@@ -127,31 +127,19 @@ body {
   margin-top: 0.29867rem;
 }
 
-.category_contain .category li .icon_dftc {
-  display: block;
-  background-image: url("../img/sprite.png");
-  background-position: 0rem 0rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+.category_contain .category li .icon-specialty {
+  font-size: 1.5rem;
+  color: #FD9E24;
 }
 
-.category_contain .category li .icon_chg {
-  display: block;
-  background-image: url("../img/sprite.png");
-  background-position: 0rem -1.70667rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+.category_contain .category li .icon-life {
+  font-size: 1.3rem;
+  color: #FB4747;
 }
 
-.category_contain .category li .icon_yp {
-  display: block;
-  background-image: url("../img/sprite.png");
-  background-position: -1.70667rem 0rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+.category_contain .category li .icon-index-active {
+  font-size: 1.4rem;
+  color: #FB4747;
 }
 
 .statement {

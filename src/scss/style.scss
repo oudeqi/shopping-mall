@@ -1,0 +1,157 @@
+@import "./helper/variables";
+
+@font-face {
+  font-family: 'alo';
+  src:
+    url('#{$icomoon-font-path}/alo.ttf?pve109') format('truetype'),
+    url('#{$icomoon-font-path}/alo.woff?pve109') format('woff'),
+    url('#{$icomoon-font-path}/alo.svg?pve109#alo') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'alo' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cart-succeed {
+  &:before {
+    content: $icon-cart-succeed;
+  }
+}
+.icon-cart-empty {
+  &:before {
+    content: $icon-cart-empty;
+  }
+}
+.icon-dustbin {
+  &:before {
+    content: $icon-dustbin;
+  }
+}
+.icon-arrow-left {
+  &:before {
+    content: $icon-arrow-left;
+  }
+}
+.icon-del {
+  &:before {
+    content: $icon-del;
+  }
+}
+.icon-arrow-down {
+  &:before {
+    content: $icon-arrow-down;
+  }
+}
+.icon-checkbox-checked {
+  &:before {
+    content: $icon-checkbox-checked;
+  }
+}
+.icon-addr {
+  &:before {
+    content: $icon-addr;
+  }
+}
+.icon-all-orders {
+  &:before {
+    content: $icon-all-orders;
+  }
+}
+.icon-complete {
+  &:before {
+    content: $icon-complete;
+  }
+}
+.icon-goods {
+  &:before {
+    content: $icon-goods;
+  }
+}
+.icon-paid {
+  &:before {
+    content: $icon-paid;
+  }
+}
+.icon-checkbox-unchecked {
+  &:before {
+    content: $icon-checkbox-unchecked;
+  }
+}
+.icon-radio-checked {
+  &:before {
+    content: $icon-radio-checked;
+  }
+}
+.icon-life {
+  &:before {
+    content: $icon-life;
+  }
+}
+.icon-specialty {
+  &:before {
+    content: $icon-specialty;
+  }
+}
+.icon-superior-products {
+  &:before {
+    content: $icon-superior-products;
+  }
+}
+.icon-back {
+  &:before {
+    content: $icon-back;
+  }
+}
+.icon-cart-active {
+  &:before {
+    content: $icon-cart-active;
+  }
+}
+.icon-cart {
+  &:before {
+    content: $icon-cart;
+  }
+}
+.icon-classify-active {
+  &:before {
+    content: $icon-classify-active;
+  }
+}
+.icon-classify {
+  &:before {
+    content: $icon-classify;
+  }
+}
+.icon-index-active {
+  &:before {
+    content: $icon-index-active;
+  }
+}
+.icon-index {
+  &:before {
+    content: $icon-index;
+  }
+}
+.icon-personal-active {
+  &:before {
+    content: $icon-personal-active;
+  }
+}
+.icon-personal {
+  &:before {
+    content: $icon-personal;
+  }
+}

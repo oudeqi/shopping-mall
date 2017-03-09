@@ -12,18 +12,18 @@
         border: 0;
         width: 100%;
         height: px2rem(40);
+        color: #BFBFBF;
         span{
             font-size: px2rem(14);
             line-height: px2rem(30);
-            color: #BFBFBF;
             display: inline-block;
             vertical-align: middle;
         }
         .icon{
+            font-size: px2rem(7);
+            line-height: 1.5;
             display: inline-block;
             vertical-align: middle;
-            line-height: px2rem(14);
-            @include sprite3($icon-index-more);
         }
     }
 }

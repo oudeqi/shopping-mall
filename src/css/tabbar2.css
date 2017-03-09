@@ -1,0 +1,118 @@
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.57rem;
+  background-color: #F9F9F9 !important;
+  opacity: 1 !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1000;
+  min-width: 320px;
+}
+
+.tabbar:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background-color: #ACACAC;
+  width: 100%;
+  -webkit-transform: scale(1, 0.5);
+      -ms-transform: scale(1, 0.5);
+          transform: scale(1, 0.5);
+}
+
+.tabbar li:first-child {
+  width: 12%;
+}
+
+.tabbar li {
+  width: 22%;
+  padding-top: 0.14rem;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tabbar li button {
+  border: 0;
+  padding: 1px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: inherit;
+  position: relative;
+  color: #848689;
+}
+
+.tabbar li button .badge {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.5rem;
+  min-width: 1.26rem;
+  height: 1.26rem;
+  border-radius: 1.26rem;
+  background-color: #F43530;
+  color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.86rem;
+  border: 1px solid #fff;
+}
+
+.tabbar li button .icon {
+  display: block;
+  margin: 0 auto;
+  font-size: 1.68rem;
+}
+
+.tabbar li button .txt {
+  display: block;
+  width: 100%;
+  font-size: 0.71rem;
+  margin-top: 0.1651rem;
+}
+
+.tabbar li button.active {
+  color: #FB4747;
+}

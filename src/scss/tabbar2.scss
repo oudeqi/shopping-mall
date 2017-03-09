@@ -1,7 +1,7 @@
 @import "./helper/_sprite.scss";
 @import "./helper/_mixin.scss";
 
-.tapbar{
+.tabbar{
     position: fixed;
     // border-top: 1px solid #ACACAC;
     bottom: 0;
@@ -29,19 +29,21 @@
     }
     li{
         width: 22%;
-        padding-top: 0.15rem;
+        padding-top: 0.14rem;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         button{
             border: 0;
+            padding: 1px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             background-color: inherit;
             position: relative;
+            color: #848689;
             .badge{
                 position: absolute;
                 top: -0.4rem;
@@ -57,50 +59,19 @@
                 font-size: 0.86rem;
                 border:1px solid #fff;
             }
-            i{
+            .icon{
                 display: block;
                 margin: 0 auto;
-            }
-            .back{
-                @include sprite4($icon-back);
-                transform:scale(0.97);
-            }
-            .home{
-                
-                @include sprite4($icon-home);
-            }
-            .category{
-                @include sprite4($icon-category);
-            }
-            .cart{
-                @include sprite4($icon-cart);
-            }
-            .my{
-                @include sprite4($icon-my);
+                font-size: 1.68rem;
             }
             .txt{
                 display: block;
                 width: 100%;
                 font-size: 0.71rem;
-                color: #848689;
-                margin-top: 0.1rem;
+                margin-top: 0.1651rem;
             }
             &.active{
-                .home{
-                    @include sprite4($icon-home-active);
-                }
-                .category{
-                    @include sprite4($icon-category-active);
-                }
-                .cart{
-                    @include sprite4($icon-cart-active);
-                }
-                .my{
-                    @include sprite4($icon-my-active);
-                }
-                .txt{
-                    color: #FB4747;
-                }
+                color: #FB4747;
             }
         }
     }

@@ -7,7 +7,8 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no"/>
     <title>联联商城</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/tapbar2.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tabbar2.css">
     <link rel="stylesheet" type="text/css" href="css/my.css">
 
     <script type="text/javascript" src="js/adapt.js"></script>
@@ -16,39 +17,38 @@
 </head>
 <body>
 <div ng-app="app" ng-controller="appct" ng-cloak>
-    <ul class="tapbar">
+    <ul class="tabbar">
         <li>
             <button type="button" tap="back()" name="button">
-                <i class="back"></i>
+                <i class="icon icon-back"></i>
             </button>
         </li>
         <li>
             <button type="button" name="button" tap="linkTo('./index.html',1)">
-                <i class="home"></i>
+                <i class="icon icon-index"></i>
                 <span class="txt">首页</span>
             </button>
         </li>
         <li>
             <button type="button" name="button" tap="linkTo('./category.html')">
-                <i class="category"></i>
+                <i class="icon icon-classify"></i>
                 <span class="txt">分类</span>
             </button>
         </li>
         <li>
             <button type="button" name="button" tap="linkTo('./my_cart.html')">
-                <i class="cart"></i>
+                <i class="icon icon-cart"></i>
                 <span class="txt">购物车</span>
                 <span ng-show="cartAll.length" class="badge" ng-bind="cartAll.length"></span>
             </button>
         </li>
         <li>
             <button class="active" type="button" name="button">
-                <i class="my"></i>
+                <i class="icon icon-personal-active"></i>
                 <span class="txt">我的商城</span>
             </button>
         </li>
     </ul>
-
 
  <div class="loading" ng-show="loading"></div>
         <div class="head" ng-swipe-right="testRight()">我的商城</div>
