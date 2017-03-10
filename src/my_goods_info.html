@@ -50,7 +50,7 @@
                  <div class="emsInfo">订单编号： {{goodsinfo.data.orderNo}}</div>
             </div>
 
-            <div class="ems" style="margin:0 0 1.9rem 0;">
+            <div class="ems" ng-show="!!goodsinfo.data.detailAddress" style="margin:0 0 1.9rem 0;">
                 <div class="emsInfo">收货地址： {{goodsinfo.data.detailAddress}}</div>
                  <div class="emsInfo">收货人名： {{goodsinfo.data.name}}</div>
             </div>

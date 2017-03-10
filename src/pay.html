@@ -51,12 +51,16 @@
          <div class="payGoodsContent">
              <div class="payGoodsContentTitle">{{kk.title}}</div>
              <div class="goodsNumber">x{{kk.number}}</div>
-             <div class="goodsPrice">{{isSwitchx?kk.ucoinPrice:kk.price}}元 <s ng-show="isSwitchx">￥{{kk.price}}</s></div>
+             <!-- {{!kk.ucoinExplain?kk.price:''}} -->
+             <div class="goodsPrice">{{isSwitchx && kk.ucoinExplain?kk.ucoinPrice:kk.price}}元 <s ng-show="isSwitchx">￥{{kk.price}}</s></div>
          </div>
      </div>
    <div class="LINE_ONE" style="height: 1px; width: 90%; margin: 0 auto;"></div>
+   <!-- <div ng-show="kk.ucoinExplain">     -->
    <div class="payUTitle" ng-show="isSwitchx">
        {{kk.ucoinExplain}}
+       {{!kk.ucoinExplain?'没有使用U币折扣':''}}
+   <!-- </div> -->
    </div>
  </div>
 
