@@ -1,3 +1,8 @@
+function loginBackToken(token){
+	localStorage.token=token;
+	location.reload();
+}
+
 var app=angular.module("appCart",[]);
 app.directive('tap',function(){
     return function(scope, elem, attrs){
@@ -55,6 +60,15 @@ app.factory("cart",["$http","$q","$rootScope",
     }
 ]);
 app.controller("appCartCt",function($scope,$http,cart){
+		$scope.mytoken=APP_TOKEN;
+		$scope.tokenShow=false;
+		if($scope.mytoken==undefined || $scope.mytoken==null || $scope.mytoken=='' || $scope.mytoken=='undefined'){
+			$scope.tokenShow=false;
+		}else{
+			$scope.tokenShow=true;
+		}
+		console.log($scope.mytoken)
+		console.log($scope.tokenShow)
 
         cart.get().then(function(data){
             console.log("获取购物车",data);
@@ -263,6 +277,13 @@ app.controller("appCartCt",function($scope,$http,cart){
 					val.isBuy=false;
 				}
 			});
+		}
+
+		/*调用原生登录*/
+		$scope.openLogin=function(){
+			if(typeof h5=="object"){
+        		h5.openLogin();
+        	}
 		}
 
 		/*购物车结算*/

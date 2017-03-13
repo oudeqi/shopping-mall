@@ -53,11 +53,14 @@
  <div class="loading" ng-show="loading"></div>
         <div class="head" ng-swipe-right="testRight()">我的商城</div>
         <div class="headCover">
-            <img class="headImg" ng-src="{{myinfo.data.headIconUrl}}">
-            <div class="headName">{{myinfo.data.nickName}}</div>
+            <img class="headImg" ng-src="{{tokenShow?myinfo.data.headIconUrl:'img/my/nologin.png'}}">
+            <div class="headName">{{tokenShow?myinfo.data.nickName:'未登录'}}</div>
 
-            <img src="img/my/my_u.png" class="headUImg">
-            <div class="headUNumber">{{myinfo.data.ucoin}}U币</div>
+            <img ng-show="tokenShow" src="img/my/my_u.png" class="headUImg">
+            <div ng-show="tokenShow" class="headUNumber">{{myinfo.data.ucoin}}U币</div>
+
+            <button ng-click="openLogin()" ng-hide="tokenShow" class="buttonNoLogin">注册/登录</button>
+
         </div>
 
         <div class="addressCover" ng-click="goAddress()">
@@ -75,6 +78,7 @@
         	</div>
         </div>
 
+        <div ng-show="tokenShow">
         <div class="itemCover" ng-repeat="x in mylist.data.data">
         	<div class="itemTop"  ng-click="goGoodsInfo(x.orderNo)">
         		<div class="itemTopLeft">
@@ -99,8 +103,9 @@
 
         	</div>
         </div>
+        </div>
 
-        <div class="loadMore" ng-show="loadMoreShow" ng-click="loadMoreFunction()">
+        <div class="loadMore" ng-show="loadMoreShow && tokenShow" ng-click="loadMoreFunction()">
             {{loadText}}
         </div>
 

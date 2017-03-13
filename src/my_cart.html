@@ -53,10 +53,27 @@
             <div class="loading" ng-show="loading"></div>
             <div class="head">
                 <div ng-show="!!isTopBack" tap="back()" class="headBackCover"><img class="headBack" src="img/back2.png"></div>购物车
+                <div ng-show="tokenShow">
                 <div class="headEdit" ng-show="!editAllDel" ng-click="goEditFunction()">编辑</div>
-                <div ng-click="goEditFunction()" ng-show="editAllDel" class="headEdit">完成</div>
+                <div ng-click="goEditFunction()" ng-show="editAllDel" class="headEdit">完成</div></div>
             </div>
             <div class="LINE"></div>
+
+            <div ng-show="!tokenShow">
+               <div class="cartEmpty" ng-hide="!!buyCar.length">
+                <div class="cartEmptyImgCover">
+                    <img class="cartEmptyImg" src="img/cart/buy_nologin.png">
+                    <div class="cartEmptySay">登录后享受更多优惠</div>
+                    <div class="cartNologin">登录开启超值低价特色购物生活</div>
+                    <button ng-click="openLogin()" class="cartEmptyButton buttonNoLogin">注册/登录</button>
+                </div>
+            </div>
+            </div>
+
+
+
+
+            <div ng-show="tokenShow">
             <div class="cartEmpty" ng-hide="!!buyCar.length">
                 <div class="cartEmptyImgCover">
                     <img class="cartEmptyImg" src="img/cart/buy_empty.png">
@@ -134,6 +151,7 @@
                         合计：<i class="bottomMoneyText">￥{{totalPrice}}</i>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </body>
