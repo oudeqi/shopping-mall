@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" href="./css/photoSlider.css"/>
         <link rel="stylesheet" type="text/css" href="./css/index.css"/>
         <script type="text/javascript" src="./js/hotcss.js"></script>
-
     </head>
     <body ng-controller="index">
         <ul class="tabbar">
@@ -49,7 +48,7 @@
             </li>
         </ul>
         <div class="banner_contain">
-            <app-banner banner-arr="banner" token="{{token}}"></app-banner>
+            <app-banner banner-arr="banner"></app-banner>
         </div>
         <div class="page_container" ng-cloak ng-show="banner">
             <div class="marquee">
@@ -60,7 +59,7 @@
                 </div>
                 <div class="r">
                     <marquee behavior="scroll" onTouchStart="this.stop()" onTouchEnd="this.start()" scrollamount="2" width="800" scrolldelay="100" direction="up">
-                        <p ng-repeat="item in marquee" ng-bind="item.title" ng-click="linkTo('/pro_details.html',token,item.id)"></p>
+                        <p ng-repeat="item in marquee" ng-bind="item.title" ng-click="linkTo('/pro_details.html',item.id)"></p>
                     </marquee>
                 </div>
             </div>
@@ -91,7 +90,7 @@
             <div class="product">
                 <h2 class="pro_tit">新品推荐</h2>
                 <ul class="pro_list">
-                    <li ng-repeat="item in newProduct" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || newProductShow">
+                    <li ng-repeat="item in newProduct" tap="linkTo('./pro_details.html',item.id)" ng-if="$index<4 || newProductShow">
                         <div class="pro_view">
                             <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
                         </div>
@@ -112,7 +111,7 @@
             <div class="product">
                 <h2 class="pro_tit">联联地方特产</h2>
                 <ul class="pro_list">
-                    <li ng-repeat="item in lltc" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || lltcShow">
+                    <li ng-repeat="item in lltc" tap="linkTo('./pro_details.html',item.id)" ng-if="$index<4 || lltcShow">
                         <div class="pro_view">
                             <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
                         </div>
@@ -133,7 +132,7 @@
             <div class="product">
                 <h2 class="pro_tit">联联吃货馆</h2>
                 <ul class="pro_list">
-                    <li ng-repeat="item in llchg" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llchgShow">
+                    <li ng-repeat="item in llchg" tap="linkTo('./pro_details.html',item.id)" ng-if="$index<4 || llchgShow">
                         <div class="pro_view">
                             <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
                         </div>
@@ -154,7 +153,7 @@
             <div class="product">
                 <h2 class="pro_tit">联联优品</h2>
                 <ul class="pro_list">
-                    <li ng-repeat="item in llyp" tap="linkTo('./pro_details.html',token,item.id)" ng-if="$index<4 || llypShow">
+                    <li ng-repeat="item in llyp" tap="linkTo('./pro_details.html',item.id)" ng-if="$index<4 || llypShow">
                         <div class="pro_view">
                             <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
                         </div>

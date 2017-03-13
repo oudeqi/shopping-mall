@@ -37,7 +37,7 @@
                 top: px2rem(-4);
                 right: px2rem(-4);
                 min-width: px2rem(18);
-                height: px2rem(18);
+                // height: px2rem(18);
                 border-radius: px2rem(18);
                 background-color: #F43530;
                 color: #fff;
@@ -45,7 +45,7 @@
                 justify-content: center;
                 align-items: center;
                 font-size: px2rem(12);
-                padding: 0 px2rem(3);
+                padding: px2rem(1) px2rem(3);
                 border:1px solid #fff;
             }
             .icon{

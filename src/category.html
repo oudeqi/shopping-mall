@@ -27,7 +27,7 @@
                 </button>
             </li>
             <li>
-                <button type="button" name="button" tap="linkTo('./index.html',token)">
+                <button type="button" name="button" tap="linkToIndex('./index.html')">
                     <i class="icon icon-index"></i>
                     <span class="txt">首页</span>
                 </button>
@@ -70,10 +70,10 @@
         <script type="text/ng-template" id="list.html">
             <div class="tab-cont" ng-show="banner">
                 <div class="banner_contain">
-                    <app-banner banner-arr="banner" token="{{token}}"></app-banner>
+                    <app-banner banner-arr="banner"></app-banner>
                 </div>
                 <ul class="pro_list">
-                    <li ng-repeat="item in list" tap="linkTo('./pro_details.html',token,item.id)">
+                    <li ng-repeat="item in list" tap="linkTo('./pro_details.html',item.id)">
                         <div class="pro_view">
                             <img ng-src="{{item.previewUrl}}?x-oss-process=image/resize,m_fill,h_{{proViewH}},w_{{proViewW}}" alt="">
                         </div>
@@ -81,7 +81,6 @@
                         <p class="pro_price" ng-bind="item.price | currency : '￥'"></p>
                         <p class="pro_discount" ng-bind="item.deduction"></p>
                     </li>
-
                 </ul>
                 <div class="more_pro" ng-hide="rowCount == 0">
                     <button type="button" name="button" ng-click="next()">

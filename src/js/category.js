@@ -5,15 +5,7 @@ app.constant("contstant",{
     HOST:"https://api.2tai.com"
 });
 //http://192.168.10.96:3000/category.html?token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2Jhc2VfaWQiOiIxMDAwNXwxNDgyMjAxODEyNzAzIn0.s6AfZ_AmoK0_5_sqYO3Db0eJQaLtvKORk2EYvzr8jzg#llyp
-/*
-resolve: {
-    delay: function($q, $timeout) {
-        var delay = $q.defer();
-        $timeout(delay.resolve, 1000);
-        return delay.promise;
-    }
-}
- */
+
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.when('/dftc', {
@@ -36,16 +28,12 @@ app.config(['$routeProvider',
 app.run(['$rootScope', '$location',"$window","device",
     function($rootScope, $location,$window,device) {
 
-        $rootScope.token = localStorage.token;
         $rootScope.proViewW = parseInt(device.screenW() / 2 * 1.5);
         $rootScope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
-        $rootScope.linkTo = function(uri,token,id){
+        $rootScope.linkTo = function(uri,id){
             localStorage.isTopCar=1;
-            if(token){
-                uri = uri+"?token="+token;
-            }
             if(id){
-                uri = uri+"&id="+id;
+                uri = uri+"?id="+id;
             }
             location.href = uri;
         };
@@ -67,7 +55,6 @@ app.run(['$rootScope', '$location',"$window","device",
             }
             return res;
         };
-        console.log($rootScope.token);
         $rootScope.$on('$routeChangeSuccess',function(event, current, previous){
            console.log(current.$$route.originalPath);
           $rootScope.currentPath = current.$$route.originalPath;
@@ -86,9 +73,9 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
         this.chg = {
             next: function(pageIndex){
                 var defer = $q.defer();
-                $http.get(contstant.HOST+"/v1/aut/goods/list", {
+                $http.get(contstant.HOST+"/v1/goods/list", {
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     },
                     params:{
                         type: chg.type,
@@ -117,9 +104,9 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
         this.dftc = {
             next: function(pageIndex){
                 var defer = $q.defer();
-                $http.get(contstant.HOST+"/v1/aut/goods/list", {
+                $http.get(contstant.HOST+"/v1/goods/list", {
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization':localStorage.token,
                     },
                     params:{
                         type: dftc.type,
@@ -148,9 +135,9 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
         this.yp = {
             next: function(pageIndex){
                 var defer = $q.defer();
-                $http.get(contstant.HOST+"/v1/aut/goods/list", {
+                $http.get(contstant.HOST+"/v1/goods/list", {
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     },
                     params:{
                         type: yp.type,
@@ -188,7 +175,7 @@ app.factory("cart",["$http","$q","contstant","$rootScope",
                 var defer = $q.defer();
                 $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     }
                 }).success(function(data){
                     if(data.data && typeof data.data === 'object'){
@@ -212,8 +199,7 @@ app.directive("appBanner",["device",function(device){
         restrict: 'E',
         replace: true,
         scope:{
-            banner:'=bannerArr',
-            token:'@'
+            banner:'=bannerArr'
         },
         template:function(element, attrs){
             var tpl = '<div class="banner">';
@@ -241,8 +227,8 @@ app.directive("appBanner",["device",function(device){
             });
             scope.linkTo = function(id){
                 localStorage.isTopCar=1;
-                if(scope.token && id){
-                    location.href = "/pro_details.html?token="+scope.token+"&id="+id;
+                if(id){
+                    location.href = "/pro_details.html?id="+id;
                 }
             };
         }
@@ -284,24 +270,32 @@ app.directive('tap',function(){
 
 app.controller("nav",["$scope","cart",function($scope,cart){
 
-    cart.get().then(function(data){
-        console.log("获取购物车",data);
-        $scope.cartAll = data.data;
-    }).catch(function(data){
-        console.log(data);
-    });
+    $scope.getCart = function(){
+        if(localStorage.token){
+            cart.get().then(function(data){
+                console.log("获取购物车",data);
+                $scope.cartAll = data.data;
+            }).catch(function(data){
+                console.log(data);
+            });
+        }
+    };
+    $scope.getCart();
 
     $scope.back = function(){
         if(typeof h5 == "object"){
             h5.mallBack();
         }
     };
-    $scope.linkTo = function(uri,token,id){
-        if(token){
-            uri = uri+"?token="+token;
-        }
+    $scope.linkTo = function(uri,id){
         if(id){
-            uri = uri+"&id="+id;
+            uri = uri+"?id="+id;
+        }
+        location.href = uri;
+    };
+    $scope.linkToIndex = function(uri){
+        if(localStorage.token){
+            uri = uri+"?token="+localStorage.token;
         }
         location.href = uri;
     };

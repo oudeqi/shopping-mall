@@ -15,9 +15,7 @@ app.config(['$locationProvider',
 
 app.run(['$rootScope', '$location',"$window",
     function($rootScope, $location,$window) {
-        $rootScope.token = $location.search().token;
         $rootScope.id = $location.search().id;
-        localStorage.token=$rootScope.token;
     }
 ]);
 
@@ -25,9 +23,9 @@ app.service("pageDate",["$http","$rootScope","$q","contstant",
     function($http,$rootScope,$q,contstant){
         this.getDetails = function(){
             var defer = $q.defer();
-            $http.get(contstant.HOST+"/v1/aut/goods/info", {
+            $http.get(contstant.HOST+"/v1/goods/info", {
                 headers: {
-                    'Authorization': $rootScope.token,
+                    'Authorization': localStorage.token,
                 },
                 params:{
                     id:$rootScope.id,
@@ -53,7 +51,7 @@ app.factory("cart",["$http","$q","contstant","$rootScope",
                 var defer = $q.defer();
                 $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     }
                 }).success(function(data){
                     if(data.data && typeof data.data === 'object'){
@@ -70,7 +68,7 @@ app.factory("cart",["$http","$q","contstant","$rootScope",
                 var defer = $q.defer();
                 $http.post(contstant.HOST+"/v1/aut/goods/shopping/cart", obj,{
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     }
                 }).success(function(data){
                     defer.resolve(data);
@@ -83,7 +81,7 @@ app.factory("cart",["$http","$q","contstant","$rootScope",
                 var defer = $q.defer();
                 $http.post(contstant.HOST+"/v1/aut/goods/order", obj,{
                     headers: {
-                        'Authorization': $rootScope.token,
+                        'Authorization': localStorage.token,
                     }
                 }).success(function(data){
                     defer.resolve(data);
@@ -252,19 +250,25 @@ app.directive('tap',function(){
     };
 });
 
-app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
-    function($scope,pageDate,device,$sce,cart){
+app.controller("pro_details",["$scope","pageDate","device","$sce","cart","$rootScope",
+    function($scope,pageDate,device,$sce,cart,$rootScope){
 
         //设备相关
         $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
         $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
-        cart.get().then(function(data){
-            console.log("获取购物车",data);
-            $scope.cartAll = data.data;
-        }).catch(function(data){
-            console.log(data);
-        });
+        $scope.cartAll = [];
+        $scope.getCart = function(){
+            if(localStorage.token){
+                cart.get().then(function(data){
+                    console.log("获取购物车",data);
+                    $scope.cartAll = data.data;
+                }).catch(function(data){
+                    console.log(data);
+                });
+            }
+        };
+        $scope.getCart();
 
         $scope.ok = false;
         $scope.cart = {};
@@ -322,35 +326,65 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
         $scope.buy = function(){
             $scope.buyClick = true;
         };
-        $scope.linkTo = function(uri,token,id){
-            // location.href = uri+"?token="+token+"&id="+id;
+
+        $scope.linkTo = function(uri,id){
             localStorage.isTopCar=2; //不是顶部导航
-            if(token){
-                uri = uri+"?token="+token;
-            }
             if(id){
-                uri = uri+"&id="+id;
+                uri = uri+"?id="+id;
             }
             location.href = uri;
         };
+
+        $scope.linkToIndex = function(uri){
+            if(localStorage.token){
+                uri = uri+"?token="+localStorage.token;
+            }
+            location.href = uri;
+        };
+
+        $scope.linkToCart = function(uri){
+            console.log("localStorage.token:",localStorage.token);
+            if(localStorage.token){
+                localStorage.isTopCar=2; //不是顶部导航
+                location.href = uri;
+            }else{
+                if(typeof h5 == "object"){
+                    h5.openLogin();
+                }
+            }
+        };
+
+
         $scope.pageBack = function() {
             history.go(-1);
         };
 
         $scope.addCart = function(){
-            cart.add($scope.cartObj).then(function(data){
-                console.log("添加购物车",data);
-                $scope.cartAll.push($scope.cartObj);
-                console.log($scope.cartAll);
-            }).catch(function(data){
-                console.log(data);
-            });
+            console.log("localStorage.token:",localStorage.token);
+            if(localStorage.token){
+                cart.add($scope.cartObj).then(function(data){
+                    console.log("添加购物车",data);
+                    $scope.cartAll.push($scope.cartObj);
+                    console.log($scope.cartAll);
+                }).catch(function(data){
+                    console.log(data);
+                });
+            }else{
+                if(typeof h5 == "object"){
+                    h5.openLogin();
+                }
+            }
+
         };
 
         // 下单
         $scope.nextClicked = false;
         $scope.next = function(){
-            console.log($scope.cart);
+            console.log("$scope.cart:",$scope.cart);
+            console.log("localStorage.token:",localStorage.token);
+            if(!localStorage.token){
+                return;
+            }
             if($scope.nextClicked){
                 return;
             }
@@ -364,7 +398,7 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
                     localStorage.payAllx=JSON.stringify(data.data);
                     localStorage.payOrderNo=data.data.orderNo;
                     localStorage.payMoney=data.data.money;
-                    window.location.href="/pay.html"
+                    window.location.href="/pay.html";
                     //下单成功
                     // if(typeof h5 == "object"){
                     //     h5.mallPay(JSON.stringify(data));
@@ -379,6 +413,12 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart",
         };
     }
 ]);
+
+function loginBackToken(token){
+    console.log(token);
+    localStorage.token = token;
+    location.reload();
+}
 
 function mallPaySucc(id){
     location.href = "./my_cart_success.html?id="+id;

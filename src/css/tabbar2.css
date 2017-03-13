@@ -80,7 +80,6 @@
   top: -0.25rem;
   right: -0.5rem;
   min-width: 1.24rem;
-  height: 1.24rem;
   border-radius: 1.26rem;
   background-color: #F43530;
   color: #fff;
@@ -97,6 +96,7 @@
       -ms-flex-align: center;
           align-items: center;
   font-size: 0.86rem;
+  padding: 0.07143rem 0rem;
   border: 1px solid #fff;
 }
 

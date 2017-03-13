@@ -13,50 +13,11 @@ app.config(['$locationProvider',
 
 app.run(['$rootScope', '$location',"$window",
     function($rootScope, $location,$window) {
-        $rootScope.token = $location.search().token;
-        localStorage.token=$rootScope.token;
-    }
-]);
-
-app.service("pageDate",["$http","$rootScope","$q","contstant",
-    function($http,$rootScope,$q,contstant){
-        this.getData = function(){
-            var defer = $q.defer();
-            $http.get(contstant.HOST+"/v1/aut/mall/home", {
-                headers: {
-                    'Authorization': $rootScope.token,
-                }
-            }).success(function(data){
-                defer.resolve(data);
-            }).error(function(data){
-                defer.reject("error");
-            });
-            return defer.promise;
-        };
-    }
-]);
-
-app.factory("cart",["$http","$q","contstant","$rootScope",
-    function($http,$q,contstant,$rootScope){
-        return {
-            get: function(){
-                var defer = $q.defer();
-                $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
-                    headers: {
-                        'Authorization': $rootScope.token,
-                    }
-                }).success(function(data){
-                    if(data.data && typeof data.data === 'object'){
-                        defer.resolve(data);
-                    }else{
-                        defer.reject(data);
-                    }
-                }).error(function(data){
-                    defer.reject("error");
-                });
-                return defer.promise;
-            }
-        };
+        if($location.search().token && $location.search().token != "null" && $location.search().token != "undefined"){
+            localStorage.token = $location.search().token;
+        }else{
+            localStorage.removeItem("token");
+        }
     }
 ]);
 
@@ -118,8 +79,7 @@ app.directive("appBanner",["device",function(device){
         restrict: 'E',
         replace: true,
         scope:{
-            banner:'=bannerArr',
-            token:'@'
+            banner:'=bannerArr'
         },
         template:function(element, attrs){
             var tpl = '<div class="banner">';
@@ -146,16 +106,16 @@ app.directive("appBanner",["device",function(device){
                 }
             });
             scope.linkTo = function(id){
-                if(scope.token && id){
-                    location.href = "/pro_details.html?token="+scope.token+"&id="+id;
+                if(id){
+                    location.href = "/pro_details.html?id="+id;
                 }
             };
         }
     };
 }]);
 
-app.controller("index",["$scope","pageDate","device","cart",
-    function($scope,pageDate,device,cart){
+app.controller("index",["$scope","device","$http","contstant",
+    function($scope,device,$http,contstant){
 
         $scope.iphone = device.iphone();
 
@@ -163,8 +123,11 @@ app.controller("index",["$scope","pageDate","device","cart",
         $scope.proViewW = parseInt(device.screenW() / 2 * 1.5);
         $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
-
-        pageDate.getData().then(function(data){
+        $http.get(contstant.HOST+"/v1/mall/home", {
+            headers: {
+                'Authorization': localStorage.token
+            }
+        }).success(function(data){
             console.log("获取首页数据：",data);
             if(data.data && typeof data.data === 'object'){
                 $scope.banner = data.data.top;
@@ -177,17 +140,33 @@ app.controller("index",["$scope","pageDate","device","cart",
                 $scope.llchgShow = false;
                 $scope.lltcShow = false;
                 $scope.llypShow = false;
+            }else{
+
             }
-        }).catch(function(data){
-            console.log(data);
+        }).error(function(data){
+
         });
 
-        cart.get().then(function(data){
-            console.log("获取购物车",data);
-            $scope.cartAll = data.data;
-        }).catch(function(data){
-            console.log(data);
-        });
+        $scope.getCart = function(){
+            if(localStorage.token){
+                $http.get(contstant.HOST+"/v1/aut/goods/shopping/cart", {
+                    headers: {
+                        'Authorization': localStorage.token
+                    }
+                }).success(function(data){
+                    console.log("获取购物车",data);
+                    if(data.data && typeof data.data === 'object'){
+                        $scope.cartAll = data.data;
+                    }else{
+
+                    }
+                }).error(function(data){
+
+                });
+            }
+        };
+        $scope.getCart();
+
 
         $scope.back = function(){
             if(typeof h5 == "object"){
@@ -195,16 +174,16 @@ app.controller("index",["$scope","pageDate","device","cart",
             }
         };
 
-        $scope.linkTo = function(uri,token,id){
+        $scope.linkTo = function(uri,id){
             localStorage.isTopCar=1;
-            if(token){
-                uri = uri+"?token="+token;
-            }
             if(id){
-                uri = uri+"&id="+id;
+                uri = uri+"?id="+id;
             }
             location.href = uri;
         };
+
+
+
 
     }
 ]);
