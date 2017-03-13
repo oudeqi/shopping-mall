@@ -1,3 +1,8 @@
+function loginBackToken(token){
+    localStorage.token=token;
+    location.reload();
+}
+
 var app=angular.module("app",[]);
 app.factory("cart",["$http","$q","$rootScope",
     function($http,$q,$rootScope){
@@ -56,12 +61,20 @@ app.directive('tap',function(){
 });
 app.controller("appct",function($scope,$http,cart){
 
+
     cart.get().then(function(data){
         console.log("获取购物车",data);
         $scope.cartAll = data.data;
     }).catch(function(data){
         console.log(data);
     });
+    $scope.mytoken=APP_TOKEN;
+    $scope.tokenShow=false;
+    if($scope.mytoken==undefined || $scope.mytoken==null || $scope.mytoken=='' || $scope.mytoken=='undefined'){
+        $scope.tokenShow=false;
+    }else{
+        $scope.tokenShow=true;
+    }
 
 	var k=1;
 	$scope.loadMoreShow=true;
@@ -97,14 +110,27 @@ app.controller("appct",function($scope,$http,cart){
 
 	$scope.changeGid=function(index){
 		$scope.gid=index;
-		$scope.loadMoreShow=true;
+        $scope.loadMoreShow=true;
 
-		$scope.getList(index-1,0);
-		$scope.kid=index-1;
-		k=1;
+        $scope.getList(index-1,0);
+        $scope.kid=index-1;
+        k=1;
+        if($scope.tokenShow){
+
+        }else{
+            console.log("去登陆")
+            $scope.openLogin();
+        }
 	}
 
 	$scope.name="商店";
+
+    /*调用原生登录*/
+    $scope.openLogin=function(){
+        if(typeof h5=="object"){
+            h5.openLogin();
+        }
+    }
 
 
 	/*获取用户信息*/
@@ -225,10 +251,17 @@ app.controller("appct",function($scope,$http,cart){
 
     /*去地址管理*/
     $scope.goAddress=function(){
-    	console.log("去地址管理")
-    	if(typeof h5=="object"){
-    		h5.openAddrManage();
-    	}
+    	
+        if($scope.tokenShow){
+            if(typeof h5=="object"){
+                h5.openAddrManage();
+                console.log("去地址管理")
+            }
+        }else{
+            console.log("去登陆")
+            $scope.openLogin();
+        }
+    	
 
     }
     /*商场返回*/
