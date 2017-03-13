@@ -197,6 +197,9 @@ app.directive("buyNow",["device","$document",function(device,$document){
                         }
                     });
                 }else{
+                    element.css({
+                        "display":"none"
+                    });
                     $document.unbind("touchstart");
                 }
             });
@@ -374,7 +377,6 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart","$rootS
                     h5.openLogin();
                 }
             }
-
         };
 
         // 下单
@@ -382,13 +384,17 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart","$rootS
         $scope.next = function(){
             console.log("$scope.cart:",$scope.cart);
             console.log("localStorage.token:",localStorage.token);
-            if(!localStorage.token){
-                return;
-            }
             if($scope.nextClicked){
                 return;
             }
             $scope.nextClicked = true;
+            if(!localStorage.token){
+                if(typeof h5 == "object"){
+                    $scope.nextClicked = false;
+                    h5.openLogin();
+                }
+                return;
+            }
             cart.order([{
                 goodsId:$scope.cart.id,
                 number:$scope.cart.quantity
