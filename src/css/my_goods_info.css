@@ -8,13 +8,16 @@
 }
 .bigCover {
 	width: 24.86rem;
-	height: 38.43rem;
+	/*height: 38.43rem;*/
+	height: auto;
 	background-color: white;
 	margin: 1rem auto 0 auto;
 }
 .smallCover {
 	width: 21.46rem;
-	height: 38.43rem;
+	height: auto;
+	padding: 0 0 13rem 0;
+	/*height: 38.43rem;*/
 	/*background-color: red;*/
 	margin: 0 1.8rem 0 1.6rem;
 }

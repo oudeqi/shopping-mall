@@ -75,7 +75,7 @@ app.controller("apppayct",function($scope,$http){
 		"backgroundImage":"url('img/cart/item.png')"
 	}
 	$scope.checkImgAc={
-		"backgroundImage":"url('img/cart/item_ac.png')"
+		"backgroundImage":"url('img/cart/item_ac_blue.png')"
 	}
 	$scope.listHeight={
 		"height":"5.8rem"
