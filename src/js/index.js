@@ -165,8 +165,10 @@ app.controller("index",["$scope","device","$http","contstant",
                 });
             }
         };
-        $scope.getCart();
 
+        if(localStorage.token){
+            $scope.getCart();
+        }
 
         $scope.back = function(){
             if(typeof h5 == "object"){

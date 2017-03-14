@@ -271,16 +271,17 @@ app.directive('tap',function(){
 app.controller("nav",["$scope","cart",function($scope,cart){
 
     $scope.getCart = function(){
-        if(localStorage.token){
-            cart.get().then(function(data){
-                console.log("获取购物车",data);
-                $scope.cartAll = data.data;
-            }).catch(function(data){
-                console.log(data);
-            });
-        }
+        cart.get().then(function(data){
+            console.log("获取购物车",data);
+            $scope.cartAll = data.data;
+        }).catch(function(data){
+            console.log(data);
+        });
     };
-    $scope.getCart();
+
+    if(localStorage.token){
+        $scope.getCart();
+    }
 
     $scope.back = function(){
         if(typeof h5 == "object"){

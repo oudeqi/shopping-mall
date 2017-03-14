@@ -261,17 +261,19 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart","$rootS
         $scope.proViewH = parseInt(device.screenW() * 105 / 166 / 2 * 1.5);
 
         $scope.cartAll = [];
+
         $scope.getCart = function(){
-            if(localStorage.token){
-                cart.get().then(function(data){
-                    console.log("获取购物车",data);
-                    $scope.cartAll = data.data;
-                }).catch(function(data){
-                    console.log(data);
-                });
-            }
+            cart.get().then(function(data){
+                console.log("获取购物车",data);
+                $scope.cartAll = data.data;
+            }).catch(function(data){
+                console.log(data);
+            });
         };
-        $scope.getCart();
+
+        if(localStorage.token){
+            $scope.getCart();
+        }
 
         $scope.ok = false;
         $scope.cart = {};
