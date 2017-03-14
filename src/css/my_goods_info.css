@@ -34,7 +34,12 @@
 	width: 76%;
 	height: 1px;
 	/*transform: scale(0,0.25);*/
-	margin: -0.86rem 0 0 12%;
+	/*4rem 
+	2.3rem 
+	0.71rem 
+	0.98
+	*/
+	margin: -1.335rem 0 0 12%;
 	background-color: #bfbfbf;
 	/*0.71rem */
 }
@@ -60,7 +65,8 @@
 .infoScheduleItem .infoScheduleItemTitle {
 	color: #11cd6e;
 	font-size: 1rem;
-	margin: 1.2rem 0 0.3rem 0;
+	height: 1.5rem;
+	margin: 0.5rem 0 0.3rem 0;
 }
 .infoScheduleItem .infoScheduleItemCir {
 	width: 0.71rem;

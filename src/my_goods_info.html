@@ -64,7 +64,7 @@
             <div class="infoLine"></div>
 
             <div class="goodsAll" ng-repeat="item in goodsinfo.data.orders">
-                <img class="goodsImg" ng-src="{{item.previewUrl}}">
+                <img class="goodsImg" ng-src="{{item.previewUrl+'?x-oss-process=image/resize,m_fill,h_200,w_200'}}">
                 <div class="goodsInfoCover">
                     <div class="goodsAllName">{{item.title}}</div>
                     <div class="goodsAllPrice">售价：{{item.price}}元x{{item.number}}</div>

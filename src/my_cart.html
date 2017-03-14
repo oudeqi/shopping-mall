@@ -95,7 +95,7 @@
                                 <input class="fullCheck" type="checkbox" name="checkbox" ng-model="checkboxModel.value1" id="{{x}}">
                                 <label class="fullCheckLabel_lose" ng-style="testImg" for="{{x}}"></label>
                             </div>
-                            <img class="cartFullImg" ng-src="{{x.img}}">
+                            <img class="cartFullImg" ng-src="{{x.img+'?x-oss-process=image/resize,m_fill,h_200,w_200'}}">
                             <div class="cartFullRight">
                                 <div class="cartFullRightName">{{x.name}}</div>
                                 <div class="cartFullRightControl">
