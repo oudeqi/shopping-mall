@@ -1,73 +1,81 @@
 .head {
-	width: 100%;
-	height: 3.15rem;
-	line-height: 3.15rem;
-	font-size: 1.29rem;
-	text-align: center;
-	background-color: white;
+  width: 100%;
+  height: 3.15rem;
+  line-height: 3.15rem;
+  font-size: 1.29rem;
+  text-align: center;
+  background-color: white;
 }
+
 .headInfo {
-	height: 6.6rem;
-	width: 100%;
-	background-color: white;
-	margin: 0 0 0.71rem 0;
+  height: 6.6rem;
+  width: 100%;
+  background-color: white;
+  margin: 0 0 0.71rem 0;
 }
+
 .headInfo .headImg {
-	width: 4.71rem;
-	height: 4.71rem;
-	margin: 1rem 0 0 1rem;
-	float: left;
+  width: 4.71rem;
+  height: 4.71rem;
+  margin: 1rem 0 0 1rem;
+  float: left;
 }
+
 .headInfo .headInfoRight {
-	height: 4.71rem;
-	/*width: calc(100% - 5.71rem);*/
-	margin: 1rem 0 0 1rem;
-	float: left;
-	font-size: 1rem;
-	color: #2b333b;
+  height: 4.71rem;
+  /*width: calc(100% - 5.71rem);*/
+  margin: 1rem 0 0 1rem;
+  float: left;
+  font-size: 1rem;
+  color: #2b333b;
 }
+
 .statusRed {
-	color: red;
+  color: red;
 }
+
 .headInfo .headInfoRight .headInfoRightStatus {
-	width: 10rem;
-	margin: 0 0 1rem 0;
+  width: 10rem;
+  margin: 0 0 1rem 0;
 }
+
 .headInfo .headInfoRight .headInfoP {
-	width: 100%;
+  width: 100%;
 }
 
 .emsContent {
-	height: 5rem;
-	width: 100%;
-	overflow: hidden;
-	background-color: white;
+  height: 5rem;
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
 }
+
 .emsContent .emsTime {
-	width: 6.1rem;
-	height: 5rem;
-	float: left;
-	padding: 1rem 0 0 1rem;
-	font-size: 0.86rem;
-	/*line-height: 5rem;*/
+  width: 6.1rem;
+  height: 5rem;
+  float: left;
+  padding: 1rem 0 0 1rem;
+  font-size: 0.86rem;
+  /*line-height: 5rem;*/
 }
 
 .emsContent .emsTime .emsTimeHour {
-	font-size: 1rem;
-}
-.emsContent .emsImg {
-	width: 1.1rem;
-	height: 5rem;
-	float: left;
-}
-.emsContent .emsContent {
-	width: 17rem;
-	float: left;
-	/*color: #fb4747;*/
-	margin: 1rem 0 0 1rem;
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
+.emsContent .emsImg {
+  width: 1.1rem;
+  height: 5rem;
+  float: left;
+}
+
+.emsContent .emsContent {
+  width: 17rem;
+  float: left;
+  /*color: #fb4747;*/
+  margin: 1rem 0 0 1rem;
+  font-size: 1rem;
+}
 
 /*.emsInfo {
 	width: 100%;

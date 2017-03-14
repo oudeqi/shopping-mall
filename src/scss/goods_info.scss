@@ -1,0 +1,20 @@
+
+.sliderCover {
+	width: 26.79rem;
+	height: 18.57rem;
+}
+.sliderCover .sliderItem {
+	position: absolute;
+	width: 26.79rem;
+	height: 18.57rem;
+	transition:all .5s ease;
+}
+.sliderItemLeft {
+	transform:translate(-26.79rem,0);
+}
+.sliderItemCenter {
+	transform:translate(0,0);
+}
+.sliderItemRight {
+	transform:translate(26.79rem,0);
+}

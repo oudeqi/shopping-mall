@@ -1,20 +1,30 @@
-
 .sliderCover {
-	width: 26.79rem;
-	height: 18.57rem;
+  width: 26.79rem;
+  height: 18.57rem;
 }
+
 .sliderCover .sliderItem {
-	position: absolute;
-	width: 26.79rem;
-	height: 18.57rem;
-	transition:all .5s ease;
+  position: absolute;
+  width: 26.79rem;
+  height: 18.57rem;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
+
 .sliderItemLeft {
-	transform:translate(-26.79rem,0);
+  -webkit-transform: translate(-26.79rem, 0);
+      -ms-transform: translate(-26.79rem, 0);
+          transform: translate(-26.79rem, 0);
 }
+
 .sliderItemCenter {
-	transform:translate(0,0);
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
 }
+
 .sliderItemRight {
-	transform:translate(26.79rem,0);
+  -webkit-transform: translate(26.79rem, 0);
+      -ms-transform: translate(26.79rem, 0);
+          transform: translate(26.79rem, 0);
 }
