@@ -4,6 +4,36 @@
 body{
     background: #F8F8F8;
 }
+.item_cover {
+    width: 100%;
+    height: px2rem(50);
+    font-size:px2rem(14);
+    background-color:white;
+    line-height:px2rem(50);
+    .item_line {
+        width:90%;
+        background-color:#bfbfbf;
+        margin:0 auto;
+        height:1px;
+        opacity:0.5;
+    }
+    button {
+        background-color:rgba(0,0,0,0);
+        width:px2rem(48);
+        height:px2rem(20);
+        color:#fb4747;
+        border:1px solid #fb4747;
+        font-size:px2rem(12);
+        float:left;
+        margin:px2rem(15) px2rem(10) 0 px2rem(22);
+
+    }
+}
+
+
+
+
+
 header{
     position: fixed;
     top: 0;

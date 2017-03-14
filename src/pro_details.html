@@ -43,6 +43,14 @@
                     <span ng-bind="'邮费：包邮'"></span>
                 </div>
             </div>
+
+            <div class="item_cover" ng-show="ok && deduction">
+                <div class="item_line"></div>
+                <button>U币购</button>
+                <div ng-bind="deduction"></div>
+            </div>
+
+
             <div class="pro_details">
                 <p class="tit">图文详情</p>
                 <div class="content" ng-bind-html="content"></div>
