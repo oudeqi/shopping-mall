@@ -79,7 +79,7 @@ app.controller("apppayct",function($scope,$http){
 	}
 	$scope.listHeight={
 		"height":"5.8rem"
-	}	
+	}
 
 	$scope.payWayArr=[{
 		title:"支付宝",
@@ -110,7 +110,7 @@ app.controller("apppayct",function($scope,$http){
 	}
 	$scope.sNo={
 		"backgroundColor":"#bfbfbf"
-	}	
+	}
 
 	$scope.orderNoAll=JSON.parse(localStorage.payAllx);
 	  var u = navigator.userAgent;
@@ -128,7 +128,7 @@ app.controller("apppayct",function($scope,$http){
 						// $scope.yesPayId=3;
 					}
 				}
-				
+
 	 		}
 	}
 
@@ -182,7 +182,7 @@ app.controller("apppayct",function($scope,$http){
 			}else{
 				val.ck=false;
 			}
-			
+
 		})
 	}
 
@@ -191,14 +191,15 @@ app.controller("apppayct",function($scope,$http){
 	/*去付款*/
 	$scope.goPay=function(){
 		if($scope.myAddress){}else{
-			alert("请选择地址")
+			// alert("请选择地址")
+			$scope.getMyAddress();
 			return;
 		}
 		if($scope.yesPayId==1 || $scope.yesPayId=='1'){
 			console.log('余额支付开始')
 			/*余额，先调用mallpay*/
-			if(typeof h5=="object"){ 
-				
+			if(typeof h5=="object"){
+
 				h5.mallPayParameters($scope.yesPayId,$scope.postGetOrderNo,'')
 			// h5.mallPayParameters($scope.yesPayId,localStorage.payOrderNo,'');
 			// h5.mallPay($scope.yesPayId,localStorage.payOrderNo,'');
@@ -207,7 +208,7 @@ app.controller("apppayct",function($scope,$http){
 			$scope.goPayMore();
 		}
 
-		
+
 	}
 
 	$scope.goPayMore=function(){
@@ -227,7 +228,7 @@ app.controller("apppayct",function($scope,$http){
 
         		if(typeof h5=="object"){
         			h5.mallPayParameters($scope.yesPayId,$scope.postGetOrderNo,JSON.stringify(data));
-        			
+
         			// h5.mallPayParameters($scope.yesPayId,localStorage.payOrderNo,JSON.stringify(data));
         		// h5.mallPay($scope.yesPayId,localStorage.payOrderNo,JSON.stringify(data));
     			}
