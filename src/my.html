@@ -90,7 +90,7 @@
                     <div ng-if="x.status==3" class="itemTopLeftInfo">共{{x.number}}件商品 | 待收货</div>
         			<div ng-if="x.status==4" class="itemTopLeftInfo">共{{x.number}}件商品 | 完成</div>
         		</div>
-        		<img class="itemTopRight" ng-src="{{x.previewUrl}}">
+        		<img class="itemTopRight" ng-src="{{x.previewUrl+'?x-oss-process=image/resize,m_fill,h_200,w_200'}}">
         	</div>
 
         	<div class="lineCover"></div>
