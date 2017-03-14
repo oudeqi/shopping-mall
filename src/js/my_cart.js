@@ -66,16 +66,17 @@ app.controller("appCartCt",function($scope,$http,cart){
 			$scope.tokenShow=false;
 		}else{
 			$scope.tokenShow=true;
+			cart.get().then(function(data){
+            console.log("获取购物车",data);
+            $scope.cartAll = data.data;
+		        }).catch(function(data){
+		            console.log(data);
+		        });
 		}
 		console.log($scope.mytoken)
 		console.log($scope.tokenShow)
 
-        cart.get().then(function(data){
-            console.log("获取购物车",data);
-            $scope.cartAll = data.data;
-        }).catch(function(data){
-            console.log(data);
-        });
+        
 
 		$scope.loading=false;
 		$scope.testTrue=true;
@@ -338,6 +339,11 @@ app.controller("appCartCt",function($scope,$http,cart){
 
 
 		$scope.getCarList=function(){
+			// $scope.tokenShow=true;
+			if($scope.tokenShow==false){
+				console.log("return了")
+				return;
+			}
 			$http.get(APP_HOST+'/v1/aut/goods/shopping/cart',{
 				headers: {
                         'Authorization': APP_TOKEN,
