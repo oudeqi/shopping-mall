@@ -111,7 +111,8 @@ gulp.task('default', ['sprite'], function(cb) {
 
 // 打包流程
 gulp.task('rev', function() {
-    return gulp.src(['./dist/css/*.css', './dist/js/*.js', './dist/img/*.*'], {base: 'dist'})
+    // './dist/fonts/*.*',
+    return gulp.src(['./dist/css/*.css', './dist/js/*.js', './dist/img/**/*'], {base: 'dist'})
     .pipe(rev())
     .pipe(gulp.dest('./dist'))
     .pipe(rev.manifest({merge: true}))
@@ -155,11 +156,16 @@ gulp.task('htmlmin', function() {
 });
 
 gulp.task('imagemin', function(){
-    return gulp.src('src/img/*.*')
+    return gulp.src('src/img/**/*')
         // .pipe(imagemin())
         .pipe(gulp.dest('dist/img/'));
 });
 
+gulp.task('fonts', function(){
+    return gulp.src('src/fonts/*.*')
+        .pipe(minifyCss())
+        .pipe(gulp.dest('dist/fonts/'));
+});
 
 gulp.task('css', function(){
     return gulp.src('src/css/*.css')
@@ -192,6 +198,7 @@ gulp.task('build', ['clean'], function(cb) {
     runSequence(
         'scss:all',
         'imagemin',
+        // 'fonts',
         'css',
         'js',
         'htmlmin',

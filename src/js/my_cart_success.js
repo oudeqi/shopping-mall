@@ -31,27 +31,29 @@ app.directive('tap',function(){
         });
     };
 });
-app.controller("appBuySuccessCt",function($scope,$http){
-	var homesrc=location.href;
-	var orderId=homesrc.split("=");
-	var orderIdYes=orderId[1];
+app.controller("appBuySuccessCt",["$scope","$http",
+    function($scope,$http){
+    	var homesrc=location.href;
+    	var orderId=homesrc.split("=");
+    	var orderIdYes=orderId[1];
 
 
-	$scope.goodsinfo=null;
-	$scope.getInfo=function(){
-		$http.get(APP_HOST+'/v1/aut/goods/order?orderNo='+orderIdYes,{
-			headers: {
-                'Authorization': APP_TOKEN,
-            }
-		}).success(function(data){
-			$scope.goodsinfo=data;
-		})
-	}
-	$scope.getInfo();
+    	$scope.goodsinfo=null;
+    	$scope.getInfo=function(){
+    		$http.get(APP_HOST+'/v1/aut/goods/order?orderNo='+orderIdYes,{
+    			headers: {
+                    'Authorization': APP_TOKEN,
+                }
+    		}).success(function(data){
+    			$scope.goodsinfo=data;
+    		})
+    	}
+    	$scope.getInfo();
 
-	$scope.linkTo = function(uri,token,id){
-        location.href = uri+"?token="+APP_TOKEN+"&id="+id;
-    };
+    	$scope.linkTo = function(uri,token,id){
+            location.href = uri+"?token="+APP_TOKEN+"&id="+id;
+        };
 
 
-})
+    }
+])

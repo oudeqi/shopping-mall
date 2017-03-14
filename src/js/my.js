@@ -59,219 +59,223 @@ app.directive('tap',function(){
         });
     };
 });
-app.controller("appct",function($scope,$http,cart){
+app.controller("appct",["$scope","$http","cart",
+    function($scope,$http,cart){
 
+        if(localStorage.token){
+            cart.get().then(function(data){
+                console.log("获取购物车",data);
+                $scope.cartAll = data.data;
+            }).catch(function(data){
+                console.log(data);
+            });
+        }
 
-    cart.get().then(function(data){
-        console.log("获取购物车",data);
-        $scope.cartAll = data.data;
-    }).catch(function(data){
-        console.log(data);
-    });
-    $scope.mytoken=APP_TOKEN;
-    $scope.tokenShow=false;
-    if($scope.mytoken==undefined || $scope.mytoken==null || $scope.mytoken=='' || $scope.mytoken=='undefined'){
+        $scope.mytoken=APP_TOKEN;
         $scope.tokenShow=false;
-    }else{
-        $scope.tokenShow=true;
-    }
-
-	var k=1;
-	$scope.loadMoreShow=true;
-	$scope.loading=false;
-	$scope.loadText="点击加载更多";
-	$scope.testRight=function(){
-		console.log("我向右滑动了");
-	}
-	$scope.goodsClass=[{
-		name:"全部订单",
-		img:"img/my/goods_all.png",
-		imgac:"img/my/goods_all_active.png",
-		id:1,
-	},{
-		name:"待支付",
-		img:"img/my/goods_nopay.png",
-		imgac:"img/my/goods_nopay_active.png",
-		id:2,
-	},{
-		name:"待收货",
-		img:"img/my/goods_nohave.png",
-		imgac:"img/my/goods_nohave_active.png",
-		id:3,
-	},{
-		name:"已完成",
-		img:"img/my/goods_have.png",
-		imgac:"img/my/goods_have_active.png",
-		id:4,
-	}]
-	$scope.gid=1;
-
-	$scope.kid=0;
-
-	$scope.changeGid=function(index){
-		$scope.gid=index;
-        $scope.loadMoreShow=true;
-
-        $scope.getList(index-1,0);
-        $scope.kid=index-1;
-        k=1;
-        if($scope.tokenShow){
-
+        if($scope.mytoken==undefined || $scope.mytoken==null || $scope.mytoken=='' || $scope.mytoken=='undefined'){
+            $scope.tokenShow=false;
         }else{
-            console.log("去登陆")
-            $scope.openLogin();
+            $scope.tokenShow=true;
         }
-	}
 
-	$scope.name="商店";
-
-    /*调用原生登录*/
-    $scope.openLogin=function(){
-        if(typeof h5=="object"){
-            h5.openLogin();
-        }
-    }
-
-
-	/*获取用户信息*/
-	$scope.myinfo=null;
-	$scope.getInfo=function(){
-		$http.get(APP_HOST+'/v1/aut/user/ucoin',{
-			headers: {
-		                        'Authorization': APP_TOKEN,
-		                    }
-            }).success(function(data){
-            	$scope.myinfo=data;
-            	console.log(data)
-            })
-	}
-	$scope.getInfo();
-
-	/*获取订单信息*/
-	// status -> 1已下单，2待发货，3待收货，4完成
-	$scope.mylist=null;
-	$scope.getList=function(type,page,isload){
-		$scope.loading=true;
-		$scope.loadText="加载中....";
-		console.log("请求："+type+'，页数：'+page)
-		$http.get(APP_HOST+'/v1/aut/goods/order/list?type='+type+'&pageIndex='+page,{
-			headers: {
-                'Authorization': APP_TOKEN,
-            }
-		}).success(function(data){
-			if(isload){
-				angular.forEach(data.data.data,function(val,index){
-					$scope.mylist.data.data.push(val)
-					console.log(val,'前面是val')
-				})
-				console.log(data.data.data.length)
-				if(data.data.data.length==0){
-					$scope.loadMoreShow=false;
-				}
-			}else{
-				$scope.mylist=data;
-
-			}
-			$scope.loadText="点击加载更多";
-
-
-
-			console.log(data)
-			$scope.loading=false;
-		})
-	}
-	$scope.getList(0,0);
-
-
-	/*跳转页面*/
-	$scope.goGoodsInfo=function(itemid){
-		window.location.href='my_goods_info.html?orderno='+itemid;
-	}
-	/*跳转物流页面*/
-	$scope.goGoodsEms=function(itemid){
-		window.location.href='my_goods_ems.html?id='+itemid;
-	}
-
-	/*返回顶部*/
-	$scope.pageScroll=function(){
-    	scroll(0,0);
-	}
-	/*加载更多*/
-
-	$scope.loadMoreFunction=function(){
-		k=k+1;
-		$scope.getList($scope.kid,k,2);
-
-	}
-
-    // add more
-    $scope.linkTo = function(uri,token,id){
-    	localStorage.isTopCar=1;
-    	if(token){
-                uri = uri+"?token="+APP_TOKEN;
-            }
-            if(id){
-                uri = uri+"&id="+id;
-            }
-            location.href = uri;
-    };
-    $scope.linkTox = function(uri,token,id){
-    	localStorage.isTopCar=2;
-        location.href = uri;
-    };
-
-    /*立即支付*/
-
-    $scope.payNow=function(orderNo,number){
-    	var obj={
-            "orderNo":orderNo
-        }
-    	console.log(obj)
-    	 $http.post(APP_HOST+"/v1/aut/goods/order/continue", obj,{
-                    headers: {
-                        'Authorization': APP_TOKEN,
-                    }
-                }).success(function(data){
-                	console.log(data)
-                	if(data.errMessage){
-		            	}else{
-		            		localStorage.payAllx=JSON.stringify(data.data);
-		                    localStorage.payOrderNo=data.data.orderNo;
-		                    localStorage.payMoney=data.data.money;
-		                    window.location.href="/pay.html"
-		            		// if(typeof h5=="object"){
-		              //   		h5.mallPay(JSON.stringify(data));
-		            		// 	}
-		            		
-		            	}
-                }).error(function(data){
-
-                });
-    }
-
-    /*去地址管理*/
-    $scope.goAddress=function(){
-    	
-        if($scope.tokenShow){
-            if(typeof h5=="object"){
-                h5.openAddrManage();
-                console.log("去地址管理")
-            }
-        }else{
-            console.log("去登陆")
-            $scope.openLogin();
-        }
-    	
-
-    }
-    /*商场返回*/
-
-    $scope.back=function(){
-    	console.log("返回")
-    	if(typeof h5=="object"){
-    		h5.mallBack();
+    	var k=1;
+    	$scope.loadMoreShow=true;
+    	$scope.loading=false;
+    	$scope.loadText="点击加载更多";
+    	$scope.testRight=function(){
+    		console.log("我向右滑动了");
     	}
-    }
+    	$scope.goodsClass=[{
+    		name:"全部订单",
+    		img:"img/my/goods_all.png",
+    		imgac:"img/my/goods_all_active.png",
+    		id:1,
+    	},{
+    		name:"待支付",
+    		img:"img/my/goods_nopay.png",
+    		imgac:"img/my/goods_nopay_active.png",
+    		id:2,
+    	},{
+    		name:"待收货",
+    		img:"img/my/goods_nohave.png",
+    		imgac:"img/my/goods_nohave_active.png",
+    		id:3,
+    	},{
+    		name:"已完成",
+    		img:"img/my/goods_have.png",
+    		imgac:"img/my/goods_have_active.png",
+    		id:4,
+    	}]
+    	$scope.gid=1;
 
-})
+    	$scope.kid=0;
+
+    	$scope.changeGid=function(index){
+    		$scope.gid=index;
+            $scope.loadMoreShow=true;
+
+            $scope.getList(index-1,0);
+            $scope.kid=index-1;
+            k=1;
+            if($scope.tokenShow){
+
+            }else{
+                console.log("去登陆")
+                $scope.openLogin();
+            }
+    	}
+
+    	$scope.name="商店";
+
+        /*调用原生登录*/
+        $scope.openLogin=function(){
+            if(typeof h5=="object"){
+                h5.openLogin();
+            }
+        }
+
+
+    	/*获取用户信息*/
+    	$scope.myinfo=null;
+    	$scope.getInfo=function(){
+    		$http.get(APP_HOST+'/v1/aut/user/ucoin',{
+    			headers: {
+    		                        'Authorization': APP_TOKEN,
+    		                    }
+                }).success(function(data){
+                	$scope.myinfo=data;
+                	console.log(data)
+                })
+    	}
+    	$scope.getInfo();
+
+    	/*获取订单信息*/
+    	// status -> 1已下单，2待发货，3待收货，4完成
+    	$scope.mylist=null;
+    	$scope.getList=function(type,page,isload){
+    		$scope.loading=true;
+    		$scope.loadText="加载中....";
+    		console.log("请求："+type+'，页数：'+page)
+    		$http.get(APP_HOST+'/v1/aut/goods/order/list?type='+type+'&pageIndex='+page,{
+    			headers: {
+                    'Authorization': APP_TOKEN,
+                }
+    		}).success(function(data){
+    			if(isload){
+    				angular.forEach(data.data.data,function(val,index){
+    					$scope.mylist.data.data.push(val)
+    					console.log(val,'前面是val')
+    				})
+    				console.log(data.data.data.length)
+    				if(data.data.data.length==0){
+    					$scope.loadMoreShow=false;
+    				}
+    			}else{
+    				$scope.mylist=data;
+
+    			}
+    			$scope.loadText="点击加载更多";
+
+
+
+    			console.log(data)
+    			$scope.loading=false;
+    		})
+    	}
+    	$scope.getList(0,0);
+
+
+    	/*跳转页面*/
+    	$scope.goGoodsInfo=function(itemid){
+    		window.location.href='my_goods_info.html?orderno='+itemid;
+    	}
+    	/*跳转物流页面*/
+    	$scope.goGoodsEms=function(itemid){
+    		window.location.href='my_goods_ems.html?id='+itemid;
+    	}
+
+    	/*返回顶部*/
+    	$scope.pageScroll=function(){
+        	scroll(0,0);
+    	}
+    	/*加载更多*/
+
+    	$scope.loadMoreFunction=function(){
+    		k=k+1;
+    		$scope.getList($scope.kid,k,2);
+
+    	}
+
+        // add more
+        $scope.linkTo = function(uri,token,id){
+        	localStorage.isTopCar=1;
+        	if(token){
+                    uri = uri+"?token="+APP_TOKEN;
+                }
+                if(id){
+                    uri = uri+"&id="+id;
+                }
+                location.href = uri;
+        };
+        $scope.linkTox = function(uri,token,id){
+        	localStorage.isTopCar=2;
+            location.href = uri;
+        };
+
+        /*立即支付*/
+
+        $scope.payNow=function(orderNo,number){
+        	var obj={
+                "orderNo":orderNo
+            }
+        	console.log(obj)
+        	 $http.post(APP_HOST+"/v1/aut/goods/order/continue", obj,{
+                        headers: {
+                            'Authorization': APP_TOKEN,
+                        }
+                    }).success(function(data){
+                    	console.log(data)
+                    	if(data.errMessage){
+    		            	}else{
+    		            		localStorage.payAllx=JSON.stringify(data.data);
+    		                    localStorage.payOrderNo=data.data.orderNo;
+    		                    localStorage.payMoney=data.data.money;
+    		                    window.location.href="/pay.html"
+    		            		// if(typeof h5=="object"){
+    		              //   		h5.mallPay(JSON.stringify(data));
+    		            		// 	}
+
+    		            	}
+                    }).error(function(data){
+
+                    });
+        }
+
+        /*去地址管理*/
+        $scope.goAddress=function(){
+
+            if($scope.tokenShow){
+                if(typeof h5=="object"){
+                    h5.openAddrManage();
+                    console.log("去地址管理")
+                }
+            }else{
+                console.log("去登陆")
+                $scope.openLogin();
+            }
+
+
+        }
+        /*商场返回*/
+
+        $scope.back=function(){
+        	console.log("返回")
+        	if(typeof h5=="object"){
+        		h5.mallBack();
+        	}
+        }
+
+    }
+])
 // alert(window.innerWidth)
