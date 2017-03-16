@@ -11,7 +11,7 @@ body {
 }
 
 .item_cover .item_line {
-  width: 90%;
+  width: 88%;
   background-color: #bfbfbf;
   margin: 0 auto;
   height: 1px;
@@ -27,6 +27,7 @@ body {
   font-size: 0.512rem;
   float: left;
   margin: 0.64rem 0.42667rem 0 0.93867rem;
+  border-radius: 4px;
 }
 
 header {

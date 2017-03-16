@@ -11,7 +11,8 @@ body{
     background-color:white;
     line-height:px2rem(50);
     .item_line {
-        width:90%;
+
+        width:88%;
         background-color:#bfbfbf;
         margin:0 auto;
         height:1px;
@@ -26,6 +27,7 @@ body{
         font-size:px2rem(12);
         float:left;
         margin:px2rem(15) px2rem(10) 0 px2rem(22);
+        border-radius:4px;
 
     }
 }

@@ -290,6 +290,9 @@ app.controller("pro_details",["$scope","pageDate","device","$sce","cart","$rootS
             }
             $scope.banner = banner;
             $scope.title = data.data.title;
+            $scope.pricex = data.data.price;
+            $scope.uncio=data.data.ucoin;
+            console.log($scope.pricex,$scope.deductionx)
             $scope.price = data.data.price;
             $scope.deduction = data.data.deduction;
             $scope.originalPrice = data.data.originalPrice;

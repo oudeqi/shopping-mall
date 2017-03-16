@@ -34,7 +34,7 @@
                 <div class="price">
                     <span ng-bind="price | currency:''"></span>
                     <span ng-bind="'元'"></span>
-                    <span ng-bind="deduction"></span>
+                    <!-- <span ng-bind="deduction"></span> -->
                 </div>
                 <div class="tip">
                     <span>原价</span>
@@ -46,8 +46,8 @@
 
             <div class="item_cover" ng-show="ok && deduction">
                 <div class="item_line"></div>
-                <button>U币购</button>
-                <div ng-bind="deduction"></div>
+                <button class="item_btn_u">U币购</button>
+                <div>{{deduction}},实付{{pricex-(uncio/100)}}元</div>
             </div>
 
 
