@@ -59,7 +59,10 @@
                 </div>
                 <div class="r">
                     <marquee behavior="scroll" onTouchStart="this.stop()" onTouchEnd="this.start()" scrollamount="2" width="800" scrolldelay="100" direction="up">
-                        <p ng-repeat="item in marquee" ng-bind="item.title" ng-click="linkTo('/pro_details.html',item.id)"></p>
+                        <p ng-repeat="item in marquee" ng-click="linkTo('/pro_details.html',item.id)">
+                            <span ng-bind="item.title"></span>
+                            <span ng-bind="item.price | currency:'￥':2"></span>
+                        </p>
                     </marquee>
                 </div>
             </div>
