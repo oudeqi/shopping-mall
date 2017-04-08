@@ -162,6 +162,11 @@ app.controller("appct",["$scope","$http","cart",
                     'Authorization': APP_TOKEN,
                 }
     		}).success(function(data){
+    			if(data.data.data.length<20){
+    				$scope.loadMoreShow=false;
+//  				return;
+    			}
+//  			console.log(data.data.data.length==0)
     			if(isload){
     				angular.forEach(data.data.data,function(val,index){
     					$scope.mylist.data.data.push(val)

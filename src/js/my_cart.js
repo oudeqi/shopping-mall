@@ -95,6 +95,9 @@ app.controller("appCartCt",["$scope","$http","cart",
 			}
 			/*编辑模式*/
 			$scope.goEditFunction=function(){
+				if($scope.cartAll.length==0){
+					return;
+				}
 				if($scope.editAllDel==true){
 					$scope.editAllDel=false;
 				}else{
