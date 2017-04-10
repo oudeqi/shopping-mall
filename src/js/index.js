@@ -116,7 +116,7 @@ app.directive("appBanner",["device",function(device){
 
 app.controller("index",["$scope","device","$http","contstant",
     function($scope,device,$http,contstant){
-
+//		alert(1)
         $scope.iphone = device.iphone();
 
         //设备相关

@@ -16,13 +16,15 @@ app.controller("gamesCt",["$scope","$location",
 			previewUrl:"img/games/bg1.png",
 			go:'http://www.jywgame.com/media.php/TuiRegister/login/pid/73/gid/10',
 		}]
-
+//		http://www.yingshantongchengbang.com/media.php/TuiRegister/login/pid/10/gid/2?gameid=2&id=9zEFLdcpUH4X2ddPnFHeig==&pid=10&username=15184435898
+// http://www.yingshantongchengbang.com/media.php/TuiRegister/login/pid/73/gid/74?gameid=74&id=9zEFLdcpUH4X2ddPnFHeig==&pid=73&username=15184435898
 		$scope.gamesInfo=[{
 			name:"大侠归来",
 			content:"郭氏夫妇、东方教主、独孤…",
 			subTitle:"最近超过8万人玩过",
 			imgSrc:"img/games/1.png",
-			go:"http://www.jywgame.com/media.php/TuiRegister/login/pid/73/gid/34",
+			go:"http://www.yingshantongchengbang.com/media.php/TuiRegister/login/pid/10/gid/2?gameid=2&id=9zEFLdcpUH4X2ddPnFHeig==&pid=10&username=15184435898",
+//			go:"http://www.jywgame.com/media.php/TuiRegister/login/pid/73/gid/34",
 		},{
 			name:"蜀山世界",
 			content:"试问情仇路几番沉浮？",
