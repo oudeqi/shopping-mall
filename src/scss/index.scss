@@ -76,16 +76,28 @@ body{
                 color: #848689;
                 margin-top: px2rem(7);
             }
-            .icon-specialty{
+            .icon{
+                display: block;
+                &.icon-dftc{
+                    @include sprite3($icon-dftc);
+                }
+                &.icon-chg{
+                    @include sprite3($icon-chg);
+                }
+                &.icon-yp{
+                    @include sprite3($icon-yp);
+                }
+            }
+            .icon-dftc{
                 font-size: 1.5rem;
                 color: #FD9E24;
             }
             .icon-life{
-                font-size: 1.3rem;
+                font-size: 1.5rem;
                 color: #FB4747;
             }
             .icon-index-active{
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 color: #FB4747;
             }
         }
