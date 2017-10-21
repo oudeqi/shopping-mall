@@ -133,26 +133,26 @@ body {
 
 .category_contain .category li .icon.icon-dftc {
   background-image: url("../img/sprite.png");
-  background-position: 0rem 0rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+  background-position: px2rem2(0px) px2rem2(0px);
+  width: px2rem2(30px);
+  height: px2rem2(30px);
+  background-size: px2rem2(134px) px2rem2(134px);
 }
 
 .category_contain .category li .icon.icon-chg {
   background-image: url("../img/sprite.png");
-  background-position: 0rem -1.70667rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+  background-position: px2rem2(0px) px2rem2(-40px);
+  width: px2rem2(30px);
+  height: px2rem2(30px);
+  background-size: px2rem2(134px) px2rem2(134px);
 }
 
 .category_contain .category li .icon.icon-yp {
   background-image: url("../img/sprite.png");
-  background-position: -1.70667rem 0rem;
-  width: 1.28rem;
-  height: 1.28rem;
-  background-size: 5.71733rem 5.71733rem;
+  background-position: px2rem2(-40px) px2rem2(0px);
+  width: px2rem2(30px);
+  height: px2rem2(30px);
+  background-size: px2rem2(134px) px2rem2(134px);
 }
 
 .category_contain .category li .icon-dftc {
